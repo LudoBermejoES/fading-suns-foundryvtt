@@ -1,0 +1,308 @@
+{{! Features Tab }}
+<section class='tab features {{tab.cssClass}}' data-group='primary' data-tab='features'>
+  <section class='grid grid-2col-max-1'>
+    <aside class='sidebar'>
+      {{! The grid classes are defined in scss/global/_grid.scss. To use,
+      use both the "grid" and "grid-Ncol" class where "N" can be any number
+      from 1 to 12 and will create that number of columns. }}
+      <ol class='items-list' style="column-count: 2">
+        {{#each system.orderedSkills as |ability key|}}
+        <li class='ability flexrow flex-group-center'>
+          <label class='resource-label rollable flexlarge align-left' data-action='roll'
+          
+            data-value='{{ability.data.value}}'
+            data-translated="{{ability.translated}}"
+            data-label='{{ability.key}}'>{{ability.translated}}</label>
+          <input type='number' name='system.skills.{{ability.key}}.value' value='{{ability.data.value}}'
+            class="ability-score" data-dtype='Number' />
+
+        </li>
+        {{/each}}
+      </ol>
+    </aside>
+    {{! For the main features list, span the right two columns }}
+    <section class='main grid-span-1'>
+      <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.CharacteristicParent.body'}} </div>
+        <ol class='items-list grouped'>
+          <li class='ability flexrow flex-group-center'> 
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.str'}}"
+                data-action='viewCharacteristic'>{{localize 'FADING_SUNS.CharacteristicLong.str'}}</label>
+            <input type='number' name='system.characteristics.str' value='{{system.characteristics.str}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+          <li class='ability flexrow flex-group-center'>
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.dex'}}"
+                data-action='viewCharacteristic'>{{localize 'FADING_SUNS.CharacteristicLong.dex'}}</label>
+            <input type='number' name='system.characteristics.dex' value='{{system.characteristics.dex}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+          <li class='ability flexrow flex-group-center'>
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.end'}}"
+                data-action='viewCharacteristic'>{{localize 'FADING_SUNS.CharacteristicLong.end'}}</label>
+            <input type='number' name='system.characteristics.end' value='{{system.characteristics.end}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+        </ol>
+      </section>
+      <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.CharacteristicParent.mind'}} </div>
+        <ol class='items-list grouped'>
+          <li class='ability flexrow flex-group-center'>
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.wits'}}"
+                data-action='viewCharacteristic'>{{localize
+              'FADING_SUNS.CharacteristicLong.wits'}}</label>
+            <input type='number' name='system.characteristics.wits' value='{{system.characteristics.wits}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+          <li class='ability flexrow flex-group-center'>
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.per'}}"
+                data-action='viewCharacteristic'>{{localize 'FADING_SUNS.CharacteristicLong.per'}}</label>
+            <input type='number' name='system.characteristics.per' value='{{system.characteristics.per}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+          <li class='ability flexrow flex-group-center'>
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.will'}}"
+                data-action='viewCharacteristic'>{{localize
+              'FADING_SUNS.CharacteristicLong.will'}}</label>
+            <input type='number' name='system.characteristics.will' value='{{system.characteristics.will}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+        </ol>
+      </section>
+      <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.CharacteristicParent.spirit'}} </div>
+        <ol class='items-list grouped'>
+          <li class='ability flexrow flex-group-center'>
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.pre'}}"
+                data-action='viewCharacteristic'>{{localize 'FADING_SUNS.CharacteristicLong.pre'}}</label>
+            <input type='number' name='system.characteristics.pre' value='{{system.characteristics.pre}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+          <li class='ability flexrow flex-group-center'>
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.int'}}"
+                data-action='viewCharacteristic'>{{localize 'FADING_SUNS.CharacteristicLong.int'}}</label>
+            <input type='number' name='system.characteristics.int' value='{{system.characteristics.int}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+          <li class='ability flexrow flex-group-center'>
+            <label class='resource-label  flexlarge align-left rollable' data-name="{{localize 'FADING_SUNS.CharacteristicLong.fth'}}"
+                data-action='viewCharacteristic'>{{localize 'FADING_SUNS.CharacteristicLong.fth'}}</label>
+            <input type='number' name='system.characteristics.fth' value='{{system.characteristics.fth}}'
+              class="ability-score" data-dtype='Number' />
+          </li>
+        </ol>
+      </section>
+      <!--<ol class='items-list'>
+        {{#each system.res as |resistance key|}}
+          <li class='ability flexrow flex-group-center'>
+            <label
+              class='resource-label rollable flexlarge align-left'
+              data-action='roll'
+              data-roll='d20+@skills.{{key}}.mod'
+              data-label='{{localize (lookup @root.config.resistances key)}}'
+            >{{localize (lookup @root.config.resistances key)}}</label>
+            <input
+              type='number'
+              name='system.res.{{key}}.value'
+              value='{{resistance.value}}'
+              class="ability-score"
+              data-dtype='Number'
+            />
+            <input
+              type='number'
+              name='system.res.{{key}}.mod'
+              value='{{resistance.mod}}'
+              class="ability-score"
+              data-dtype='Number'
+              placeholder='Mod.'
+            />
+     
+          </li>
+        {{/each}}
+      </ol>-->
+    </section>
+       <section class='main grid-span-1'>
+    {{#if upbringings.length }}
+           <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.Miscellaneous.upbringing'}} </div>
+        <ol class='items-list grouped'>
+          {{#each upbringings as |item id|}}
+          <li
+            class='item flexrow items-content'
+            data-item-id='{{item._id}}'
+            data-drag='true'
+            data-document-class='Item'
+          >
+
+          <a
+                class='item-control item-edit'
+                title='{{localize "DOCUMENT.Update" type='MeleeWeapon'}}'
+                data-action='viewDoc'
+              >
+          <strong>{{item.name}}</strong>
+              </a>
+              <a class="item-control item-delete" title="Delete MeleeWeapon" data-action="deleteDoc">
+              <i class="fas fa-trash"></i>
+            </a>
+        </li>
+        {{/each}}
+        </ol>
+      </section>
+      {{/if}}
+      <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.Miscellaneous.blessings_curses'}} </div>
+        <ol class='items-list grouped'>
+          {{#each blessings as |item id|}}
+          <li
+            class='item flexrow items-content'7
+            data-item-id='{{item._id}}'
+            data-drag='true'
+            data-document-class='Item'
+          >
+
+          <a
+                class='item-control item-edit'
+                title='{{localize "DOCUMENT.Update" type='MeleeWeapon'}}'
+                data-action='viewDoc'
+              >
+          <strong>{{item.name}}</strong>
+              </a>
+               <a class="item-control item-delete" title="Delete MeleeWeapon" data-action="deleteDoc">
+              <i class="fas fa-trash"></i>
+            </a>
+        </li>
+        {{/each}}
+        </ol>
+           <ol class='items-list grouped'>
+          {{#each curses as |item id|}}
+          <li
+            class='item flexrow items-content'7
+            data-item-id='{{item._id}}'
+            data-drag='true'
+            data-document-class='Item'
+          >
+
+          <a
+                class='item-control item-edit'
+                title='{{localize "DOCUMENT.Update" type='MeleeWeapon'}}'
+                data-action='viewDoc'
+              >
+          <strong>{{item.name}}</strong>
+              </a>
+               <a class="item-control item-delete" title="Delete MeleeWeapon" data-action="deleteDoc">
+              <i class="fas fa-trash"></i>
+            </a>
+        </li>
+        {{/each}}
+        </ol>
+      </section>
+      <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.Actor.Character.FIELDS.Perks.label'}} </div>
+        <ol class='items-list grouped'>
+          {{#each perks as |item id|}}
+          <li
+            class='item flexrow items-content'
+            data-item-id='{{item._id}}'
+            data-drag='true'
+            data-document-class='Item'
+          >
+
+          <a
+                class='item-control item-edit'
+                title='{{localize "DOCUMENT.Update" type='MeleeWeapon'}}'
+                data-action='viewDoc'
+              >
+          <strong>{{item.name}}</strong>
+              </a>
+              <a class="item-control item-delete" title="Delete MeleeWeapon" data-action="deleteDoc">
+              <i class="fas fa-trash"></i>
+            </a>
+        </li>
+        {{/each}}
+        </ol>
+      </section>
+    </section>
+    <section class='main grid-span-1'>
+     <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.Miscellaneous.Competences'}} </div>
+        <ol class='items-list grouped'>
+          {{#each competences as |item id|}}
+          <li
+            class='item flexrow items-content'
+            data-item-id='{{item._id}}'
+            data-drag='true'
+            data-document-class='Item'
+          >
+
+          <a
+                class='item-control item-edit'
+                title='{{localize "DOCUMENT.Update" type='MeleeWeapon'}}'
+                data-action='viewDoc'
+              >
+          <strong>{{item.name}}</strong>
+              </a>
+               <a class="item-control item-delete" title="Delete MeleeWeapon" data-action="deleteDoc">
+              <i class="fas fa-trash"></i>
+            </a>
+        </li>
+        {{/each}}
+        </ol>
+      </section>
+       <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.Miscellaneous.Knowledges'}} </div>
+        <ol class='items-list grouped'>
+          {{#each knowledges as |item id|}}
+          <li
+            class='item flexrow items-content'7
+            data-item-id='{{item._id}}'
+            data-drag='true'
+            data-document-class='Item'
+          >
+
+          <a
+                class='item-control item-edit'
+                title='{{localize "DOCUMENT.Update" type='MeleeWeapon'}}'
+                data-action='viewDoc'
+              >
+          <strong>{{item.name}}</strong>
+              </a>
+               <a class="item-control item-delete" title="Delete MeleeWeapon" data-action="deleteDoc">
+              <i class="fas fa-trash"></i>
+            </a>
+        </li>
+        {{/each}}
+        </ol>
+      </section>
+
+    <section class="section-group">
+        <div class="items-header-group" data-action="viewJournal" data-journal-name="Estados">{{localize 'FADING_SUNS.Miscellaneous.Statuses'}} </div>
+        <ol class='items-list grouped'>
+          {{#each statuses as |item id|}}
+          <li
+            class='item flexrow items-content'7
+            data-item-id='{{item._id}}'
+            data-drag='true'
+            data-document-class='Item'
+          >
+
+          <a
+                class='item-control item-edit'
+                title='{{localize "DOCUMENT.Update" type='Status'}}'
+                data-action='viewDoc'
+              >
+          <strong>{{item.name}}</strong>
+              </a>
+               <a class="item-control item-delete" title="Delete Status" data-action="deleteDoc">
+              <i class="fas fa-trash"></i>
+            </a>
+        </li>
+        {{/each}}
+        </ol>
+      </section>
+
+    </section>
+  </section>
+
+
+</section>

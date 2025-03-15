@@ -1,0 +1,47 @@
+<div class="blood-img" style="background-image: url('{{getBloodBackground}}');">
+  {{#if maneuver}}
+  <h1>{{maneuver.name}} ({{total}})</h1>
+  {{/if}}
+  <div class='move-name'>{{message}}</div>
+  <div class="dice-roll">
+    <div class="dice-result">
+      <div class="dice-formula">1d20</div>
+      <div class="dice-tooltip">
+        <section class="tooltip-part">
+          <div class="dice">
+            <header class="part-header flexrow">
+              <span class="part-formula">1d20</span>
+              <span class="part-total">{{dice}}</span>
+            </header>
+            <ol class="dice-rolls">
+              <li class="roll die d20 min">{{dice}}</li>
+            </ol>
+          </div>
+        </section>
+      </div>
+
+      <div class='result-roll'>
+        <div class='tooltip'>
+          <h1 class='tooltiptext'>{{result}}</h1>
+        </div>
+      </div>
+      <div class='move-name'>{{successMessage}}</div>
+      <div class='move-name'>{{resistanceMessage}}</div>
+      
+      {{#if canSpendVPToSucceed}}
+      <div class="spend-vp-container">
+        <p>{{localize "FADING_SUNS.messages.CAN_SPEND_VP_TO_SUCCEED" vpNeeded=vpNeededToSucceed}}</p>
+        <button class="spend-vp-button rollable" data-action="spendVPToSucceed" data-vp-needed="{{vpNeededToSucceed}}" data-actor-id="{{actorId}}">
+          {{localize "FADING_SUNS.messages.SPEND_VP_BUTTON" vpNeeded=vpNeededToSucceed}}
+        </button>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+<!--        {{#if maxVPToMoveToBank}}
+      <span>{{localize 'FADING_SUNS.messages.MOVE_TO_BANK'}}</span>
+      {{#each maxVPToMoveToBank}}
+      <span class="rollable" data-action="moveToBank" data-vp="{{this}}"  data-actor-id="{{../actorId}}">{{this}}</span>
+      {{/each}}
+      {{/if}}-->
+</div>

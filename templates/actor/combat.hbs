@@ -1,0 +1,239 @@
+{{! Gear Tab }}
+
+<section class='tab combat {{tab.cssClass}}' data-group='primary' data-tab='combat'>
+
+<h6>{{localize 'FADING_SUNS.ItemTitles.MeleeWeapons'}}</h4>
+  <ol class='items-list'>
+    <li class='item flexrow items-header'>
+      <div class='item-name'>{{localize 'Name'}}</div>
+      <div class='item-NT'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.NT'}}</div>
+      <div class='item-Goal'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Goal'}}</div>
+      <div class='item-Damage'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Damage'}}</div>
+      <div class='item-MinStrength'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.MinStrength'}}</div>
+      <div class='item-Agora'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Agora'}}</div>
+      <div class='item-Weight'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Weight'}}</div>
+      <div class='item-Size'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Size'}}</div>
+      <div class='item-controls'>
+        {{#if @root.editable}}
+          <a
+            class='item-control item-create'
+            title='{{localize "DOCUMENT.Create" type='Item'}}'
+            data-action='createDoc'
+            data-document-class='Item'
+            data-type='gear'
+          >
+            <i class='fas fa-plus'></i>
+            {{localize 'DOCUMENT.New' type='item'}}
+          </a>
+        {{/if}}
+      </div>
+    </li>
+    {{#each meleeWeapon as |item id|}}
+      <li
+        class='item flexrow items-content'
+        data-item-id='{{item.id}}'
+        data-drag='true'
+        data-document-class='Item'
+      >
+      <div class='item-name rollable' data-action='rollWeapon' style="padding-left: 5px" data-label='{{skill.key}}' data-translated='{{skill.translated}}' data-name='system.skills.{{skill.key}}.value' data-value='{{skill.data.value}}' data-damage='{{item.system.Damage}}'
+           data-dtype='Number' data-item-id="{{item.id}}">
+        {{item.name}}
+      </div>
+      <div class='item-NT'>{{item.system.NT}}</div>
+      <div class='item-Goal'>{{item.system.Goal}}</div>
+      <div class='item-Damage'>{{item.system.Damage}}</div>
+      <div class='item-MinStrength'>{{item.system.MinStrength}}</div>
+      <div class='item-Agora'>{{item.system.Agora}}</div>
+      <div class='item-Weight'>{{item.system.Weight}}</div>
+      <div class='item-Size'>{{item.system.Size}}</div>
+        <div class='item-controls'>
+          <a
+            class='item-control item-edit'
+            title='{{localize "DOCUMENT.Update" type='MeleeWeapon'}}'
+            data-action='viewDoc'
+          >
+            <i class='fas fa-edit'></i>
+          </a>
+          {{#if @root.editable}}
+            <a
+              class='item-control item-delete'
+              title='{{localize "DOCUMENT.Delete" type='MeleeWeapon'}}'
+              data-action='deleteDoc'
+            >
+              <i class='fas fa-trash'></i>
+            </a>
+          {{/if}}
+        </div>
+      </li>
+    {{/each}}
+  </ol>
+
+  <h6>{{localize 'FADING_SUNS.ItemTitles.FirearmWeapons'}}</h4>
+  <ol class='items-list'>
+    <li class='item flexrow items-header'>
+
+      
+      <div class='item-name' >{{localize 'Name'}}</div>
+      <div class='item-Type'>{{localize 'FADING_SUNS.Item.Firearm.FIELDS_SHORT.Type'}}</div>
+      <div class='item-NT'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.NT'}}</div>
+      <div class='item-Goal'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Goal'}}</div>
+      <div class='item-Damage'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Damage'}}</div>
+      <div class='item-Range'>{{localize 'FADING_SUNS.Item.Firearm.FIELDS_SHORT.Range'}}</div>
+      <div class='item-RateOfFire'>{{localize 'FADING_SUNS.Item.Firearm.FIELDS_SHORT.RateOfFire'}}</div>
+      <div class='item-Ammo'>{{localize 'FADING_SUNS.Item.Firearm.FIELDS_SHORT.Ammo'}}</div>
+      <div class='item-MinStrength'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.MinStrength'}}</div>
+      <div class='item-Agora'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Agora'}}</div>
+      <div class='item-Weight'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Weight'}}</div>
+      <div class='item-Size'>{{localize 'FADING_SUNS.Item.Weapon.FIELDS_SHORT.Size'}}</div>
+      <div class='item-controls'>
+        {{#if @root.editable}}
+          <a
+            class='item-control item-create'
+            title='{{localize "DOCUMENT.Create" type='Item'}}'
+            data-action='createDoc'
+            data-document-class='Item'
+            data-type='gear'
+          >
+            <i class='fas fa-plus'></i>
+            {{localize 'DOCUMENT.New' type='item'}}
+          </a>
+        {{/if}}
+      </div>
+    </li>
+    {{#each fireArmWeapon as |item id|}}
+      <li
+        class='item flexrow items-content'
+        data-item-id='{{item.id}}'
+        data-drag='true'
+        data-document-class='Item'
+      >
+      <div class='item-name rollable' data-action='rollWeapon' style="padding-left: 5px" data-label='{{skill.key}}' data-translated='{{skill.translated}}' data-name='system.skills.{{skill.key}}.value' data-value='{{skill.data.value}}'
+           data-dtype='Number' data-item-id="{{item.id}}">
+        {{item.name}}
+      </div>
+      <div class='item-Type'>{{item.system.Type}}</div>
+      <div class='item-NT'>{{item.system.NT}}</div>
+      <div class='item-Goal'>{{item.system.Goal}}</div>
+      <div class='item-Damage'>{{item.system.Damage}}</div>
+      <div class='item-Range'>{{item.system.Range}}</div>
+      <div class='item-RateOfFire'>{{item.system.RateOfFire}}</div>
+      <div class='item-Ammo'>{{item.system.Ammo}}</div>
+      <div class='item-MinStrength'>{{item.system.MinStrength}}</div>
+      <div class='item-Agora'>{{item.system.Agora}}</div>
+      <div class='item-Weight'>{{item.system.Weight}}</div>
+      <div class='item-Size'>{{item.system.Size}}</div>
+        <div class='item-controls'>
+          <a
+            class='item-control item-edit'
+            title='{{localize "DOCUMENT.Update" type='FirearmWeapon'}}'
+            data-action='viewDoc'
+          >
+            <i class='fas fa-edit'></i>
+          </a>
+          {{#if @root.editable}}
+            <a
+              class='item-control item-delete'
+              title='{{localize "DOCUMENT.Delete" type='FirearmWeapon'}}'
+              data-action='deleteDoc'
+            >
+              <i class='fas fa-trash'></i>
+            </a>
+          {{/if}}
+        </div>
+      </li>
+    {{/each}}
+  </ol>
+
+  <h6>{{localize 'FADING_SUNS.ItemTitles.Armors'}}</h4>
+  <ol class='items-list'>
+    <li class='item flexrow items-header'>
+      <div class='item-name'>{{localize 'Name'}}</div>
+      <div class='item-TL'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.NT'}}</div>
+      <div class='item-BodyResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.BodyResistance'}}</div>
+      <div class='item-Grade'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.Grade'}}</div>
+      <div class='item-DexPenalty'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.DexPenalty'}}</div>
+      <div class='item-VigorPenalty'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.VigorPenalty'}}</div>
+      <div class='item-Disponibility'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.Disponibility'}}</div>
+      <div class='item-BlasterResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.BlasterResistance'}}</div>
+      <div class='item-FlameResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.FlameResistance'}}</div>
+      <div class='item-HardResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.HardResistance'}}</div>
+      <div class='item-LaserResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.LaserResistance'}}</div>
+      <div class='item-ShockResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.ShockResistance'}}</div>
+      <div class='item-SlamResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.SlamResistance'}}</div>
+      <div class='item-SonicResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.SonicResistance'}}</div>
+      <div class='item-UltraHardResistance'>{{localize 'FADING_SUNS.Item.Armor.FIELDS_SHORT.UltraHardResistance'}}</div>
+      <div class='item-controls'>
+        {{#if @root.editable}}
+          <a
+            class='item-control item-create'
+            title='{{localize "DOCUMENT.Create" type='Item'}}'
+            data-action='createDoc'
+            data-document-class='Item'
+            data-type='gear'
+          >
+            <i class='fas fa-plus'></i>
+            {{localize 'DOCUMENT.New' type='item'}}
+          </a>
+        {{/if}}
+      </div>
+    </li>
+    
+    {{#each armor as |item id|}}
+      <li
+        class='item flexrow items-content'
+        data-item-id='{{item._id}}'
+        data-drag='true'
+        data-document-class='Item'
+      >
+      <div class='item-name' style="padding-left: 5px">
+        {{item.name}}
+        {{#if item.system.equipped}}
+          <span class="equipped-tag"><i class="fas fa-shield-alt" title="{{localize 'FADING_SUNS.Item.Armor.FIELDS.Equipped'}}"></i></span>
+        {{/if}}
+      </div>
+      <div class='item-TL'>{{item.system.NT}}</div>
+      <div class='item-BodyResistance'>{{item.system.BodyResistance}}</div>
+      <div class='item-Grade'>{{item.system.Grade}}</div>
+      <div class='item-DexPenalty'>{{item.system.DexPenalty}}</div>
+      <div class='item-VigorPenalty'>{{item.system.VigorPenalty}}</div>
+      <div class='item-Disponibility'>{{item.system.Disponibility}}</div>
+      <div class='item-BlasterResistance'>{{item.system.BlasterResistance}}</div>
+      <div class='item-FlameResistance'>{{item.system.FlameResistance}}</div>
+      <div class='item-HardResistance'>{{item.system.HardResistance}}</div>
+      <div class='item-LaserResistance'>{{item.system.LaserResistance}}</div>
+      <div class='item-ShockResistance'>{{item.system.ShockResistance}}</div>
+      <div class='item-SlamResistance'>{{item.system.SlamResistance}}</div>
+      <div class='item-SonicResistance'>{{item.system.SonicResistance}}</div>
+      <div class='item-UltraHardResistance'>{{item.system.UltraHardResistance}}</div>
+        <div class='item-controls'>
+          {{#if @root.editable}}
+            <a
+              class='item-control item-toggle'
+              title='{{#if item.system.equipped}}{{localize "FADING_SUNS.Item.Armor.FIELDS.Unequip"}}{{else}}{{localize "FADING_SUNS.Item.Armor.FIELDS.Equip"}}{{/if}}'
+              data-action='toggleArmor'
+            >
+              <i class='fas {{#if item.system.equipped}}fa-toggle-on{{else}}fa-toggle-off{{/if}}'></i>
+            </a>
+          {{/if}}
+          <a
+            class='item-control item-edit'
+            title='{{localize "DOCUMENT.Update" type='Armor'}}'
+            data-action='viewDoc'
+          >
+            <i class='fas fa-edit'></i>
+          </a>
+          {{#if @root.editable}}
+            <a
+              class='item-control item-delete'
+              title='{{localize "DOCUMENT.Delete" type='Armor'}}'
+              data-action='deleteDoc'
+            >
+              <i class='fas fa-trash'></i>
+            </a>
+          {{/if}}
+        </div>
+      </li>
+    {{/each}}
+  </ol>
+
+</section>

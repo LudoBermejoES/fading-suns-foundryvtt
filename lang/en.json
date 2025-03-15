@@ -1,0 +1,404 @@
+{
+  "FADING_SUNS": {
+    "LETS_ROL": "Let's rol",
+    "CharacteristicParent": {
+      "body": "Body",
+      "mind": "Mind",
+      "spirit": "Spirit"
+    },
+
+    "Miscellaneous": {
+      "upbringing": "Upbringing",
+      "blessings_curses": "Blessing/Curse",
+      "Competences": "Competences",
+      "Knowledges": "Knowledges",
+      "Statuses": "Statuses"
+    },
+    
+    "damageChat": {
+      "weaponDamage": "Your weapon is causing {{damage}} points to the enemy",
+      "addDamage": "You can increase the damage to your weapon by using your cache or victory points. Per 2 points you can add 1 damage",
+      "useCachePoints": "Use cache points",
+      "useVictoryPoints": "Use victory points"
+    },
+
+    "messages": {
+      "CharacteristicChoose": "Choose a characteristic for the roll",
+      "ManeuverChoose": "Choose a maneuver",
+      "ManeuverNotInTheList": "Not in the list, let me choose the characeristic",
+      "ResistanceChoose": "Choose a resistance for the roll",
+      "SkillChoosed": "Selected skill: ",
+      "VictoryPointsChoose": "Victory points to use",
+      "VP": "VP",
+      "WYRD_POINT_USED": "Wyrd point",
+      "USE_WYRD_POINT": "Use wyrd point",
+      "DICE": "Dice",
+      "OTHER_MODIFIERS": "Other modifiers",
+      "EXTRA_MODIFIERS": "Extra modifiers",
+      "EXTRA_MODIFIERS_SHORT": "mod.",
+      "SUCCESS": "You made it!",
+      "CRITICAL": "Critical success!",
+      "TOTAL_FAILURE": "Critical failure!",
+      "FAILURE": "You failed!",
+      "VICTORY_POINTS_EARNED": "You earned $victory_points victory points",
+      "RESISTANCE_SUCCESS": "The resistance to beat was $resistance, so you need to use some victory points. That gives you $difference victory points to store",
+      "RESISTANCE_FAILURE": "You made it but the resistance $resistance is bigger than your victory points $vp",
+      "RESISTANCE_CRITICAL": "You made it with a critical role! $resistance will be 0, that gives you $vp victory points to store and a wyrd point",
+      "MOVE_TO_BANK": "Move VP to Bank: ",
+      "ADVANTAGE": "Advantage",
+      "DISADVANTAGE": "Disadvantage",
+      "NORMAL": "Normal",
+      "TargetSelected": "Target Selected",
+      "NoTargetSelected": "No target selected",
+      "SelectTargetHint": "Select a target to automatically set resistance based on body resistance",
+      "ResistanceAuto": "Resistance automatically set based on target's body resistance",
+      "AttackProperties": "Attack Properties",
+      "CoverageChoose": "Target Coverage",
+      "FinalDifficulty": "Final Difficulty",
+      "NoCoverage": "No Coverage",
+      "PartialCoverage": "Partial Coverage",
+      "TotalCoverage": "Total Coverage",
+      "CurrentDifficulty": "Current Difficulty",
+      "CAN_SPEND_VP_TO_SUCCEED": "You can spend {vpNeeded} Victory Points from your bank to succeed on this roll.",
+      "SPEND_VP_BUTTON": "Spend {vpNeeded} VP to Succeed",
+      "VP_SPENT_TO_SUCCEED": "{vpSpent} Victory Points were spent from the bank to succeed on this roll."
+    },
+
+    "Maneuver": {
+      "Skill": "Skill",
+      "Characteristic": "Characteristic",
+      "Time": "Time",
+      "Competence": "Competence",
+      "Type": "Type",
+      "TypeValue": {
+        "action": "Action",
+        "combat": "Combat",
+        "defense": "Defense",
+        "influence": "Influence"
+      },
+      "Description": "Description",
+      "Impact": "Impact",
+      "Resistance": "Resistance",
+      "Name": "Name"
+    },
+
+    "Power": {
+      "Skill": "Skill",
+      "Characteristic": "Characteristic",
+      "Time": "Time",
+      "Requirement": "Requirement",
+      "Type": "Type",
+      "TypeValue": {
+        "psionics": "Psionic",
+        "theurgy": "Theurgy"
+      },
+      "Description": "Description",
+      "Impact": "Impact",
+      "Resistance": "Resistance",
+      "Name": "Name"
+    },
+
+    "ResistancesList": {
+      "Unknown": "Unknown",
+      "Effortless": "Effortless",
+      "Easy": "Easy",
+      "Hard": "Hard",
+      "Demanding": "Demanding",
+      "Tough": "Tough",
+      "Severe": "Severe",
+      "Herculean": "Herculean",
+      "Miraculous": "Miraculous"
+    },
+
+    "ItemTitles": {
+      "Generic": "Generic items",
+      "SchoolPower": "School of the power",
+      "Armors": "Armors",
+      "MeleeWeapons": "Melee weapons",
+      "FirearmWeapons": "Firearms weapons",
+      "Statuses": "Statuses",
+      "Maneuver": "Maneuver",
+      "Powers": "Powers",
+      "Perks": "Perks"
+    },
+
+    "CharacteristicLong": {
+      "str": "Strength",
+      "dex": "Dexterity",
+      "end": "Endurance",
+      "wits": "Wits",
+      "per": "Perception",
+      "will": "Will",
+      "pre": "Presence",
+      "int": "Intuition",
+      "fth": "Faith"
+    },
+
+    "Resistances": {
+      "name": "Resistances",
+      "body": "Body",
+      "mind": "Mind",
+      "spirit": "Spirit"
+    },
+
+    "Characteristic": {
+      "str": {
+        "short": "str",
+        "full": "Strength"
+      },
+      "dex": {
+        "short": "dex",
+        "full": "Dexterity"
+      },
+      "end": {
+        "short": "end",
+        "full": "Endurance"
+      },
+      "wits": {
+        "short": "wits",
+        "full": "Wits"
+      },
+      "per": {
+        "short": "per",
+        "full": "Perception"
+      },
+      "will": {
+        "short": "will",
+        "full": "Will"
+      },
+      "pre": {
+        "short": "pre",
+        "full": "Presence"
+      },
+      "int": {
+        "short": "int",
+        "full": "Intuition"
+      },
+      "fth": {
+        "short": "fth",
+        "full": "Faith"
+      }
+    },
+
+    "Skill": {
+      "Academia": "Academia",
+      "Alchemy": "Alchemy",
+      "Animalia": "Animalia",
+      "Arts": "Arts",
+      "Charm": "Charm",
+      "Crafts": "Crafts",
+      "Disguise": "Disguise",
+      "Drive": "Drive",
+      "Empathy": "Empathy",
+      "Fight": "Fight",
+      "Focus": "Focus",
+      "Impress": "Impress",
+      "Interface": "Interface",
+      "Intrusion": "Intrusion",
+      "Knavery": "Knavery",
+      "Melee": "Melee",
+      "Observe": "Observe",
+      "Perform": "Perform",
+      "Pilot": "Pilot",
+      "Remedy": "Remedy",
+      "Shoot": "Shoot",
+      "SleightOfHand": "Sleight Of Hand",
+      "Sneak": "Sneak",
+      "Survival": "Survival",
+      "TechRedemption": "Tech Redemption",
+      "Vigor": "Vigor"
+    },
+    "SheetLabels": {
+      "Actor": "Fading Suns Actor Sheet",
+      "Item": "Fading Suns Item Sheet",
+      "Armor": "Fading Suns Armor Sheet",
+      "Generic": "Fading Suns Generic item Sheet",
+      "SchoolPower": "School of the power"
+    },
+    "Actor": {
+      "Tabs": {
+        "Biography": "Biography",
+        "Features": "Features",
+        "Gear": "Gear",
+        "Combat": "Combat",
+        "Perks": "Perks",
+        "Powers": "Powers",
+        "Effects": "Effects"
+      },
+      "base": {
+        "FIELDS": {
+          "biography": { "label": "Biography" }
+        }
+      },
+      "Character": {
+        "FIELDS": {
+          "Level": { "label": "Level" },
+          "Species": { "label": "Species" },
+          "Name": { "label": "Name" },
+          "Rank": { "label": "Rank" },
+          "Money": { "label": "Money" },
+          "Psi": { "label": "Psi" },
+          "Urge": { "label": "Urge" },
+          "Theurgy": { "label": "Theurgy" },
+          "Hubris": { "label": "Hubris" },
+          "Planet": { "label": "Planet" },
+          "Size": { "label": "Size" },
+          "Speed": { "label": "Speed" },
+          "Birthdate": { "label": "Birthdate" },
+          "Class": { "label": "Class" },
+          "Faction": { "label": "Faction" },
+          "Calling": { "label": "Calling" },
+          "Blessing": { "label": "Blessing" },
+          "Curse": { "label": "Curse" },
+          "Vitality": { "label": "Vitality" },
+          "Revivals": { "label": "Revivals", "use": "Use revival" },
+          "VictoryPoints": { "label": "Victory points" },
+          "WyrdPoints": { "label": "Wyrd points" },
+          "MaxBankPoints": { "label": "Max bank points" },
+          "Cache": { "label": "Cache" },
+          "Surge": {
+            "label": "Surge",
+            "current": "Current",
+            "max": "Max",
+            "totalPointsGained": "Total points gained",
+            "use": "Use surge"
+          },
+          "Perks": { "label": "Perks" }
+        }
+      },
+      "NPC": {
+        "FIELDS": {
+          "cr": { "label": "CR" },
+          "xp": { "label": "XP" }
+        }
+      }
+    },
+    "Item": {
+      "Tabs": {
+        "Attributes": "Attributes",
+        "Description": "Description",
+        "Effects": "Effects"
+      },
+      "Armor": {
+        "FIELDS": {
+          "NT": "Tech Level",
+          "BodyResistance": "Body resistance",
+          "AllowedShield": "Allowed shield",
+          "Grade": "Grade",
+          "DexPenalty": "Dexterity penalty",
+          "VigorPenalty": "Vigor penalty",
+          "Disponibility": "Disponibility",
+          "BlasterResistance": "Blaster resistance",
+          "FlameResistance": "Flame resistance",
+          "HardResistance": "Hard resistance",
+          "LaserResistance": "Laser resistance",
+          "ShockResistance": "Shock resistance",
+          "SlamResistance": "Slam resistance",
+          "SonicResistance": "Sonic resistance",
+          "UltraHardResistance": "Ultra-hard resistance",
+          "Equipped": "Equipped",
+          "Equip": "Equip Armor",
+          "Unequip": "Unequip Armor"
+        },
+        "FIELDS_SHORT": {
+          "NT": "NT",
+          "BodyResistance": "BR",
+          "AllowedShield": "SHLD",
+          "Grade": "GRD",
+          "DexPenalty": "DXP",
+          "VigorPenalty": "VGP",
+          "Disponibility": "DIS",
+          "BlasterResistance": "Bls",
+          "FlameResistance": "Flm",
+          "HardResistance": "Hrd",
+          "LaserResistance": "Lsr",
+          "ShockResistance": "SHK",
+          "SlamResistance": "SLM",
+          "SonicResistance": "SON",
+          "UltraHardResistance": "UlH"
+        }
+      },
+      "Weapon": {
+        "FIELDS": {
+          "NT": "Tech level",
+          "Goal": "Goal",
+          "Damage": "Damage",
+          "MinStrength": "Minimal Strength",
+          "Agora": "Agora",
+          "Weight": "Weight",
+          "Features": "Features",
+          "description": "Description",
+          "Size": "Size"
+        },
+        "FIELDS_SHORT": {
+          "NT": "NT",
+          "Goal": "Goal",
+          "Damage": "Damage",
+          "MinStrength": "Min ST",
+          "Agora": "Agora",
+          "Weight": "Weight",
+          "Size": "Size"
+        }
+      },
+      "Firearm": {
+        "FIELDS": {
+          "Type": "Type",
+          "Range": "Range",
+          "RateOfFire": "RoF",
+          "Ammo": "Ammo"
+        },
+        "FIELDS_SHORT": {
+          "Type": "Type",
+          "Range": "Range",
+          "RateOfFire": "RoF",
+          "Ammo": "Ammo"
+        }
+      },
+      "Status": {
+        "FIELDS": {
+          "Type": "Type"
+        },
+        "FIELDS_SHORT": {
+          "Type": "Type"
+        }
+      },
+      "Gear": {
+        "FIELDS": {
+          "rollFormula": { "label": "Roll Formula" },
+          "numDice": { "label": "Number of Dice" },
+          "dieSize": { "label": "Die Size" },
+          "rollMod": { "label": "Roll Modifier" },
+          "quantity": { "label": "Quantity" },
+          "weight": { "label": "Weight" }
+        }
+      }
+    },
+    "Effect": {
+      "Source": "Source",
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
+    },
+    "AttackProperties": {
+      "blaster": "Blaster",
+      "shock": "Shock",
+      "slam": "Slam",
+      "hard": "Hard",
+      "flame": "Flame",
+      "laser": "Laser",
+      "sonic": "Sonic",
+      "ultraHard": "Ultra-Hard"
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "NPC"
+    },
+    "Item": {
+      "gear": "Gear",
+      "feature": "Feature"
+    }
+  }
+}

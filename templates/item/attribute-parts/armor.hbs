@@ -1,0 +1,87 @@
+{{! Attributes Tab }}
+<section   class='tab attributes {{tab.cssClass}}'
+  data-group='primary' data-tab='attributesArmor'>
+  <section class='grid grid-3col'>
+
+    <div class='resource'>
+      <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.NT'}}</label>
+      <input type='text' name='system.NT' value='{{system.NT}}' data-dtype='Number' />
+    </div>
+    <div class='resource'>
+      <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.BodyResistance'}}</label>
+      <input type='text' name='system.BodyResistance' value='{{system.BodyResistance}}'' data-dtype='Number' />
+    </div>
+    <div class='resource'>
+      <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.AllowedShield'}}</label>
+      <input type='text' name='system.AllowedShield' value='{{system.AllowedShield}}' />
+    </div>
+    </section>
+    <section class='grid grid-4col'>
+
+      <div class='resource'>
+        <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.Grade'}}</label>
+        <input type='text' name='system.Grade' value='{{system.Grade}}' />
+      </div>
+      <div class='resource'>
+        <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.DexPenalty'}}</label>
+        <input type='text' name='system.DexPenalty' value='{{system.DexPenalty}}' data-dtype='Number' />
+      </div>
+      <div class='resource'>
+        <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.VigorPenalty'}}</label>
+        <input type='text' name='system.VigorPenalty' value='{{system.VigorPenalty}}' data-dtype='Number' />
+      </div>
+      
+  <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.Disponibility'}}</label>
+    <input type='text' name='system.Disponibility' value='{{system.Disponibility}}' />
+  </div>
+  </section>
+  
+  <section class='grid grid-2col'>
+    <div class='resource'>
+      <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.Equipped'}}</label>
+      <input type='checkbox' name='system.equipped' {{#if system.equipped}}checked{{/if}} />
+    </div>
+  </section>
+  
+        <div class='resource-content flexrow flex-center flex-between items-header-group'>
+              {{localize 'FADING_SUNS.Resistances.name'}}
+        </div>
+  <section class='grid grid-8col'>
+
+  <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.BlasterResistance'}}</label>
+    <input type="text" name="system.BlasterResistance" data-dtype='Number' value='{{system.BlasterResistance}}'>
+  </div>
+  <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.FlameResistance'}}</label>
+    <input type="text" name="system.FlameResistance" data-dtype='Number' value='{{system.FlameResistance}}'>
+  </div>
+  
+  <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.HardResistance'}}</label>
+    <input type="text" name="system.HardResistance" data-dtype='Number' value='{{system.HardResistance}}'>
+  </div>
+  <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.LaserResistance'}}</label>
+    <input type="text" name="system.LaserResistance" data-dtype='Number' value='{{system.LaserResistance}}'>
+  </div>
+  <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.ShockResistance'}}</label>
+    <input type="text" name="system.ShockResistance"data-dtype='Number'  value='{{system.ShockResistance}}'>
+  </div>
+    <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.SlamResistance'}}</label>
+    <input type="text" name="system.SlamResistance" data-dtype='Number' value='{{system.SlamResistance}}'>
+  </div>
+  <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.SonicResistance'}}</label>
+    <input type="text" name="system.SonicResistance" data-dtype='Number' value='{{system.SonicResistance}}'>
+  </div>
+  <div class='resource'>
+    <label class='resource-label'>{{localize 'FADING_SUNS.Item.Armor.FIELDS.UltraHardResistance'}}</label>
+    <input type="text" name="system.UltraHardResistance" data-dtype='Number' value='{{system.UltraHardResistance}}'>
+  </div>
+  </section>
+
+</section>

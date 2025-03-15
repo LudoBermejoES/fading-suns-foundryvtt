@@ -1,0 +1,114 @@
+.item-form {
+  font-family: $font-primary;
+}
+
+.sheet-header {
+  flex: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+
+  .profile-img {
+    flex: 0 0 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
+
+  .header-fields {
+    flex: 1;
+  }
+}
+
+.sheet-tabs {
+  flex: 0;
+}
+
+.sheet-body,
+.sheet-body .tab,
+.sheet-body .tab .editor {
+  height: 100%;
+}
+
+.tab.biography {
+  flex: 1;
+
+  .editor {
+    height: 100%;
+  }
+}
+
+.tox {
+  .tox-editor-container {
+    background: $c-white;
+  }
+
+  .tox-edit-area {
+    padding: 0 8px;
+  }
+}
+
+.fs_button {
+  width: 100%;
+  height: var(--input-height);
+  line-height: var(--input-height);
+  padding: 0 0.5rem;
+  background: var(--input-background-color);
+  border-radius: 4px;
+  outline: 1px solid transparent;
+  color: var(--input-text-color);
+  font-size: var(--font-size-14);
+  transition: outline-color 0.5s;
+}
+
+.fs_button_input {
+  height: var(--input-height);
+  line-height: var(--input-height);
+  padding: 0 0.5rem;
+  background: var(--input-background-color);
+  border-radius: 4px;
+  outline: 1px solid transparent;
+  color: var(--input-text-color);
+  font-size: var(--font-size-14);
+  transition: outline-color 0.5s;
+  max-width: 40px;
+}
+
+.fs_button:disabled {
+  opacity: 1;
+  pointer-events: none;
+}
+
+.radio-data {
+  text-align: left;
+  display: inline;
+}
+
+.application textarea {
+  width: 100%;
+  height: var(--input-height);
+  line-height: var(--input-height);
+  padding: 0 0.5rem;
+  background: var(--input-background-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  outline: 1px solid transparent;
+  color: var(--input-text-color);
+  user-select: text;
+  font-size: var(--font-size-14);
+  transition: outline-color 0.5s;
+}
+
+.items-header-roll {
+  height: 85px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove var(--fading-suns-c-groove);
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}

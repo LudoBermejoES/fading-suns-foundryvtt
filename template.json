@@ -1,0 +1,339 @@
+{
+  "Actor": {
+    "types": ["Character"],
+    "statuses": [],
+    "templates": {
+      "bank": {
+        "bank": {
+          "maxBankPoints": 5,
+          "victoryPoints": 0,
+          "wyrdPoints": 0
+        }
+      }
+    },
+    "Character": {
+      "templates": ["bank"],
+      "cache": 0,
+      "level": 1,
+      "rank": "",
+      "money": 0,
+      "planet": "",
+      "birthdate": "",
+      "class": "",
+      "faction": "",
+      "calling": "",
+      "size": 5,
+      "speed": 10,
+      "cash": 0,
+      "techgnosis": 0,
+      "vitality": {
+        "max": 15,
+        "value": 15
+      },
+      "surge": {
+        "current": 1,
+        "max": 5
+      },
+      "revivals": {
+        "value": 1,
+        "max": 1
+      },
+      "maxVitality": 15,
+      "maxRevivals": 1,
+      "biography": "",
+      "specie": "",
+      "characteristics": {
+        "str": 3,
+        "dex": 3,
+        "end": 3,
+        "wits": 3,
+        "per": 3,
+        "will": 3,
+        "pre": 3,
+        "int": 3,
+        "fth": 3
+      },
+      "skills": {
+        "Academia": {
+          "initial": 3,
+          "value": 3
+        },
+        "Alchemy": {
+          "initial": 0,
+          "value": 0
+        },
+        "Animalia": {
+          "initial": 3,
+          "value": 3
+        },
+        "Arts": {
+          "initial": 3,
+          "value": 3
+        },
+        "Charm": {
+          "initial": 3,
+          "value": 3
+        },
+        "Crafts": {
+          "initial": 3,
+          "value": 3
+        },
+        "Disguise": {
+          "initial": 3,
+          "value": 3
+        },
+        "Drive": {
+          "initial": 3,
+          "value": 3
+        },
+        "Empathy": {
+          "initial": 3,
+          "value": 3
+        },
+        "Fight": {
+          "initial": 3,
+          "value": 3
+        },
+        "Focus": {
+          "initial": 3,
+          "value": 3
+        },
+        "Impress": {
+          "initial": 3,
+          "value": 3
+        },
+        "Interface": {
+          "initial": 0,
+          "value": 0
+        },
+        "Intrusion": {
+          "initial": 3,
+          "value": 3
+        },
+        "Knavery": {
+          "initial": 3,
+          "value": 3
+        },
+        "Melee": {
+          "initial": 3,
+          "value": 3
+        },
+        "Observe": {
+          "initial": 3,
+          "value": 3
+        },
+        "Perform": {
+          "initial": 3,
+          "value": 3
+        },
+        "Pilot": {
+          "initial": 0,
+          "value": 0
+        },
+        "Remedy": {
+          "initial": 3,
+          "value": 3
+        },
+        "Shoot": {
+          "initial": 3,
+          "value": 3
+        },
+        "SleightOfHand": {
+          "initial": 3,
+          "value": 3
+        },
+        "Sneak": {
+          "initial": 3,
+          "value": 3
+        },
+        "Survival": {
+          "initial": 3,
+          "value": 3
+        },
+        "TechRedemption": {
+          "initial": 3,
+          "value": 3
+        },
+        "Vigor": {
+          "initial": 3,
+          "value": 3
+        }
+      },
+      "res": {
+        "body": {
+          "value": 0,
+          "mod": ""
+        },
+        "mind": {
+          "value": 0,
+          "mod": ""
+        },
+        "spirit": {
+          "value": 0,
+          "mod": ""
+        }
+      },
+      "occult": {
+        "psi": 0,
+        "urge": 0,
+        "theurgy": 0,
+        "hubris": 0
+      }
+    }
+  },
+  "Item": {
+    "templates": {
+      "common": {
+        "description": ""
+      },
+      "weapon": {
+        "TL": 0,
+        "Goal": "",
+        "Damage": 0,
+        "MinStrength": 0,
+        "Agora": "",
+        "Weight": 0,
+        "Features": [],
+        "description": "",
+        "Size": "",
+        "characteristics": []
+      }
+    },
+    "types": [
+      "Skill",
+      "Blessing",
+      "Characteristic",
+      "Curse",
+      "Perk",
+      "Upbringing",
+      "Armor",
+      "FirearmWeapon",
+      "Status",
+      "Generic",
+      "SchoolPower",
+      "MeleeWeapon",
+      "EShield",
+      "Species",
+      "Maneuver",
+      "Power",
+      "Competence",
+      "Knowledge"
+    ],
+
+    "Maneuver": {
+      "type": "",
+      "action": "",
+      "competence": "",
+      "time": "",
+      "roll": {
+        "skill": "",
+        "characteristic": ""
+      },
+      "resistance": "",
+      "impact": "",
+      "resistance": "",
+      "modifier": 0
+    },
+
+    "Power": {
+      "type": "",
+      "action": "",
+      "requirement": "",
+      "time": "",
+      "roll": {
+        "skill": "",
+        "characteristic": ""
+      },
+      "resistance": "",
+      "impact": "",
+      "resistance": "",
+      "schoolPower": {
+        "id": "",
+        "order": 0
+      },
+
+      "modifier": 0
+    },
+
+    "Generic": {
+      "templates": ["common"],
+      "TL": 0,
+      "weight": 0
+    },
+
+    "SchoolPower": {
+      "templates": ["common"]
+    },
+
+    "Characteristic": {
+      "templates": ["common"]
+    },
+
+    "Skill": {
+      "templates": ["common"]
+    },
+
+    "Competence": {
+      "templates": ["common"]
+    },
+
+    "Knowledge": {
+      "templates": ["common"]
+    },
+
+    "Blessing": {
+      "templates": ["common"]
+    },
+
+    "Curse": {
+      "templates": ["common"]
+    },
+
+    "Perk": {
+      "templates": ["common"]
+    },
+    "Upbringing": {
+      "templates": ["common"]
+    },
+    "Armor": {
+      "description": "",
+      "TL": 0,
+      "BodyResistance": 0,
+      "AllowedShield": "",
+      "Grade": "",
+      "DexPenalty": 0,
+      "VigorPenalty": 0,
+      "Disponibility": "",
+      "BlasterResistance": false,
+      "FlameResistance": false,
+      "HardResistance": false,
+      "LaserResistance": false,
+      "ShockResistance": false,
+      "SlamResistance": false,
+      "SonicResistance": false,
+      "UltraHardResistance": false
+    },
+    "MeleeWeapon": {
+      "templates": ["weapon"]
+    },
+    "Status": {
+      "templates": ["common"],
+      "Type": ""
+    },
+    "FirearmWeapon": {
+      "templates": ["weapon"],
+      "Type": "",
+      "Ramge": "10/!20",
+      "RateOfFire": 0,
+      "Ammo": 0
+    },
+    "EShield": {
+      "templates": ["common"]
+    },
+    "Species": {
+      "templates": ["common"],
+      "size": 5,
+      "speed": "10"
+    }
+  }
+}

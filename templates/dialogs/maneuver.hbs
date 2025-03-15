@@ -1,0 +1,29 @@
+<div class="fading-suns">
+
+    {{{skill.description}}}
+
+    <div class="items-header-group">{{localize 'FADING_SUNS.messages.ManeuverChoose'}} </div>
+
+          {{#each maneuvers as |item id|}}
+            <div class='ability flexrow flex-group-center'>
+                    <button type="button" class="fs_button_input" data-action='viewDoc' name="viewDoc" data-item-id='{{item._id}}' >
+                    <i class="fas fa-eye"></i>
+                    </button>
+                    <label class='resource-label rollable flexlarge align-left' data-action='roll-feature'
+                    data-roll='feature' name="roll-feature" data-label='{{item.id}}'>{{ item.name }}</label>
+
+                </button>
+            </div>
+
+           {{/each}}
+            <div class='ability flexrow flex-group-center' style="padding-top: 5px">
+                    <label class='resource-label rollable flexlarge align-left' data-action='roll-feature'
+                    data-roll='feature' name="roll-feature" >{{localize 'FADING_SUNS.messages.ManeuverNotInTheList'}}</label>
+
+                </button>
+            </div>
+
+    </div>
+    
+
+</div>

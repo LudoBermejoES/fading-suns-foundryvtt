@@ -1,0 +1,122 @@
+{{! Sheet Header }}
+<header class='sheet-header'>
+  <img class='profile-img' src='{{actor.img}}' data-edit='img' data-action='onEditImage' title='{{actor.name}}'
+    height='100' width='100' />
+  <div class='header-fields'>
+    <div class='resources grid grid-3col-max-1'>
+      <div class='resource flex-group-center'>
+        <label for='actor.name' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Name.label'}}
+        </label>
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input name='name' type='text' value='{{actor.name}}' placeholder='Name' />
+          <button type="button" name="viewJournal" class="fs_button_input " title="Edit Athletics"
+            data-action='viewJournal' data-journal-name="{{actor.name}}">
+            <i class="fas fa-eye"></i>
+          </button>
+
+        </div>
+      </div>
+
+      <div class='resource flex-group-center'>
+        <label for='system.vitality.value' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Vitality.label'}} (max {{system.vitality.max}})
+        </label>
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input type='text' name='system.vitality.value' value='{{system.vitality.value}}' data-dtype='Number' />
+        </div>
+      </div>
+      <div class='resource flex-group-center'>
+        <label for='system.revivals.value' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Revivals.label'}} {{ system.revivals.value}} / {{
+          system.revivals.max }}
+        </label>
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input type='button' class="fs_button " name='Revival' data-action="useRevival" {{#unless
+            system.revivals.value }} disabled {{/unless}} value='{{ localize '
+            FADING_SUNS.Actor.Character.FIELDS.Revivals.use'}}' />
+        </div>
+      </div>
+
+    </div>
+
+    <div class='resources grid grid-4col'>
+      <div class='resource-content flexrow flex-center flex-between'>
+        <div class='resource flex-group-center'>
+          <label class='resource-label'>
+
+            {{localize 'FADING_SUNS.Actor.Character.FIELDS.Cache.label'}}:
+          </label>
+          <div class='resource-content'>
+            <input type='number' name='system.cache' value='{{system.cache}}' class="ability-score"
+            data-dtype='Number' />
+          </div>
+        </div>
+        <div class='resource flex-group-center'>
+          <label class='resource-label'>
+            {{localize 'FADING_SUNS.Actor.Character.FIELDS.MaxBankPoints.label'}}:
+          </label>
+          <div class='resource-content flexrow flex-center flex-between'>
+            <div class="items-header-group">{{system.bank.maxBankPoints}} </div>
+          </div>
+        </div>
+      </div>
+      <div class='resource flex-group-center'>
+        <label for='system.vbank.victoryPoints' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.VictoryPoints.label'}}
+        </label>
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input type='text' name='system.bank.victoryPoints' value='{{system.bank.victoryPoints}}' data-dtype='Number'
+            />
+        </div>
+      </div>
+
+      <div class='resource flex-group-center'>
+        <label for='system.bank.wyrdPoints' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.WyrdPoints.label'}}
+        </label>
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input type='text' name='system.bank.wyrdPoints' value='{{system.bank.wyrdPoints}}' data-dtype='Number' />
+        </div>
+      </div>
+
+      <div class='resource flex-group-center'>
+        <label for='system.revivals.value' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Surge.label'}} {{ system.surge.current}} / {{ system.surge.max
+          }}
+        </label>
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input type='button' class="fs_button" name='Revival' data-action="useSurge" {{#unless system.surge.current }}
+            disabled {{/unless}} value='{{ localize 'FADING_SUNS.Actor.Character.FIELDS.Surge.use'}}' />
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class='resources grid grid-4col-title'>
+      <div class='resource flex-group-center'>
+        <div class='resource-content flexrow flex-center flex-between items-header-group'>
+          {{localize 'FADING_SUNS.Resistances.name'}}
+        </div>
+      </div>
+      {{#each system.res as |resistance key|}}
+
+      <div class='resource flex-group-center'>
+
+        <div class='resource-content flexrow flex-center flex-between'>
+          <label for='system.res.{{key}}.value' class='resource-label'>
+            {{localize (lookup @root.config.resistances key)}}
+          </label>
+
+          <input type='number' name='system.res.{{key}}.value' value='{{resistance.value}}' class="ability-score"
+            data-dtype='Number' />
+          <input type='number' name='system.res.{{key}}.mod' value='{{resistance.mod}}' class="ability-score"
+            data-dtype='Number' placeholder='Mod.' />
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+  </div>
+</header>

@@ -1,0 +1,621 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+:root {
+  --fading-suns-c-dark: #191813;
+  --fading-suns-c-faint: #c9c7b8;
+  --fading-suns-c-beige: #b5b3a4;
+  --fading-suns-c-tan: #444444;
+  --fading-suns-c-white: #ffffff;
+  --fading-suns-c-black: #000000;
+  --fading-suns-c-groove: #eeede0;
+}
+
+.theme-dark {
+  --fading-suns-c-dark: #c9c7b8;
+  --fading-suns-c-faint: #191813;
+  --fading-suns-c-beige: #444444;
+  --fading-suns-c-tan: #b5b3a4;
+  --fading-suns-c-white: #000000;
+  --fading-suns-c-black: #ffffff;
+  --fading-suns-c-groove: #11121f;
+}
+
+/* Global styles */
+.window-app {
+  font-family: "Roboto", sans-serif;
+}
+
+.rollable:hover, .rollable:focus {
+  color: var(--fading-suns-c-black);
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+
+.grid,
+.grid-2col {
+  display: grid;
+  grid-column: span 2/span 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.grid-2col-max-1 {
+  display: grid;
+  grid-column: span 3/span 1;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2em;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.grid-3col-max-1 {
+  grid-column: span 3/span 3;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.grid-3col {
+  grid-column: span 3/span 3;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4col {
+  grid-column: span 4/span 4;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-4col-title {
+  grid-column: span 4/span 4;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr;
+}
+
+.grid-5col {
+  grid-column: span 5/span 5;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-5col-max-1 {
+  grid-column: span 5/span 5;
+  grid-template-columns: 2fr 0.5fr 0.5fr 0.5fr;
+}
+
+.grid-6col {
+  grid-column: span 6/span 6;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-7col {
+  grid-column: span 7/span 7;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.grid-8col {
+  grid-column: span 8/span 8;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.grid-9col {
+  grid-column: span 9/span 9;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
+.grid-10col {
+  grid-column: span 10/span 10;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.grid-11col {
+  grid-column: span 11/span 11;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+.grid-12col {
+  grid-column: span 12/span 12;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.grid-start-2 {
+  grid-column-start: 2;
+}
+
+.grid-start-3 {
+  grid-column-start: 3;
+}
+
+.grid-start-4 {
+  grid-column-start: 4;
+}
+
+.grid-start-5 {
+  grid-column-start: 5;
+}
+
+.grid-start-6 {
+  grid-column-start: 6;
+}
+
+.grid-start-7 {
+  grid-column-start: 7;
+}
+
+.grid-start-8 {
+  grid-column-start: 8;
+}
+
+.grid-start-9 {
+  grid-column-start: 9;
+}
+
+.grid-start-10 {
+  grid-column-start: 10;
+}
+
+.grid-start-11 {
+  grid-column-start: 11;
+}
+
+.grid-start-12 {
+  grid-column-start: 12;
+}
+
+.grid-span-2 {
+  grid-column-end: span 2;
+}
+
+.grid-span-3 {
+  grid-column-end: span 3;
+}
+
+.grid-span-4 {
+  grid-column-end: span 4;
+}
+
+.grid-span-5 {
+  grid-column-end: span 5;
+}
+
+.grid-span-6 {
+  grid-column-end: span 6;
+}
+
+.grid-span-7 {
+  grid-column-end: span 7;
+}
+
+.grid-span-8 {
+  grid-column-end: span 8;
+}
+
+.grid-span-9 {
+  grid-column-end: span 9;
+}
+
+.grid-span-10 {
+  grid-column-end: span 10;
+}
+
+.grid-span-11 {
+  grid-column-end: span 11;
+}
+
+.grid-span-12 {
+  grid-column-end: span 12;
+}
+
+.flex-group-center,
+.flex-group-left,
+.flex-group-right {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flex-group-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.flex-group-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.flexshrink {
+  flex: 0;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flexlarge {
+  flex: 2;
+}
+
+.align-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.align-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.align-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.item-delete {
+  max-width: 12px;
+}
+
+.item-edit {
+  text-align: left !important;
+}
+
+.text-button {
+  font-size: 20px;
+}
+
+/* Styles limited to fading-suns sheets */
+.fading-suns .item-form {
+  font-family: "Roboto", sans-serif;
+}
+.fading-suns .sheet-header {
+  flex: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.fading-suns .sheet-header .profile-img {
+  flex: 0 0 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+.fading-suns .sheet-header .header-fields {
+  flex: 1;
+}
+.fading-suns .sheet-tabs {
+  flex: 0;
+}
+.fading-suns .sheet-body,
+.fading-suns .sheet-body .tab,
+.fading-suns .sheet-body .tab .editor {
+  height: 100%;
+}
+.fading-suns .tab.biography {
+  flex: 1;
+}
+.fading-suns .tab.biography .editor {
+  height: 100%;
+}
+.fading-suns .tox .tox-editor-container {
+  background: var(--fading-suns-c-white);
+}
+.fading-suns .tox .tox-edit-area {
+  padding: 0 8px;
+}
+.fading-suns .fs_button {
+  width: 100%;
+  height: var(--input-height);
+  line-height: var(--input-height);
+  padding: 0 0.5rem;
+  background: var(--input-background-color);
+  border-radius: 4px;
+  outline: 1px solid transparent;
+  color: var(--input-text-color);
+  font-size: var(--font-size-14);
+  transition: outline-color 0.5s;
+}
+.fading-suns .fs_button_input {
+  height: var(--input-height);
+  line-height: var(--input-height);
+  padding: 0 0.5rem;
+  background: var(--input-background-color);
+  border-radius: 4px;
+  outline: 1px solid transparent;
+  color: var(--input-text-color);
+  font-size: var(--font-size-14);
+  transition: outline-color 0.5s;
+  max-width: 40px;
+}
+.fading-suns .fs_button:disabled {
+  opacity: 1;
+  pointer-events: none;
+}
+.fading-suns .radio-data {
+  text-align: left;
+  display: inline;
+}
+.fading-suns .application textarea {
+  width: 100%;
+  height: var(--input-height);
+  line-height: var(--input-height);
+  padding: 0 0.5rem;
+  background: var(--input-background-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  outline: 1px solid transparent;
+  color: var(--input-text-color);
+  user-select: text;
+  font-size: var(--font-size-14);
+  transition: outline-color 0.5s;
+}
+.fading-suns .items-header-roll {
+  height: 85px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove var(--fading-suns-c-groove);
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+.fading-suns .resource-label {
+  font-weight: bold;
+}
+.fading-suns .ability {
+  margin-bottom: 2px;
+}
+.fading-suns .ability-score,
+.fading-suns .ability-mod {
+  flex: 0 0 44px;
+}
+.fading-suns .items-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove var(--fading-suns-c-groove);
+  font-weight: bold;
+}
+.fading-suns .items-header > * {
+  font-size: 14px;
+  text-align: center;
+}
+.fading-suns .items-header .item-name {
+  font-weight: bold;
+  padding-left: 5px;
+  text-align: left;
+  display: flex;
+}
+.fading-suns .items-content {
+  align-items: center;
+}
+.fading-suns .items-content > * {
+  text-align: center;
+}
+.fading-suns .items-content .item-name {
+  padding-left: 5px;
+  text-align: left;
+  display: flex;
+}
+.fading-suns .section-group {
+  border-top: 1px solid;
+  margin-bottom: 1em;
+}
+.fading-suns .items-header-group {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+.fading-suns .grouped {
+  padding-left: 1em !important;
+}
+.fading-suns .items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: var(--fading-suns-c-tan);
+}
+.fading-suns .items-list .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fading-suns .items-list .item-name {
+  flex: 2;
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  text-align: left;
+  align-items: center;
+  display: flex;
+}
+.fading-suns .items-list .item-name h3, .fading-suns .items-list .item-name h4 {
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.fading-suns .items-list .item-controls {
+  display: flex;
+  flex: 0 0 100px;
+  justify-content: flex-end;
+}
+.fading-suns .items-list .item-controls a {
+  font-size: 12px;
+  text-align: center;
+  margin: 0 6px;
+}
+.fading-suns .items-list .item {
+  align-items: center;
+  padding: 0 2px;
+  border-bottom: 1px solid var(--fading-suns-c-faint);
+}
+.fading-suns .items-list .item:last-child {
+  border-bottom: none;
+}
+.fading-suns .items-list .item .item-name {
+  color: var(--fading-suns-c-dark);
+}
+.fading-suns .items-list .item .item-name .item-image {
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: 30px;
+  border: none;
+  margin-right: 5px;
+}
+.fading-suns .items-list .item-prop {
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
+}
+.fading-suns .items-list .items-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove var(--fading-suns-c-groove);
+  font-weight: bold;
+}
+.fading-suns .items-list .items-header > * {
+  font-size: 12px;
+  text-align: center;
+}
+.fading-suns .items-list .items-header .item-name {
+  padding-left: 5px;
+  text-align: left;
+}
+.fading-suns .item-formula {
+  flex: 0 0 200px;
+  padding: 0 8px;
+}
+.fading-suns .effects-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove var(--fading-suns-c-groove);
+  font-weight: bold;
+}
+.fading-suns .effects-header > * {
+  font-size: 14px;
+  text-align: center;
+}
+.fading-suns .effects-header .effect-name {
+  font-weight: bold;
+  padding-left: 5px;
+  text-align: left;
+  display: flex;
+}
+.fading-suns .effects-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: var(--fading-suns-c-tan);
+}
+.fading-suns .effects-list .effect-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fading-suns .effects-list .effect-name {
+  flex: 2;
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  text-align: left;
+  align-items: center;
+  display: flex;
+}
+.fading-suns .effects-list .effect-name h3, .fading-suns .effects-list .effect-name h4 {
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.fading-suns .effects-list .effect-controls {
+  display: flex;
+  flex: 0 0 100px;
+  justify-content: flex-end;
+}
+.fading-suns .effects-list .effect-controls a {
+  font-size: 12px;
+  text-align: center;
+  margin: 0 6px;
+}
+.fading-suns .effects-list .effect {
+  align-items: center;
+  padding: 0 2px;
+  border-bottom: 1px solid var(--fading-suns-c-faint);
+}
+.fading-suns .effects-list .effect:last-child {
+  border-bottom: none;
+}
+.fading-suns .effects-list .effect .effect-name {
+  color: var(--fading-suns-c-dark);
+}
+.fading-suns .effects-list .effect .effect-name .effect-image {
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: 30px;
+  border: none;
+  margin-right: 5px;
+}
+.fading-suns .effects-list .effect-prop {
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
+}
+.fading-suns .effects-list .effects-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove var(--fading-suns-c-groove);
+  font-weight: bold;
+}
+.fading-suns .effects-list .effects-header > * {
+  font-size: 12px;
+  text-align: center;
+}
+.fading-suns .effects-list .effects-header .effect-name {
+  padding-left: 5px;
+  text-align: left;
+}
+.fading-suns .effect-formula {
+  flex: 0 0 200px;
+  padding: 0 8px;
+}
+.fading-suns .effects .item .effect-source,
+.fading-suns .effects .item .effect-duration,
+.fading-suns .effects .item .effect-controls {
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
+}
+.fading-suns .effects .item .effect-controls {
+  border: none;
+}
+
+/* Armor equipped styling */
+.equipped-tag {
+  margin-left: 5px;
+  color: #4caf50;
+}
+
+.item-toggle {
+  color: #999;
+}
+
+.item-toggle .fa-toggle-on {
+  color: #4caf50;
+}

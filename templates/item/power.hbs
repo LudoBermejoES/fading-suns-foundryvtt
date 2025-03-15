@@ -1,0 +1,142 @@
+{{! action Tab }}
+<section
+  class='tab active'
+  data-group='primary'
+  data-tab='power'
+>
+
+<div class='resources grid grid-2col'>
+    <div class='resource flex-group-center'>
+      <label for='item.name' class='resource-label'>
+        {{localize 'FADING_SUNS.Power.Name'}}
+      </label>
+      <div class='resource-content flexrow flex-center flex-between'>
+         <div class='resource-content flexrow flex-center flex-between'>
+        <input name='name' type='text' value='{{item.name}}' />  
+      </div>
+      </div>
+    </div>
+    <div class='resource flex-group-center'>
+      <label for='system.requirement' class='resource-label'>
+        {{localize 'FADING_SUNS.Power.Requirement'}}
+      </label>
+      <div class='resource-content flexrow flex-center flex-between'>
+         <div class='resource-content flexrow flex-center flex-between'>
+        <input name='system.requirement' type='text' value='{{system.requirement}}' />  
+      </div>
+      </div>
+    </div>
+</div>
+
+
+<div class='resources grid grid-3col'>
+    <div class='resource flex-group-center'>
+      <label for='system.type' class='resource-label'>
+        {{localize 'FADING_SUNS.Power.Type'}}
+      </label>
+      <div class='resource-content flexrow flex-center flex-between'>
+        <select name="system.type">
+            {{#each powerTypes as |item id|}}
+              <option value="{{item.key}}" {{#if item.selected}} selected {{/if}}>{{item.translated}} </option>
+            {{/each}}
+          </select>
+      </div>
+    </div>
+
+
+    <div class='resource flex-group-center'>
+      <label for='system.roll.skill' class='resource-label'>
+        {{localize 'FADING_SUNS.Power.Skill'}}
+      </label>
+
+      <div class='resource-content flexrow flex-center flex-between'>
+        <select name="system.roll.skill">
+            {{#each skills as |item id|}}
+              <option value="{{item.key}}" {{#if item.selected}} selected {{/if}}>{{item.translated}} </option>
+            {{/each}}
+          </select>
+      </div>
+    </div>
+
+    <div class='resource flex-group-center'>
+      <label for='system.roll.characteristic' class='resource-label'>
+        {{localize 'FADING_SUNS.Power.Characteristic'}}
+      </label>
+
+      <div class='resource-content flexrow flex-center flex-between'>
+          <select name="system.roll.characteristic">
+            {{#each characteristics as |item id|}}
+              <option value="{{item.key}}" {{#if item.selected}} selected {{/if}}>{{item.translated}} </option>
+            {{/each}}
+          </select>
+                    <div class='flexrow flex-group-center'>
+              <label for='system.modifier'>
+                  {{localize 'FADING_SUNS.messages.EXTRA_MODIFIERS_SHORT'}}
+              </label>
+              <input name='system.modifier' type='number' value='{{system.modifier}}' />  
+          </div>
+    </div>
+     
+  </div>
+</div>  
+
+  <div class='resource flex-group-left'>
+      <label for='system.description' class='resource-label'>
+         {{localize 'FADING_SUNS.Power.Description'}}
+      </label>
+      {{! Editors must receive enriched text data from getData to properly handle rolls, UUID links, etc. }}
+      {{#if editable}} 
+        <prose-mirror name="system.description" data-document-u-u-i-d="{{item.uuid}}" value="{{system.description}}" collaborate="true" toggled="true">
+          {{{enrichedDescription}}}
+        </prose-mirror>
+      {{else}} {{{enrichedDescription}}}
+      {{/if}}
+  </div>      
+
+  <div class='resources grid grid-2col'>
+    <div class='resource flex-group-left'>
+      <label for='system.time' class='resource-label'>
+        {{localize 'FADING_SUNS.Power.Time'}}
+      </label>
+       {{#if editable}} 
+        <prose-mirror name="system.time" data-document-u-u-i-d="{{item.uuid}}" value="{{system.time}}" collaborate="true" toggled="true">
+          {{{enrichedTime}}}
+        </prose-mirror>
+      {{else}} {{{enrichedTime}}}
+      {{/if}}
+    </div>
+        <div class='resource flex-group-left'>
+      <label for='system.resistance' class='resource-label'>
+        {{localize 'FADING_SUNS.Power.Resistance'}}
+      </label>
+      {{! Editors must receive enriched text data from getData to properly handle rolls, UUID links, etc. }}
+      {{#if editable}} 
+        <prose-mirror name="system.resistance" data-document-u-u-i-d="{{item.uuid}}" value="{{system.resistance}}" collaborate="true" toggled="true">
+          {{{enrichedResistance}}}
+        </prose-mirror>
+      {{else}} {{{enricheResistance}}}
+      {{/if}}
+    </div>
+
+  </div>  
+
+
+
+
+
+      <div class='resource flex-group-left'>
+      <label for='system.impact' class='resource-label'>
+        {{localize 'FADING_SUNS.Power.Impact'}}
+      </label>
+          {{#if editable}} 
+            <prose-mirror name="system.impact" data-document-u-u-i-d="{{item.uuid}}" value="{{system.impact}}" collaborate="true" toggled="true">
+              {{{enrichedImpact}}}
+            </prose-mirror>
+          {{else}} {{{enrichedImpact}}}
+          {{/if}}
+    </div>   
+
+
+
+            
+</section>

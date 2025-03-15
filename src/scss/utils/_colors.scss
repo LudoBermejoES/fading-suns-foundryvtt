@@ -1,0 +1,29 @@
+:root {
+  --fading-suns-c-dark: #191813;
+  --fading-suns-c-faint: #c9c7b8;
+  --fading-suns-c-beige: #b5b3a4;
+  --fading-suns-c-tan: #444444;
+  --fading-suns-c-white: #ffffff;
+  --fading-suns-c-black: #000000;
+  --fading-suns-c-groove: #eeede0;
+}
+
+.theme-dark {
+  --fading-suns-c-dark: #c9c7b8;
+  --fading-suns-c-faint: #191813;
+  --fading-suns-c-beige: #444444;
+  --fading-suns-c-tan: #b5b3a4;
+  --fading-suns-c-white: #000000;
+  --fading-suns-c-black: #ffffff;
+  --fading-suns-c-groove: #11121f;
+}
+
+$c-white: var(--fading-suns-c-white);
+$c-black: var(--fading-suns-c-black);
+
+$c-dark: var(--fading-suns-c-dark);
+$c-faint: var(--fading-suns-c-faint);
+$c-beige: var(--fading-suns-c-beige);
+$c-tan: var(--fading-suns-c-tan);
+
+$c-groove: var(--fading-suns-c-groove);

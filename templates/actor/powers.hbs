@@ -1,0 +1,105 @@
+{{! Powers Tab }}
+
+
+
+<section class='tab powers {{tab.cssClass}}' data-group='primary' data-tab='powers'>
+
+{{#if psionics }}
+  <div class='resources grid grid-2col'>
+  <div class='resource flex-group-center'>
+    <label for='system.rank.value' class='resource-label'>
+      {{localize 'FADING_SUNS.Actor.Character.FIELDS.Psi.label'}}
+    </label>
+
+    <div class='resource-content flexrow flex-center flex-between'>
+          <input name='system.occult.psi.value' type='number' value='{{system.occult.psi.value}}' placeholder='Psi' />
+    </div>
+  </div>
+    <div class='resource flex-group-center'>
+    <label for='system.rank.value' class='resource-label'>
+      {{localize 'FADING_SUNS.Actor.Character.FIELDS.Urge.label'}}
+    </label>
+
+    <div class='resource-content flexrow flex-center flex-between'>
+          <input name='system.occult.urge.value' type='number' value='{{system.occult.urge.value}}' placeholder='Urge' />
+    </div>
+  </div>
+</div>  
+{{/if}}
+
+{{#if theurgy }}
+  <div class='resources grid grid-2col'>
+  <div class='resource flex-group-center'>
+    <label for='system.rank.value' class='resource-label'>
+      {{localize 'FADING_SUNS.Actor.Character.FIELDS.Theurgy.label'}}
+    </label>
+
+    <div class='resource-content flexrow flex-center flex-between'>
+          <input name='system.occult.theurgy.value' type='number' value='{{system.occult.theurgy.value}}' placeholder='theurgy' />
+    </div>
+  </div>
+    <div class='resource flex-group-center'>
+    <label for='system.rank.value' class='resource-label'>
+      {{localize 'FADING_SUNS.Actor.Character.FIELDS.Hubris.label'}}
+    </label>
+
+    <div class='resource-content flexrow flex-center flex-between'>
+          <input name='system.occult.hubris.value' type='number' value='{{system.occult.hubris.value}}' placeholder='Hubris' />
+    </div>
+  </div>
+</div>  
+{{/if}}
+
+<h6>{{localize 'FADING_SUNS.ItemTitles.Powers'}}</h4>
+  <ol class='items-list'>
+    <li class='item flexrow items-header'>
+      <div class='item-name'>{{localize 'Name'}}</div>
+      <div class='item-controls'>
+        {{#if @root.editable}}
+          <a
+            class='item-control item-create'
+            title='{{localize "DOCUMENT.Create" type='Item'}}'
+            data-action='createDoc'
+            data-document-class='Item'
+            data-type='gear'
+          >
+            <i class='fas fa-plus'></i>
+            {{localize 'DOCUMENT.New' type='item'}}
+          </a>
+        {{/if}}
+      </div>
+    </li>
+    {{#each powers as |item id|}}
+      <li
+        class='item flexrow items-content'
+        data-item-id='{{item._id}}'
+        data-drag='true'
+        data-document-class='Item'
+      >
+      <div class='item-name' style="padding-left: 5px">
+        {{item.name}}
+      </div>
+
+        <div class='item-controls'>
+          <a
+            class='item-control item-edit'
+            title='{{localize "DOCUMENT.Update" type='MeleeWeapon'}}'
+            data-action='viewDoc'
+          >
+            <i class='fas fa-edit'></i>
+          </a>
+          {{#if @root.editable}}
+            <a
+              class='item-control item-delete'
+              title='{{localize "DOCUMENT.Delete" type='MeleeWeapon'}}'
+              data-action='deleteDoc'
+            >
+              <i class='fas fa-trash'></i>
+            </a>
+          {{/if}}
+        </div>
+      </li>
+    {{/each}}
+  </ol>
+
+</section>

@@ -1,0 +1,335 @@
+{
+  "FADING_SUNS": {
+    "LETS_ROL": "Tirada",
+    "CharacteristicParent": {
+      "body": "Cuerpo",
+      "mind": "Mente",
+      "spirit": "Espíritu"
+    },
+
+    "Miscellaneous": {
+      "upbringing": "Derechos nacimiento",
+      "blessings_curses": "Bendición/Maldición",
+      "Competences": "Competencias",
+      "Knowledges": "Saberes",
+      "Statuses": "Estados"
+
+    },
+
+    "messages": {
+      "CharacteristicChoose": "Elige una característica para la tirada",
+      "ManeuverChoose": "Elige una maniobra",
+      "ManeuverNotInTheList": "No está en la lista, déjame elegir la característica",
+      "ResistanceChoose": "Elige una resistencia para la tirada",
+      "SkillChoosed": "Habilidad seleccionada: ",
+      "VictoryPointsChoose": "Puntos de victoria a usar",
+      "VP": "PV",
+      "WYRD_POINT_USED": "Punto de wyrd",
+      "USE_WYRD_POINT": "Usar punto de wyrd",
+      "DICE": "Dado",
+      "OTHER_MODIFIERS": "Otros modificadores",
+      "EXTRA_MODIFIERS": "Modificadores extra",
+      "EXTRA_MODIFIERS_SHORT": "mod.",
+      "SUCCESS": "¡Lo has conseguido!",
+      "CRITICAL": "¡Éxito crítico!",
+      "TOTAL_FAILURE": "¡Fallo crítico!",
+      "FAILURE": "¡Has fallado!",
+      "VICTORY_POINTS_EARNED": "Has ganado $victory_points puntos de victoria",
+      "RESISTANCE_SUCCESS": "La resistencia a superar era $resistance, así que necesitas usar algunos puntos de victoria. Eso te da $difference puntos de victoria para almacenar",
+      "RESISTANCE_FAILURE": "Lo has conseguido pero la resistencia $resistance es mayor que tus puntos de victoria $vp",
+      "RESISTANCE_CRITICAL": "¡Lo has conseguido con una tirada crítica! $resistance será 0, eso te da $vp puntos de victoria para almacenar y un punto de wyrd",
+      "MOVE_TO_BANK": "Mover PV al Banco: ",
+      "ADVANTAGE": "Ventaja",
+      "DISADVANTAGE": "Desventaja",
+      "NORMAL": "Normal",
+      "TargetSelected": "Objetivo Seleccionado",
+      "NoTargetSelected": "Ningún objetivo seleccionado",
+      "SelectTargetHint": "Selecciona un objetivo para establecer automáticamente la resistencia basada en la resistencia corporal",
+      "ResistanceAuto": "Resistencia establecida automáticamente basada en la resistencia corporal del objetivo",
+      "AttackProperties": "Propiedades de Ataque",
+      "CoverageChoose": "Cobertura del Objetivo",
+      "FinalDifficulty": "Dificultad Final",
+      "NoCoverage": "Sin Cobertura",
+      "PartialCoverage": "Cobertura Parcial (+3)",
+      "TotalCoverage": "Cobertura Total (+6)",
+      "CAN_SPEND_VP_TO_SUCCEED": "Puedes gastar {vpNeeded} Puntos de Victoria de tu banco para tener éxito en esta tirada.",
+      "SPEND_VP_BUTTON": "Gastar {vpNeeded} PV para Tener Éxito",
+      "VP_SPENT_TO_SUCCEED": "Se gastaron {vpSpent} Puntos de Victoria del banco para tener éxito en esta tirada."
+    },
+
+    "Maneuver": {
+      "Skill": "Habilidad",
+      "Characteristic": "Característica",
+      "Time": "Tiempo",
+      "Competence": "Competencia",
+      "Type": "Tipo",
+      "TypeValue": {
+        "action": "Acción",
+        "combat": "Combate",
+        "defense": "Defensa",
+        "influence": "Influencia"
+      },
+      "Description": "Descripción",
+      "Impact": "Impacto",
+      "Resistance": "Resistencia",
+      "Name": "Nombre"
+    },
+
+    "Power": {
+      "Skill": "Habilidad",
+      "Characteristic": "Característica",
+      "Time": "Tiempo",
+      "Requirement": "Requerimientos",
+      "Type": "Tipo",
+      "TypeValue": {
+        "psionic": "Psiónico",
+        "theurgy": "Teurgia"
+      },
+      "Description": "Descripción",
+      "Impact": "Impacto",
+      "Resistance": "Resistencia",
+      "Name": "Nombre"
+    },
+
+    "ResistancesList": {
+      "Unknown": "Desconocida",
+      "Effortless": "Sin esfuerzo",
+      "Easy": "Fácil",
+      "Hard": "Difícil",
+      "Demanding": "Exigente",
+      "Tough": "Dura",
+      "Severe": "Severa",
+      "Herculean": "Hercúlea",
+      "Miraculous": "Milagrosa"
+    },
+
+    "ItemTitles": {
+      "Generic": "Objetos genéricos",
+      "SchoolPower": "Escuela del poder",
+      "Armors": "Armaduras",
+      "MeleeWeapons": "Armas cuerpo a cuerpo",
+      "FirearmWeapons": "Armas de fuego",
+      "Statuses": "Estados",
+      "Maneuver": "Maniobras",
+      "Powers": "Poderes",
+      "Perks": "Beneficios"
+    },
+
+    "CharacteristicLong": {
+      "str": "Fuerza",
+      "dex": "Destreza",
+      "end": "Constitución",
+      "wits": "Inteligencia",
+      "per": "Percepción",
+      "will": "Voluntad",
+      "pre": "Presencia",
+      "int": "Intuición",
+      "fth": "Fé"
+    },
+
+    "Resistances": {
+      "name": "Resistencias",
+      "body": "Corporal",
+      "mind": "Mental",
+      "spirit": "Espiritual"
+    },
+
+    "Characteristic": {
+      "str": {
+        "short": "str",
+        "full": "Strength"
+      },
+      "dex": {
+        "short": "dex",
+        "full": "Dexterity"
+      },
+      "end": {
+        "short": "end",
+        "full": "Endurance"
+      },
+      "wits": {
+        "short": "wits",
+        "full": "Wits"
+      },
+      "per": {
+        "short": "per",
+        "full": "Perception"
+      },
+      "will": {
+        "short": "will",
+        "full": "Will"
+      },
+      "pre": {
+        "short": "pre",
+        "full": "Presence"
+      },
+      "int": {
+        "short": "int",
+        "full": "Intuition"
+      },
+      "fth": {
+        "short": "fth",
+        "full": "Faith"
+      }
+    },
+
+    "Skill": {
+      "Academia": "Academia",
+      "Alchemy": "Alquimia",
+      "Animalia": "Trato con animales",
+      "Arts": "Artes",
+      "Charm": "Encanto",
+      "Crafts": "Oficios",
+      "Disguise": "Disfraz",
+      "Drive": "Conducir",
+      "Empathy": "Empatía",
+      "Fight": "Luchar",
+      "Focus": "Introspección",
+      "Impress": "Impresionar",
+      "Interface": "Interfaz",
+      "Intrusion": "Intrusión",
+      "Knavery": "Charlatanería",
+      "Melee": "Cuerpo a cuerpo",
+      "Observe": "Observar",
+      "Perform": "Representar",
+      "Pilot": "Pilotar",
+      "Remedy": "Curar",
+      "Shoot": "Disparar",
+      "SleightOfHand": "Prestidigitación",
+      "Sneak": "Sigilo",
+      "Survival": "Supervivencia",
+      "TechRedemption": "Tecnorredención",
+      "Vigor": "Vigor"
+    },
+    "SheetLabels": {
+      "Actor": "Personaje",
+      "Item": "Ficha",
+      "Armor": "Armadura"
+    },
+    "Actor": {
+      "Tabs": {
+        "Biography": "Biografía",
+        "Features": "Habilidades",
+        "Gear": "Equipo",
+        "Combat": "Combate",
+        "Powers": "Poderes",
+        "Effects": "Efectos",
+        "Perks": "Beneficios"
+      },
+
+      "base": {
+        "FIELDS": {
+          "biography": { "label": "Biografía" }
+        }
+      },
+      "Character": {
+        "FIELDS": {
+          "Level": { "label": "Nivel" },
+          "Species": { "label": "Especie" },
+          "Name": { "label": "Nombre" },
+          "Rank": { "label": "Rango" },
+          "Money": { "label": "Dinero" },
+          "Psi": { "label": "Psi" },
+          "Urge": { "label": "Ansia" },
+          "Theurgy": { "label": "Teurgia" },
+          "Hubris": { "label": "Hubris" },
+          "Planet": { "label": "Planeta" },
+          "Size": { "label": "Tamaño" },
+          "Speed": { "label": "Velocidad" },
+          "Birthdate": { "label": "Nacimiento" },
+          "Class": { "label": "Clase" },
+          "Faction": { "label": "Facción" },
+          "Calling": { "label": "Vocación" },
+          "Blessing": { "label": "Bendición" },
+          "Curse": { "label": "Maldición" },
+          "Vitality": { "label": "Vitalidad" },
+          "Revivals": { "label": "Reanimaciones" },
+          "VictoryPoints": { "label": "Puntos de victoria" },
+          "WyrdPoints": { "label": "Puntos de Wyrd" },
+          "MaxBankPoints": { "label": "Máximo en banco" },
+          "Cache": { "label": "Depósito" },
+          "Surge": {
+            "label": "Impulso",
+            "current": "Actuales",
+            "max": "Max",
+            "totalPointsGained": "Puntos de voluntad ganados",
+            "use": "Usar impulso"
+          },
+          "Perks": { "label": "Beneficios" }
+        }
+      },
+      "NPC": {
+        "FIELDS": {
+          "cr": { "label": "CR" },
+          "xp": { "label": "XP" }
+        }
+      }
+    },
+    "Item": {
+      "Tabs": {
+        "Attributes": "Attributes",
+        "Description": "Description",
+        "Effects": "Effects"
+      },
+      "Armor": {
+        "FIELDS": {
+          "NT": "Nivel Tecnológico",
+          "BodyResistance": "Resistencia corporal",
+          "AllowedShield": "Escudo permitido",
+          "Grade": "Grado",
+          "DexPenalty": "Penalización de destreza",
+          "VigorPenalty": "Penalización de vigor",
+          "Disponibility": "Disponibilidad",
+          "BlasterResistance": "Resistencia a descarga",
+          "FlameResistance": "Resistencia a fuego",
+          "HardResistance": "Resistencia a endurecida",
+          "LaserResistance": "Resistencia a láser",
+          "ShockResistance": "Resistencia a descarga",
+          "SlamResistance": "Resistencia a golpe",
+          "SonicResistance": "Resistencia a sónica",
+          "UltraHardResistance": "Resistencia a ultra-endurecida",
+          "Equipped": "Equipada",
+          "Equip": "Equipar Armadura",
+          "Unequip": "Desequipar Armadura"
+        }
+      },
+      "Gear": {
+        "FIELDS": {
+          "rollFormula": { "label": "Roll Formula" },
+          "numDice": { "label": "Number of Dice" },
+          "dieSize": { "label": "Die Size" },
+          "rollMod": { "label": "Roll Modifier" },
+          "quantity": { "label": "Quantity" },
+          "weight": { "label": "Weight" }
+        }
+      }
+    },
+    "Effect": {
+      "Source": "Source",
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "NPC"
+    },
+    "Item": {
+      "gear": "Gear",
+      "feature": "Feature"
+    }
+  },
+  "AttackProperties": {
+    "blaster": "Descarga",
+    "shock": "Descarga",
+    "slam": "Golpe",
+    "hard": "Endurecida",
+    "flame": "Fuego",
+    "laser": "Láser",
+    "sonic": "Sónica",
+    "ultraHard": "Ultra-Endurecida"
+  }
+}

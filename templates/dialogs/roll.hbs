@@ -1,0 +1,160 @@
+<div class="fading-suns">
+    
+    <div class="items-header-roll">
+        {{#if maneuver.name}}
+             <div style="font-size: 24px;">{{maneuver.name}} </div>
+        {{/if}}
+
+
+        <div>{{skillTranslated}} ({{skillValue}}) + {{ characteristicSelected }} {{ characteristicValueSelected }} {{#if victoryPointsSelected }} + {{ victoryPointsSelected }} {{localize 'FADING_SUNS.messages.VP'}} {{/if}} {{#if wyrdPointUsed }} + 3 ({{localize 'FADING_SUNS.messages.WYRD_POINT_USED'}}) {{/if}} {{#if extraModifiers }} + {{ extraModifiers }} ({{localize  'FADING_SUNS.messages.EXTRA_MODIFIERS_SHORT'}}) {{/if}}</div>
+        <div style="font-size: 24px;">{{ totalRoll }}  </div>
+    </div>
+    {{#unless maneuver.name}}
+    <section class="main grid-span-2">
+        <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.messages.CharacteristicChoose'}} </div>
+        <div class='resources grid grid-3col'>
+
+        {{#each characteristicsTranslated as |item id|}}
+
+            <div class='resource-content flexrow flex-center flex-between radio-data'>
+                       <input name='characteristic' type='radio' value='{{item.key}}' {{#if (eq ../characteristic item.key)}} checked {{/if}} class='characteristicRadio'/ action="chooseCharacteristic">  <label for="{{item.key}}">{{item.translated}} ({{item.value}}) </label>
+            </div>
+
+            {{/each}}
+        </div>
+
+        </section>
+    </section>
+    {{/unless}}
+
+
+    <section class="main grid-span-1">
+        <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.messages.VictoryPointsChoose'}} </div>
+        <div class='resources grid grid-{{victoryPoints}}col'>
+
+        {{#for 0 victoryPoints 1}}
+            <div class='resource-content flexrow flex-center flex-between radio-data'>
+                <input name='victoryPointsSelected' type='radio' value='{{this}}' class='resistanceRadio'action="chooseResistance" {{#if (eq ../victoryPointsSelected this)}} checked {{/if}}>  <label for="{{this}}">{{this}}</label>
+            </div>
+        {{/for}}
+        </div>
+
+        </section>
+    </section>
+    
+
+ <section class="main grid-span-1">
+
+
+
+    <section class="main grid-span-2">
+        <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.messages.OTHER_MODIFIERS'}} </div>
+        <div class='resources grid grid-2col'>
+
+            {{#if wyrdPoints}}
+            <div class='flexrow flex-group-left'>
+                <label for='system.planet'>
+                        {{localize 'FADING_SUNS.messages.USE_WYRD_POINT'}}
+                    </label>
+                    <input name='wyrdPointUsed' type='checkbox' value='{{wyrdPointUsed}}' class='resistanceRadio'action="chooseResistance" {{#if wyrdPointUsed }} checked {{/if}} />
+       
+            </div>
+            {{/if}}
+
+            <div class='resource flex-group-center'>
+    
+                <div class='flexrow flex-group-center'>
+                    <label for='system.planet'>
+                        {{localize 'FADING_SUNS.messages.EXTRA_MODIFIERS'}}
+                    </label>
+                    <input name='extraModifiers' type='text' value='{{extraModifiers}}' />  
+                </div>
+            </div>
+         
+        </div>
+
+        </section>
+    </section>
+
+    <section class="main grid-span-1">
+        <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.messages.ResistanceChoose'}} </div>
+        
+        {{#if isWeapon}}
+            {{#if hasTarget}}
+            <div class="target-info">
+                <p>{{localize 'FADING_SUNS.messages.TargetSelected'}}: <strong>{{targetName}}</strong></p>
+                <p>{{localize 'FADING_SUNS.messages.ResistanceAuto'}}</p>
+                
+                {{#if attackProperties.length}}
+                <div class="attack-properties">
+                    <p>{{localize 'FADING_SUNS.messages.AttackProperties'}}:</p>
+                    <ul>
+                    {{#each attackProperties as |property|}}
+                        <li>{{localize (concat 'FADING_SUNS.AttackProperties.' property)}}</li>
+                    {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+                
+                <!-- Coverage selection -->
+                <div class="coverage-selection">
+                    <p>{{localize 'FADING_SUNS.messages.CoverageChoose'}}:</p>
+                    <div class="resources grid grid-3col">
+                        <div class="resource-content flexrow flex-center flex-between radio-data">
+                            <input name="coverage" type="radio" value="none" class="coverageRadio" {{#if (eq coverage "none")}} checked {{/if}}>
+                            <label>{{localize 'FADING_SUNS.messages.NoCoverage'}} (+0)</label>
+                        </div>
+                        <div class="resource-content flexrow flex-center flex-between radio-data">
+                            <input name="coverage" type="radio" value="partial" class="coverageRadio" {{#if (eq coverage "partial")}} checked {{/if}}>
+                            <label>{{localize 'FADING_SUNS.messages.PartialCoverage'}} (+3)</label>
+                        </div>
+                        <div class="resource-content flexrow flex-center flex-between radio-data">
+                            <input name="coverage" type="radio" value="total" class="coverageRadio" {{#if (eq coverage "total")}} checked {{/if}}>
+                            <label>{{localize 'FADING_SUNS.messages.TotalCoverage'}} (+6)</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Final calculated difficulty display -->
+                <div class="final-difficulty">
+                    <p>{{localize 'FADING_SUNS.messages.FinalDifficulty'}}:</p>
+                    <div class="difficulty-value">
+                        <strong>{{numericResistance}}</strong>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <div class="target-info warning">
+                <p>{{localize 'FADING_SUNS.messages.NoTargetSelected'}}</p>
+                <p>{{localize 'FADING_SUNS.messages.SelectTargetHint'}}</p>
+            </div>
+            {{/if}}
+        {{else}}
+          <div class='resources grid grid-3col'>
+
+          {{#each resistancesTranslated as |item id|}}
+              <div class='resource-content flexrow flex-center flex-between radio-data'>
+                  <input name='resistance' type='radio' value='{{item.key}}' class='resistanceRadio' {{#if (eq ../resistance item.key)}} checked {{/if}} {{#if ../isWeapon}}{{#if ../hasTarget}}disabled{{/if}}{{/if}} action="chooseResistance">  <label for="{{item.key}}">{{item.translated}} ({{item.value}})</label>
+              </div>
+          {{/each}}
+          </div>
+        {{/if}}
+
+        </section>
+    </section>
+    <footer class="sheet-footer flexrow">
+         <button type="submit" name="submit" data-type="normal">
+            <i class="fa fa-check"></i> {{localize 'FADING_SUNS.messages.NORMAL'}}
+        </button>
+         <button type="submit" name="submit" data-type="advantage">
+            <i class="fa fa-arrow-up"></i> {{localize 'FADING_SUNS.messages.ADVANTAGE'}}
+        </button>
+        <button type="submit" name="submit" data-type="disadvantage">
+            <i class="fa fa-arrow-down"></i> {{localize 'FADING_SUNS.messages.DISADVANTAGE'}}
+        </button>
+    </footer>
+</div>

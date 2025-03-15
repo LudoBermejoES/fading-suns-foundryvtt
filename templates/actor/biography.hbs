@@ -1,0 +1,159 @@
+{{! Biography Tab }}
+<section class='tab biography {{tab.cssClass}}' data-group='primary' data-tab='biography'>
+
+  <div class='resources grid grid-4col'>
+    <div class='resource flex-group-center'>
+      <label for='system.rank.value' class='resource-label'>
+        {{localize 'FADING_SUNS.Actor.Character.FIELDS.Rank.label'}}
+      </label>
+
+      <div class='resource-content flexrow flex-center flex-between'>
+        <input name='system.rank.value' type='text' value='{{system.rank.value}}' placeholder='Rank' />
+      </div>
+    </div>
+
+    <div class='resource flex-group-center'>
+      <label for='system.specie' class='resource-label'>
+        {{localize 'FADING_SUNS.Actor.Character.FIELDS.Species.label'}}
+      </label>
+
+      <div class='resource-content flexrow flex-center flex-between'>
+        <input name='system.specie' type='text' value='{{system.specie}}' placeholder='Species' />
+        <button type="button" name="viewJournal" class="fs_button_input " title="Edit Athletics" data-action='viewJournal' data-journal-name="{{system.specie}}">
+          <i class="fas fa-eye"></i>
+        </button>
+      </div>
+    </div>
+      <div class='resource flex-group-center'>
+        <label for='system.size.value' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Size.label'}}
+        </label>
+
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input name='system.size.value' type='number' value='{{system.size.value}}' placeholder='Size' />
+        </div>
+      </div>
+      <div class='resource flex-group-center'>
+        <label for='system.speed.value' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Speed.label'}}
+        </label>
+
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input name='system.speed.value' type='number' value='{{system.speed.value}}' placeholder='Speed' />
+        </div>
+      </div>
+  </div>
+
+  <div class='resources grid grid-2col'>
+    <div class='resource flex-group-center'>
+      <label for='system.planet' class='resource-label'>
+        {{localize 'FADING_SUNS.Actor.Character.FIELDS.Planet.label'}}
+      </label>
+      <div class='resource-content flexrow flex-center flex-between'>
+        <input name="system.planet" type="text" value="{{system.planet}}" placeholder="{{localize 'FADING_SUNS.Actor.Character.FIELDS.Planet.label'}}" />
+        <button type="button" class="fs_button_input " title="Edit Athletics" data-action='viewJournal' data-journal-name="{{system.planet}}">
+          <i class="fas fa-eye"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class='resource flex-group-center'>
+      <label for='system.birthdate.value' class='resource-label'>
+        {{localize 'FADING_SUNS.Actor.Character.FIELDS.Birthdate.label'}}
+      </label>
+
+      <div class='resource-content flexrow flex-center flex-between'>
+        <input name='system.birthdate.value' type='text' value='{{system.birthdate.value}}' placeholder='Birthdate' />
+      </div>
+    </div>
+  </div>
+
+  <div class='resources grid grid-4col'>
+
+    <div class='resource flex-group-center'>
+      <label for='system.class' class='resource-label'>
+        {{localize 'FADING_SUNS.Actor.Character.FIELDS.Class.label'}}
+      </label>
+      <div class='resource-content flexrow flex-center flex-between'>
+        <input name='system.class' type='text' value='{{system.class}}' placeholder='Class' />
+        <button type="button" class="fs_button_input " title="Edit Athletics" data-action='viewJournal' data-journal-name="{{system.class}}">
+          <i class="fas fa-eye"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <div class='resource flex-group-center'>
+      <label for='system.rank.value' class='resource-label'>
+        {{localize 'FADING_SUNS.Actor.Character.FIELDS.Level.label'}}
+      </label>
+
+      <div class='resource-content flexrow flex-center flex-between'>
+        <input name='system.level.value' type='number' value='{{system.level.value}}' placeholder='Level' />
+      </div>
+    </div>
+
+    <div class='resource flex-group-center'>
+      <label for='system.faction' class='resource-label'>
+        {{localize 'FADING_SUNS.Actor.Character.FIELDS.Faction.label'}}
+      </label>
+
+      <div class='resource-content flexrow flex-center flex-between'>
+        <input name='system.faction' type='text' value='{{system.faction}}' placeholder='Faction' />
+        <button type="button" class="fs_button_input " title="Edit Athletics" data-action='viewJournal' data-journal-name="{{system.faction}}">
+          <i class="fas fa-eye"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class='resource flex-group-center'>
+      <label for='system.calling' class='resource-label'>
+        {{localize 'FADING_SUNS.Actor.Character.FIELDS.Calling.label'}}
+      </label>
+
+      <div class='resource-content flexrow flex-center flex-between'>
+        <input name='system.calling' type='text' value='{{system.calling}}' placeholder='Calling' />
+        <button type="button" class="fs_button_input " title="Edit Athletics" data-action='viewJournal' data-journal-name="{{system.calling}}">
+          <i class="fas fa-eye"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class='resources grid grid-4col'>
+
+    <div class='resource flex-group-center'>
+      <label for='system.rank.value' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Vitality.label'}}
+      </label>
+      <div class='resource-content flexrow flex-center flex-between'>
+          <input type='text' name='system.vitality.max' value='{{system.vitality.max}}' data-dtype='Number' />
+      </div>
+    </div>
+     <div class='resource flex-group-center'>
+        <label for='system.revivals.value' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Revivals.label'}}
+        </label>
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input type='text' name='system.revivals.value' value='{{system.revivals.value}}' data-dtype='Number' />
+          <span> / </span>
+          <input type='text' name='system.revivals.max' value='{{system.revivals.max}}' data-dtype='Number' />
+        </div>
+      </div>
+
+     <div class='resource flex-group-center'>
+        <label for='system.revivals.value' class='resource-label'>
+          {{localize 'FADING_SUNS.Actor.Character.FIELDS.Surge.label'}}
+        </label>
+        <div class='resource-content flexrow flex-center flex-between'>
+          <input type='text' name='system.surge.current' value='{{system.surge.current}}' data-dtype='Number' />
+          <span> / </span>
+          <input type='text' name='system.surge.max' value='{{system.surge.max}}' data-dtype='Number' />
+        </div>
+      </div>
+
+
+  </div>
+
+</section>
