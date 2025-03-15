@@ -5,13 +5,10 @@ module.exports = {
       {
         targets: {
           node: 'current',
-        },
-      },
-    ],
+          browsers: '> 0.25%, not dead'
+        }
+      }
+    ]
   ],
-  env: {
-    test: {
-      plugins: ['@babel/plugin-transform-modules-commonjs']
-    }
-  }
+  plugins: ['@babel/plugin-transform-modules-commonjs']
 }; 
