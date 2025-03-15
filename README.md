@@ -1,86 +1,122 @@
-# FadingSuns System
+# Fading Suns System for Foundry VTT
 
 ![Foundry v11](https://img.shields.io/badge/foundry-v11-green) ![Foundry v12](https://img.shields.io/badge/foundry-v12-green)
 
-This system is a fading-suns system that you can use as a starting point for building your own custom systems. It's similar to Simple World-building, but has examples of creating attributes in code rather than dynamically through the UI.
+A comprehensive implementation of the Fading Suns roleplaying game system for Foundry Virtual Tabletop.
 
-> **Tutorial Updates are WIP**
-> 
-> The v12 branch of FadingSuns has switched to using Foundry's ApplicationV2 version of document sheets, and the updates for the accompanying tutorial on the wiki are still in progress. Feel free to use this version of the system, but you'll need to use the comments within the actor and item sheet classes for context on what's happening vs. reading the tutorial.
+## Description
+
+Fading Suns is a science fiction space opera roleplaying game set in a far future universe where noble houses, merchant guilds, and a powerful church vie for power amidst the ruins of a fallen empire. This system brings the rich world and mechanics of Fading Suns to Foundry VTT, allowing you to run immersive campaigns in this unique setting.
+
+This system provides:
+- Character sheets with support for all Fading Suns attributes, skills, and mechanics
+- Integrated dice rolling system with Victory Points and Wyrd Points
+- Support for weapons, armor, and equipment
+- Comprehensive implementation of Fading Suns' unique occult powers (Psi, Theurgy)
+- Multilingual support (English and Spanish)
+
+## Installation
+
+### Method 1: Direct Installation
+
+1. In Foundry VTT, navigate to the "Add-on Modules" tab
+2. Click "Install System"
+3. In the "Manifest URL" field, paste: `[Your manifest URL here]`
+4. Click "Install"
+
+### Method 2: Manual Installation
+
+1. Download the latest release from the [releases page](https://github.com/yourusername/fading-suns/releases)
+2. Extract the zip file
+3. Place the extracted folder in your Foundry VTT's `Data/systems` directory
+4. Restart Foundry VTT
+
+## Features
+
+### Character Creation and Management
+
+The system provides a comprehensive character sheet that includes:
+- Characteristics (Strength, Dexterity, Endurance, Wits, Perception, Will, Presence, Intelligence, Faith)
+- Skills (Academia, Alchemy, Animalia, Arts, etc.)
+- Resistances (Body, Mind, Spirit)
+- Occult abilities (Psi, Urge, Theurgy, Hubris)
+- Victory Points and Wyrd Points management
+- Detailed character information (faction, calling, planet, etc.)
+
+### Dice Rolling System
+
+The Fading Suns system uses a unique dice rolling mechanic:
+- Roll characteristic + skill dice pools
+- Calculate Victory Points based on success
+- Manage Wyrd Points for special abilities
+- Support for advantages/disadvantages
+- Resistance checks
+
+### Items and Equipment
+
+The system supports various item types:
+- Weapons (Melee and Firearms)
+- Armor and Energy Shields
+- Skills and Perks
+- Blessings and Curses
+- Powers and Maneuvers
+- And more!
+
+### Localization
+
+The system is available in:
+- English
+- Spanish
 
 ## Usage
 
-There are two ways to get started: using the FadingSuns system generator command or manually renaming and updating files.
+### Creating a Character
 
-Regardless of which method you choose, think carefully about your system's name. Your system's package name when submitted to Foundry must be formatted like `alphanumeric-lowercase`, and it must be unique. Check the Foundry systems package list for conflicts before committing to a name!
+1. Create a new game world using the Fading Suns system
+2. Create a new actor of type "Character"
+3. Fill in the character details, characteristics, and skills
+4. Add items, weapons, and equipment as needed
 
-> **Data Models**
->
-> If you would like to use DataModel classes instead of the older template.json configuration, you'll need to use the `npm run generate` command described below and choose to enable them when asked. DataModels are currently an optional feature, and are only availabe in the generator CLI due to that.
+### Rolling Dice
 
-### Generator
+1. Click on a characteristic or skill to initiate a roll
+2. Select the appropriate characteristic and skill combination
+3. Apply any modifiers or advantages/disadvantages
+4. View the results in the chat, including Victory Points earned
 
-This system includes a generator CLI in `package.json`. To use it, you must have [node.js](https://nodejs.org) installed, and it's recommended that you install node 20 or later.
+### Managing Resources
 
-> **Python Generator**
-> 
-> If you would rather use Python than node, there’s an excellent Python-based generator created by Cussa at https://github.com/Cussa/fvtt-fading-suns-initializator. Give it a shot!
+- Track Vitality for health
+- Manage Victory Points and Wyrd Points for special abilities
+- Track occult powers and their associated costs
 
-Once you have npm installed, you can run the following in your terminal or command prompt:
+## Contributing
 
-```bash
-npm install
-npm run generate
-```
+Contributions to the Fading Suns system are welcome! Please feel free to submit issues or pull requests.
 
-Your terminal should prompt you to name your system. Read the instructions carefully, the letter case and special characters in each question matter for correct system generation.
+1. Fork the repository
+2. Create a feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request
 
-Once the generator completes, it will output your system to `build/<your-system-name>`, where `<your-system-name>` is the package name you supplied during the prompt.
+## License
 
-Copy this directory over to your Foundry systems directory and start coding!
+This system is licensed under the [MIT License](LICENSE.txt).
 
-### Manual Replacement
+## Credits
 
-Before installing this system, you should rename any files that have `fading-suns` in their filename to use whatever machine-safe name your system needs, such as `adnd2e` if you were building a system for 2nd edition Advanced Dungeons & Dragons. In addition, you should search through the files for `fading-suns` and `FadingSuns` and do the same for those, replacing them with appropriate names for your system.
+- System Development: [List of contributors from system.json]
+- Fading Suns RPG: Created by Holistic Design, Inc.
+- Foundry VTT: Created by Atropos
 
-The `name` property in your `system.json` file is your system's package name. This need to be formatted `alphanumeric-lowercase`, and it must also match the foldername you use for your system.
+## Support
 
-### Vue 3 FadingSuns
+For support, please:
+- Join our Discord server: [Your Discord link]
+- Submit issues on our GitHub repository: [Your GitHub issues link]
+- Check the [Fading Suns RPG community](https://www.fadingsuns.com/) for general game questions
 
-**NOTE: The Vue 3 version is currently outdated and considered an advanced usage of Foundry due to it being a custom renderer. Only try it out if you _really_ like Vue and are feeling dangerous!**
+---
 
-Alternatively, there's another build of this system that supports using Vue 3 components (ES module build target) for character sheet templates.
-
-Head over to the [Vue3FadingSuns System](https://gitlab.com/asacolips-projects/foundry-mods/vue3fading-suns) repo if you're interested in using Vue!
-
-### Getting Help
-
-Check out the [Official Foundry VTT Discord](https://discord.gg/foundryvtt)! The #system-development channel has helpful pins and is a good place to ask questions about any part of the foundry application.
-
-For more static references, the [Knowledge Base](https://foundryvtt.com/kb/) and [API Documentation](https://foundryvtt.com/api/) provide different levels of detail. For the most detail, you can find the client side code in your foundry installation location. Classes are documented in individual files under `resources/app/client` and `resources/app/common`, and the code is collated into a single file at `resources/app/public/scripts/foundry.js`.
-
-#### Tutorial
-
-For much more information on how to use this system as a starting point for making your own, see the [full tutorial on the Foundry Wiki](https://foundryvtt.wiki/en/development/guides/SD-tutorial)!
-
-Note: Tutorial may be out of date, so look out for the Foundry compatibility badge at the top of each page.
-
-## Sheet Layout
-
-This system includes a handful of helper CSS classes to help you lay out your sheets if you're not comfortable diving into CSS fully. Those are:
-
-- `flexcol`: Included by Foundry itself, this lays out the child elements of whatever element you place this on vertically.
-- `flexrow`: Included by Foundry itself, this lays out the child elements of whatever element you place this on horizontally.
-- `flex-center`: When used on something that's using flexrow or flexcol, this will center the items and text.
-- `flex-between`: When used on something that's using flexrow or flexcol, this will attempt to place space between the items. Similar to "justify" in word processors.
-- `flex-group-center`: Add a border, padding, and center all items.
-- `flex-group-left`: Add a border, padding, and left align all items.
-- `flex-group-right`: Add a border, padding, and right align all items.
-- `grid`: When combined with the `grid-Ncol` classes, this will lay out child elements in a grid.
-- `grid-Ncol`: Replace `N` with any number from 1-12, such as `grid-3col`. When combined with `grid`, this will layout child elements in a grid with a number of columns equal to the number specified.
-
-## Compiling the CSS
-
-This repo includes both CSS for the theme and SCSS source files. If you're new to CSS, it's probably easier to just work in those files directly and delete the SCSS directory. If you're interested in using a CSS preprocessor to add support for nesting, variables, and more, you can run `npm install` in this directory to install the dependencies for the scss compiler. After that, just run `npm run build` to compile the SCSS and start a process that watches for new changes.
-
-![image](http://mattsmith.in/images/fading-suns.png)
+![Fading Suns Logo](systems/fading-suns/assets/anvil-impact.png)
