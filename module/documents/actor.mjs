@@ -1,3 +1,5 @@
+import { getSpeciesSize, getSpeciesSpeed, calculateVitality } from "../helpers/species.mjs";
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -28,6 +30,28 @@ export class FadingSunsActor extends Actor {
    * is queried and has a roll executed directly from it).
    */
   prepareDerivedData() {
+    super.prepareDerivedData?.();
+    
+    if (this.type !== "character") return;
+    
+    const system = this.system;
+    const speciesName = system.species?.value;
+    
+    // Set species-based attributes if species is defined
+    if (speciesName) {
+      // Update size based on species
+      system.size = system.size || {};
+      system.size.value = getSpeciesSize(speciesName);
+      
+      // Update speed based on species
+      system.speed = system.speed || {};
+      system.speed.value = getSpeciesSpeed(speciesName);
+      
+      // Update max vitality based on species and other attributes
+      system.vitality = system.vitality || {};
+      system.vitality.max = calculateVitality(this);
+    }
+    
     const actorData = this;
     const systemData = actorData.system;
     const flags = actorData.flags.fadingsuns || {};

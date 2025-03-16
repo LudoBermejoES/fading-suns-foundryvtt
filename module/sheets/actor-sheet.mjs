@@ -2,6 +2,7 @@ import { createEffectCategories } from "../helpers/effects.mjs";
 import RollDice from "../dialogs/rollDice.mjs";
 import Maneuver from "../dialogs/maneuver.mjs";
 import { PredefinedEffectsDialog } from "../dialogs/predefined-effects-dialog.mjs";
+import { updateActorSpeciesAttributes } from "../helpers/species.mjs";
 
 const { api, sheets } = foundry.applications;
 
@@ -390,10 +391,15 @@ export class FadingSunsActorSheet extends api.HandlebarsApplicationMixin(
    * Post-render steps are not awaited by the render process.
    * @param {ApplicationRenderContext} context      Prepared context data
    * @param {RenderOptions} options                 Provided render options
-   * @protected
-   * @override
    */
   _onRender(context, options) {
+    super._onRender?.(context, options);
+    
+    // Update species-based attributes when the sheet is opened
+    if (options.renderContext === "open") {
+      updateActorSpeciesAttributes(this.actor);
+    }
+    
     this.#dragDrop.forEach((d) => d.bind(this.element));
     this.#disableOverrides();
     // You may want to add other special handling here
