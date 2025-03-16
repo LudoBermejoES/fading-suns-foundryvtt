@@ -104,7 +104,7 @@ export function calculateTargetResistance(target, attackData, attacker) {
   if (!target) return 0;
   
   // Get the base resistance
-  const baseResistance = target.system.resistances?.corporal?.value || 0;
+  const baseResistance = target.system.res?.body?.value || 0;
   
   // Get armor resistances
   const armorResistances = {};

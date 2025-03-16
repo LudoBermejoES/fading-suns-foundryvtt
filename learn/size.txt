@@ -1,0 +1,23 @@
+Especie Tamaño
+medio
+Velocidad de
+movimiento
+Ascorbita 5 10 m
+Gannok 4 8 m
+Etyri 5 o 6 10 m (tamaño 5)
+o 12 m (tamaño 6);
+12 m volando
+Hironem 5 10 m
+Humano 5 10 m
+Oro’ym 5 10 m; 10 m nadando
+Shantor 7 28 m (cuadrúpedo)
+Urobun
+y
+ukar
+5 10 m
+Vorox 7 14 m (dos patas),
+21 m (cuatro patas),
+28 m (seis patas)
+
+Vitalidad = Tamaño de la especie + Constitución + Voluntad
++ Fe + nivel
