@@ -1,0 +1,65 @@
+Atontado
+No estás en plena forma: sufres un penalizador de –2 a la meta de tus tiradas relacionadas con la Percepción y a tus ataques físicos.
+
+Atormentado
+Sientes un dolor terrible. Sufres un penalizador de –2 a todas tus acciones físicas. Además, cuando gastes PV, debes gastar 1 PV adicional como penalización por el dolor para evitar que este te distraiga. Ejemplo: Quieres gastar 3 PV para aumentar tu Resistencia, pero debes gastar 1 PV adicional como penalización por el dolor, por lo que en total gastas 4 PV.
+
+Aturdido
+Tu coordinación ha sufrido un revés. Las tiradas relacionadas con acciones físicas y percepción son desfavorables.
+
+Audición reducida
+Tienes problemas para oír. Sufres un penalizador de –2 a la meta de cualquier actividad o tirada de percepción que requiera oír, como los diversos tipos de influencia mental o social que requieren que oigas a tu objetivo. Lo bueno es que ganas Resistencia +2 a los ataques sónicos, como el de la pistola chirriante.
+
+Cansado
+Te sientes muy débil. Sufres un penalizador de –2 a todas las acciones relacionadas con la actividad física. También debes gastar 1 PV para llevar a cabo cualquier acción que requiera una tirada, incluso aunque normalmente no tenga coste. Gasta el PV antes de hacer la tirada.
+
+Cegado
+No puedes ver. Todas tus tiradas físicas contra alguien a quien no estás tocando directamente son desfavorables. Por el contrario, los ataques físicos de los demás contra ti son favorables. Las acciones de influencia que suelen requerir contacto visual también se ven afectadas.
+
+Desorientado
+Tu percepción se ha visto totalmente afectada. Tus acciones se dirigen contra objetivos aleatorios en vez de contra la persona o personas a las que quieres apuntar.
+
+Ensordecido
+No puedes oír. Te es imposible percibir o realizar cualquier actividad que requiera audición, como los diversos tipos de influencia mental o social que requieren que oigas a tu objetivo. Lo bueno es que los ataques sónicos, como el de la pistola chirriante, son desfavorables contra ti.
+
+Estimulado
+Eres extremadamente consciente de lo que te rodea. Tu mente no se está quieta. Ganas ventaja de iniciativa y un bonificador de +2 a tu Percepción en tiradas de percepción instintiva. Tus tiradas con la maniobra localizar son favorables.
+
+Eufórico
+Te invade el placer. Es una sensación agradable y al mismo tiempo una distracción. Eres el último en el orden de iniciativa y sufres un penalizador de –2 a la meta de todas tus tiradas.
+
+Flotando
+Estás flotando en el aire (o quizás en el vacío). Las tiradas de tus acciones físicas son desfavorables (a menos que tengas la competencia Operaciones a Bordo, que incluye entrenamiento en ingravidez). No puedes iniciar el movimiento si no dispones de algún agarre, cuerda, jetpack o cualquier otro tipo de ayuda o forma de ponerte en marcha.
+
+Incapacitado
+No puedes iniciar ninguna acción que requiera tirada ni reaccionar a las acciones de los demás.
+
+Inconsciente
+Te caes, quedas Tumbado (consulta el estado correspondiente) y dejas de darte cuenta de lo que ocurre a tu alrededor. No puedes llevar a cabo ninguna acción, salvo quizás un intento instintivo de quitártelo de encima, dependiendo de la situación. Los ataques físicos contra ti son favorables. El lado bueno es que eres inmune a los intentos de influencia mientras permanezcas en este estado.
+
+Inmovilizado
+No te puedes mover y todas tus acciones que impliquen el movimiento de todo tu cuerpo (como esquivar, escalar, bailar, etc.) son desfavorables.
+
+Insensibilizado
+Has quedado apático. Eres inmune a estados relacionados con el dolor, como Atormentado (y algunos tipos de Penalizado, según la causa), mientras dure este estado.
+
+Malherido
+Has sufrido una herida que requiere cirugía antes de poder sanar. Alguien con la habilidad Curar puede intentar anular este estado, lo que a su vez te permitirá sanar gracias a la reanimación, el Descanso u otro tipo de cuidados médicos. El Elixir también puede curar Vitalidad y anular este estado. Algunos tipos de ritos teúrgicos son capaces de ignorar este estado para curar Vitalidad o incluso anular el estado y permitir que comience la curación natural.
+
+Mareado
+Tienes náuseas. Sufres un penalizador de –2 a todas tus tiradas. Algunos estímulos podrían provocar que vomites (malos olores, ver comida a la que eres alérgico, la llegada de un rival odiado). Si te empujan o sufres un ataque que provoque una cantidad de daño a tu Vitalidad que supere tu puntuación de Constitución, vomitarás de forma incontrolable y refleja, perdiendo tu próxima acción primaria (pero no volverás a vomitar hasta por lo menos dentro de 10 turnos).
+
+Moribundo
+Estás agonizando. Si no recibes ayuda médica para estabilizarte (dejándote Inconsciente) antes del final de la escena, morirás. Una vez estabilizado, este estado se anula y quedas Cansado (más adelante encontrarás las reglas de la Muerte y agonía en la sección Vitalidad).
+
+Obstaculizado
+Tus movimientos están limitados. Solo puedes moverte a la mitad de tu velocidad normal y sufres un penalizador de –2 a la meta de todas las acciones que impliquen el movimiento de todo tu cuerpo (como esquivar, escalar, bailar, etc.).
+
+Paralizado
+No puedes mover ninguna parte de tu cuerpo, ni siquiera las manos, por lo que no puedes iniciar ninguna acción física. Las acciones de influencia que requieren algo más que un susurro son desfavorables.
+
+Tumbado
+Estás tirado en el suelo. Debes utilizar tu acción de movimiento para gatear (a un cuarto de tu velocidad) o levantarte.
+
+Visión reducida
+No ves bien. Sufres un penalizador de –2 a la meta de todas tus tiradas físicas contra alguien a quien no estás tocando directamente. Las acciones de influencia que suelen requerir contacto visual también se ven afectadas.

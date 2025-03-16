@@ -19,7 +19,11 @@
       "weaponDamage": "Your weapon is causing {{damage}} points to the enemy",
       "addDamage": "You can increase the damage to your weapon by using your cache or victory points. Per 2 points you can add 1 damage",
       "useCachePoints": "Use cache points",
-      "useVictoryPoints": "Use victory points"
+      "useVictoryPoints": "Use victory points",
+      "damageFormula": "Damage Formula: {formula}",
+      "damageResult": "Damage Result: {result}",
+      "resistance": "Target Resistance: {resistance}",
+      "finalDamage": "Final Damage: {damage}"
     },
 
     "messages": {
@@ -36,6 +40,8 @@
       "OTHER_MODIFIERS": "Other modifiers",
       "EXTRA_MODIFIERS": "Extra modifiers",
       "EXTRA_MODIFIERS_SHORT": "mod.",
+      "EFFECT_MODIFIERS": "Effect modifiers",
+      "EXTRA_VP_COST": "Extra VP cost",
       "SUCCESS": "You made it!",
       "CRITICAL": "Critical success!",
       "TOTAL_FAILURE": "Critical failure!",
@@ -389,6 +395,29 @@
       "laser": "Laser",
       "sonic": "Sonic",
       "ultraHard": "Ultra-Hard"
+    },
+    "Roll": {
+      "CannotAct": "Cannot act due to effects",
+      "AutoFail": "Automatic failure due to effects",
+      "RandomTarget": "Random target due to effects",
+      "CriticalSuccess": "Critical Success!",
+      "Success": "Success!",
+      "Failure": "Failure!",
+      "TotalFailure": "Total Failure!"
+    },
+    
+    "Warnings": {
+      "CannotSpendVP": "You cannot spend Victory Points due to effects",
+      "RandomTarget": "Your attack targets a random target due to effects"
+    },
+    
+    "Errors": {
+      "CannotSpendVP": "You cannot spend Victory Points due to effects",
+      "NotEnoughVP": "You don't have enough Victory Points. Cost: {cost}"
+    },
+    
+    "Info": {
+      "ExtraVPCost": "Due to effects, you must spend {cost} additional Victory Points"
     }
   },
   "TYPES": {

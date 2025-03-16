@@ -13,7 +13,17 @@
       "Competences": "Competencias",
       "Knowledges": "Saberes",
       "Statuses": "Estados"
+    },
 
+    "damageChat": {
+      "weaponDamage": "Tu arma está causando {{damage}} puntos al enemigo",
+      "addDamage": "Puedes aumentar el daño de tu arma usando tu caché o puntos de victoria. Por cada 2 puntos puedes añadir 1 de daño",
+      "useCachePoints": "Usar puntos de caché",
+      "useVictoryPoints": "Usar puntos de victoria",
+      "damageFormula": "Fórmula de Daño: {formula}",
+      "damageResult": "Resultado de Daño: {result}",
+      "resistance": "Resistencia del Objetivo: {resistance}",
+      "finalDamage": "Daño Final: {damage}"
     },
 
     "messages": {
@@ -30,6 +40,8 @@
       "OTHER_MODIFIERS": "Otros modificadores",
       "EXTRA_MODIFIERS": "Modificadores extra",
       "EXTRA_MODIFIERS_SHORT": "mod.",
+      "EFFECT_MODIFIERS": "Modificadores de efectos",
+      "EXTRA_VP_COST": "Coste extra de PV",
       "SUCCESS": "¡Lo has conseguido!",
       "CRITICAL": "¡Éxito crítico!",
       "TOTAL_FAILURE": "¡Fallo crítico!",
@@ -323,13 +335,36 @@
     }
   },
   "AttackProperties": {
-    "blaster": "Descarga",
+    "blaster": "Bláster",
     "shock": "Descarga",
     "slam": "Golpe",
     "hard": "Endurecida",
     "flame": "Fuego",
     "laser": "Láser",
     "sonic": "Sónica",
-    "ultraHard": "Ultra-Endurecida"
+    "ultraHard": "Superendurecida"
+  },
+  "Roll": {
+    "CannotAct": "No puede actuar debido a efectos",
+    "AutoFail": "Fallo automático debido a efectos",
+    "RandomTarget": "Objetivo aleatorio debido a efectos",
+    "CriticalSuccess": "¡Éxito Crítico!",
+    "Success": "¡Éxito!",
+    "Failure": "¡Fallo!",
+    "TotalFailure": "¡Fallo Total!"
+  },
+  
+  "Warnings": {
+    "CannotSpendVP": "No puedes gastar Puntos de Victoria debido a efectos",
+    "RandomTarget": "Tu ataque apunta a un objetivo aleatorio debido a efectos"
+  },
+  
+  "Errors": {
+    "CannotSpendVP": "No puedes gastar Puntos de Victoria debido a efectos",
+    "NotEnoughVP": "No tienes suficientes Puntos de Victoria. Coste: {cost}"
+  },
+  
+  "Info": {
+    "ExtraVPCost": "Debido a efectos, debes gastar {cost} Puntos de Victoria adicionales"
   }
 }

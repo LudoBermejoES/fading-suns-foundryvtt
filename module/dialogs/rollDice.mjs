@@ -1,5 +1,16 @@
 import { mergeObject } from '../helpers/utils.mjs';
 import { parseAttackProperties, calculateEffectiveResistance, getResistanceLevel } from '../helpers/combat.mjs';
+import { getEffectModifiers, applyEffectModifiersToRoll } from '../helpers/rollEffects.mjs';
+import { 
+  calculateRoll, 
+  determineRollType, 
+  calculateTargetResistance, 
+  processRollResult, 
+  calculateDamage, 
+  hasRandomTarget, 
+  calculateExtraVPCost, 
+  canSpendVP 
+} from '../helpers/rollCalculation.mjs';
 
 /**
  * Define your class that extends FormApplication
@@ -25,6 +36,15 @@ export default class RollDice extends FormApplication {
         this.attackProperties = parseAttackProperties(item.system.Features);
       }
     }
+    
+    // Get effect modifiers
+    this.effectModifiers = getEffectModifiers(this.actor, {
+      characteristic: this.characteristic,
+      skill: this.dataset.value,
+      maneuver: this.maneuver,
+      isWeapon: this.isWeapon,
+      attackProperties: this.attackProperties
+    });
   }
 
   characteristic = "str";
@@ -99,31 +119,16 @@ export default class RollDice extends FormApplication {
       const targetActor = this.target.actor;
       
       if (targetActor) {
-        // Get base body resistance
-        const baseBodyResistance = targetActor.system?.res?.body?.value || 0;
+        // Calculate target resistance using our helper function
+        const attackData = {
+          attackProperties: this.attackProperties,
+          coverage: this.coverage
+        };
         
-        // Get armor resistances from equipped armor
-        let armorResistances = null;
-        
-        // Find equipped armor items
-        const equippedArmor = targetActor.items.filter(item => 
-          item.type === 'Armor' && item.system.equipped);
-        
-        if (equippedArmor.length > 0) {
-          // Use the first equipped armor for simplicity
-          // In a more complex system, you might want to combine multiple armor pieces
-          armorResistances = equippedArmor[0].system;
-        }
-        
-        // Calculate effective resistance based on attack properties and armor
-        const effectiveResistance = calculateEffectiveResistance(
-          baseBodyResistance,
-          this.attackProperties,
-          armorResistances
-        );
+        // Calculate the resistance
+        let totalResistance = calculateTargetResistance(targetActor, attackData, this.actor);
         
         // Add coverage modifiers
-        let totalResistance = effectiveResistance;
         if (this.coverage === "partial") {
           totalResistance += 3;
         } else if (this.coverage === "total") {
@@ -153,12 +158,32 @@ export default class RollDice extends FormApplication {
     );
     const resistanceValueSelected = resistances[this.resistance];
 
+    // Calculate total roll with effect modifiers
+    const rollData = {
+      characteristic: this.characteristic,
+      skill: this.dataset.value,
+      victoryPointsSelected: this.victoryPointsSelected,
+      wyrdPointUsed: this.wyrdPointUsed,
+      extraModifiers: Number(this.extraModifiers),
+      maneuver: this.maneuver,
+      isWeapon: this.isWeapon,
+      attackProperties: this.attackProperties
+    };
+    
+    // Apply effect modifiers
+    const modifiedRollData = applyEffectModifiersToRoll(rollData, this.effectModifiers);
+    
+    // Calculate total roll
     const totalRoll =
       Number(this.dataset.value) +
       Number(characteristicValueSelected) +
       Number(this.victoryPointsSelected) +
       (this.wyrdPointUsed ? 3 : 0) +
-      Number(this.extraModifiers);
+      Number(this.extraModifiers) +
+      (modifiedRollData.modifier || 0);
+
+    // Get extra VP cost from effects
+    const extraVPCost = calculateExtraVPCost(rollData, this.actor);
 
     return {
       extraModifiers: this.extraModifiers,
@@ -185,6 +210,9 @@ export default class RollDice extends FormApplication {
       attackProperties: this.attackProperties,
       coverage: this.coverage,
       numericResistance: this.numericResistance,
+      effectModifiers: this.effectModifiers,
+      extraVPCost,
+      canSpendVP: canSpendVP(this.actor)
     };
   }
 
@@ -231,7 +259,29 @@ export default class RollDice extends FormApplication {
   }
 
   _onClickVictoryPoints(event) {
-    this.victoryPointsSelected = Number(event.currentTarget.value);
+    // Get the selected VP value
+    const selectedVP = Number(event.currentTarget.value);
+    
+    // Get extra VP cost from effects
+    const extraVPCost = calculateExtraVPCost({
+      characteristic: this.characteristic,
+      skill: this.dataset.value,
+      maneuver: this.maneuver,
+      isWeapon: this.isWeapon,
+      attackProperties: this.attackProperties
+    }, this.actor);
+    
+    // Set the total VP cost (selected + extra)
+    this.victoryPointsSelected = selectedVP;
+    
+    // Check if the actor can spend VP
+    if (!canSpendVP(this.actor)) {
+      ui.notifications.warn(game.i18n.localize("FADING_SUNS.Warnings.CannotSpendVP"));
+      this.victoryPointsSelected = 0;
+    } else if (extraVPCost > 0) {
+      ui.notifications.info(game.i18n.format("FADING_SUNS.Info.ExtraVPCost", { cost: extraVPCost }));
+    }
+    
     this.render();
   }
   _onClickWyrdPointUsed(event) {
@@ -254,30 +304,34 @@ export default class RollDice extends FormApplication {
   }
 
   _prepareRoll(dice, rollData, myRol) {
+    // Apply effect modifiers to the roll data
+    const modifiedRollData = applyEffectModifiersToRoll(rollData, this.effectModifiers);
+    
+    // Calculate the total
     const total =
-      Number(this.dataset.value) +
-      Number(rollData.characteristic) +
-      rollData.victoryPoints +
-      rollData.wyrdPoints +
-      rollData.extraModifiers;
+      Number(this.actor.system.skills[this.dataset.value]?.value || 0) +
+      Number(this.actor.system.characteristics[this.characteristic]?.value || 0) +
+      (modifiedRollData.victoryPoints || 0) +
+      (modifiedRollData.wyrdPoints || 0) +
+      (modifiedRollData.extraModifiers || 0) +
+      (modifiedRollData.modifier || 0);
 
-    const success = dice <= total;
-    const failure = dice > total;
-    const critical = dice === total;
-    const totalFailure = dice === 20;
-    const result = total - dice;
+    // Process the roll result
+    const result = processRollResult({ total }, dice);
 
     return {
       total,
-      success,
-      critical,
-      totalFailure,
-      failure,
+      success: result.success,
+      critical: result.critical,
+      totalFailure: result.totalFailure,
+      failure: result.failure,
       dice,
-      result,
+      result: total - dice,
       myRol,
+      message: result.message
     };
   }
+
   async _doSingleRoll(rollData) {
     const roll = "1d20";
 
@@ -335,15 +389,66 @@ export default class RollDice extends FormApplication {
   }
 
   async _calculateRoll(type, rollData) {
-    if (type === "normal") {
-      return this._doSingleRoll(rollData);
+    // Prepare roll data with effect modifiers
+    const preparedRollData = {
+      ...rollData,
+      characteristic: this.characteristic,
+      skill: this.dataset.value,
+      maneuver: this.maneuver,
+      isWeapon: this.isWeapon,
+      attackProperties: this.attackProperties,
+      rollType: type
+    };
+    
+    // Check if the actor cannot act due to effects
+    if (this.effectModifiers.cannotAct) {
+      return {
+        myRol: null,
+        total: 0,
+        success: false,
+        critical: false,
+        failure: true,
+        totalFailure: true,
+        dice: 20,
+        message: game.i18n.localize("FADING_SUNS.Roll.CannotAct")
+      };
+    }
+    
+    // Check for auto-fail
+    if (this.effectModifiers.autoFail) {
+      return {
+        myRol: null,
+        total: 0,
+        success: false,
+        critical: false,
+        failure: true,
+        totalFailure: true,
+        dice: 20,
+        message: game.i18n.localize("FADING_SUNS.Roll.AutoFail")
+      };
+    }
+    
+    // Check for random target
+    if (this.effectModifiers.randomTarget) {
+      // TODO: Implement random target selection
+      ui.notifications.warn(game.i18n.localize("FADING_SUNS.Roll.RandomTarget"));
+    }
+    
+    // Determine roll type based on effect modifiers
+    const effectRollType = determineRollType(preparedRollData, this.actor);
+    
+    // Use the effect-determined roll type if it's different from the requested type
+    const finalRollType = effectRollType !== "normal" ? effectRollType : type;
+    
+    if (finalRollType === "normal") {
+      return this._doSingleRoll(preparedRollData);
     }
 
-    const { roll1, roll2 } = await this._doDoubleRoll(rollData);
+    const { roll1, roll2 } = await this._doDoubleRoll(preparedRollData);
 
     const best = this._getBest(roll1, roll2);
 
-    if (type === "advantage") {
+    if (finalRollType === "advantage") {
       return best;
     }
 
@@ -370,45 +475,75 @@ export default class RollDice extends FormApplication {
 
     const wyrdPoints = this.wyrdPointUsed ? 3 : 0;
 
+    // Get extra VP cost from effects
+    const extraVPCost = calculateExtraVPCost({
+      characteristic: this.characteristic,
+      skill: this.dataset.value,
+      maneuver: this.maneuver,
+      isWeapon: this.isWeapon,
+      attackProperties: this.attackProperties,
+      wyrdPointUsed: this.wyrdPointUsed
+    }, this.actor);
+    
+    // Check if the actor can spend VP
+    if (this.victoryPointsSelected > 0 && !canSpendVP(this.actor)) {
+      ui.notifications.error(game.i18n.localize("FADING_SUNS.Errors.CannotSpendVP"));
+      return;
+    }
+    
+    // Calculate total VP cost (selected + extra)
+    const totalVPCost = this.victoryPointsSelected + extraVPCost;
+    
+    // Check if the actor has enough VP
+    if (totalVPCost > this.actor.system.bank.victoryPoints) {
+      ui.notifications.error(game.i18n.format("FADING_SUNS.Errors.NotEnoughVP", { cost: totalVPCost }));
+      return;
+    }
+
     let rollData = {
       skill: this.dataset.value,
-      characteristic: characteristicValueSelected,
-      victoryPoints: 0,
-      wyrdPoints: 0,
+      characteristic: this.characteristic,
+      victoryPointsSelected: this.victoryPointsSelected,
+      wyrdPointUsed: this.wyrdPointUsed,
       extraModifiers: 0,
+      maneuver: this.maneuver,
+      isWeapon: this.isWeapon,
+      attackProperties: this.attackProperties
     };
 
     if (Number(this.extraModifiers)) {
       rollData.extraModifiers = Number(this.extraModifiers);
     }
 
-    if (Number(this.victoryPointsSelected)) {
-      rollData.victoryPoints = Number(this.victoryPointsSelected);
-    }
-
-    if (wyrdPoints) {
-      rollData.wyrdPoints = wyrdPoints;
-    }
-
     const type = event.target.dataset.type;
 
-    const { myRol, total, success, critical, totalFailure, failure, dice } =
+    const { myRol, total, success, critical, totalFailure, failure, dice, message } =
       await this._calculateRoll(type, rollData);
 
-    let message = `${this.dataset.label} (${this.dataset.value}) + ${characteristicSelected} (${characteristicValueSelected})`;
+    let chatMessage = `${this.dataset.label} (${this.dataset.value}) + ${characteristicSelected} (${characteristicValueSelected})`;
     if (this.victoryPointsSelected) {
-      message += ` + ${this.victoryPointsSelected} + ${game.i18n.format("FADING_SUNS.messages.VP")}`;
-      this.actor.system.bank.victoryPoints -= this.victoryPointsSelected;
+      chatMessage += ` + ${this.victoryPointsSelected} + ${game.i18n.format("FADING_SUNS.messages.VP")}`;
+      // Deduct VP cost (including extra cost from effects)
+      this.actor.system.bank.victoryPoints -= totalVPCost;
+      
+      // If there was an extra VP cost, mention it in the message
+      if (extraVPCost > 0) {
+        chatMessage += ` (${game.i18n.format("FADING_SUNS.messages.EXTRA_VP_COST")}: ${extraVPCost})`;
+      }
     }
 
     if (this.wyrdPointUsed) {
-      message += ` + 3 + (${game.i18n.format("FADING_SUNS.messages.WYRD_POINT_USED")})`;
+      chatMessage += ` + 3 + (${game.i18n.format("FADING_SUNS.messages.WYRD_POINT_USED")})`;
       this.actor.system.bank.wyrdPoints -= 1;
     }
 
     if (this.extraModifiers) {
-      message += ` + ${this.extraModifiers} + (${game.i18n.format("FADING_SUNS.messages.EXTRA_MODIFIERS")})`;
-      this.actor.system.bank.wyrdPoints -= 1;
+      chatMessage += ` + ${this.extraModifiers} + (${game.i18n.format("FADING_SUNS.messages.EXTRA_MODIFIERS")})`;
+    }
+    
+    // Add effect modifiers to the message if there are any
+    if (this.effectModifiers.modifier) {
+      chatMessage += ` + ${this.effectModifiers.modifier} + (${game.i18n.format("FADING_SUNS.messages.EFFECT_MODIFIERS")})`;
     }
 
     if (critical) {
@@ -476,13 +611,13 @@ export default class RollDice extends FormApplication {
     }
 
     const templateData = {
-      result: this._getMessage(
+      result: message || this._getMessage(
         success,
         critical,
         totalFailure,
         dice - resistanceValueSelected,
       ),
-      message,
+      message: chatMessage,
       successMessage,
       resistanceMessage,
       dice,
@@ -491,7 +626,8 @@ export default class RollDice extends FormApplication {
       maneuver: this.maneuver,
       actorId: this.actor._id,
       canSpendVPToSucceed,
-      vpNeededToSucceed
+      vpNeededToSucceed,
+      effectModifiers: this.effectModifiers
     };
 
     const content = await renderTemplate(
@@ -511,30 +647,63 @@ export default class RollDice extends FormApplication {
     if((success || critical) && this.damage) {
       const bank = dice - resistanceValueSelected;
       const vp = this.actor.system.bank.victoryPoints;
-      // this._showDamageMessage({ bank, vp, damage: this.damage });
+      
+      // Calculate damage using our helper function
+      if (this.dataset.itemId) {
+        const weapon = this.actor.items.get(this.dataset.itemId);
+        if (weapon) {
+          const damageData = calculateDamage(
+            { success, critical },
+            weapon,
+            resistanceValueSelected !== "?" ? Number(resistanceValueSelected) : 0
+          );
+          
+          this._showDamageMessage({ 
+            bank, 
+            vp, 
+            damage: this.damage,
+            damageData
+          });
+        } else {
+          this._showDamageMessage({ bank, vp, damage: this.damage });
+        }
+      } else {
+        this._showDamageMessage({ bank, vp, damage: this.damage });
+      }
     }
     this.close();
   }
 
-  async _showDamageMessage( { bank, vp, damage }) {
-    const weaponDamage = game.i18n.format("FADING_SUNS.damageChat.weaponDamage").replace('{{damage}}', damage)
+  async _showDamageMessage({ bank, vp, damage, damageData }) {
+    const weaponDamage = game.i18n.format("FADING_SUNS.damageChat.weaponDamage").replace('{{damage}}', damage);
+    
+    // Prepare template data
+    const templateData = {
+      weaponDamage,
+      bank,
+      vp
+    };
+    
+    // Add damage calculation data if available
+    if (damageData) {
+      templateData.damageFormula = damageData.damageFormula;
+      templateData.damageResult = damageData.damageResult;
+      templateData.resistance = damageData.resistance;
+      templateData.finalDamage = damageData.finalDamage;
+    }
 
     const content = await renderTemplate(
       "systems/fading-suns/templates/chat/damage.hbs",
-      {
-        weaponDamage,
-        bank,
-        vp
-      },
+      templateData,
     );
+    
     const chatData = {
       speaker: ChatMessage.getSpeaker({ alias: this.name }),
       content: content,
     };
 
     ChatMessage.create(chatData);
-
-   }
+  }
 }
 
 window.RollDice = RollDice;

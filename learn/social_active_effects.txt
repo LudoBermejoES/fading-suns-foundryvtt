@@ -1,0 +1,32 @@
+Amigado
+Tu influenciador te cae bien. Si eras hostil, ahora eres neutral. Si eras neutral, ahora eres amistoso. Si eras amistoso, ahora eres un aliado leal. Este estado no tiene reglas específicas; recuerda que las personas, por lo general, quieren lo mejor para sus amigos y no suelen atacarlos. Mientras estés Amigado, te sentirás inclinado a hacer un favor a tu amigo si te lo pide. Nada del otro mundo (ninguna acción arriesgada), pero sí cosas como abrir una puerta, mirar para otro lado, dejar pasar un delito menor, etc.
+
+Atónito
+Te has dado cuenta de algo repentinamente. Negocia con el DJ la naturaleza y el efecto de la cuestión según el contexto. Podrías haber descifrado un misterio al que llevas tiempo dando vueltas, resuelto un dilema espiritual, revelado una faceta sobre una facción o cultura alienígena, o quizás tengas un nuevo objetivo o misión. La persona que te haya provocado el estado se gana tu respeto; sus intentos de influencia de persuasión contra ti son favorables. Como efecto secundario, incluso si el estado ha acabado ya, tu próxima tirada para una práctica reparadora será favorable (consulta el recuadro Prácticas reparadoras en este capítulo).
+
+Cautivado
+Tu influenciador (o su espectáculo, según recibas el estado) te fascina. No puedes quitarle los ojos de encima y estás pendiente de cada una de sus palabras. Te resulta difícil prestar atención a otras cosas que no tengan que ver con lo que te ha dejado Cautivado (excepto si te tienes que defender). El DJ puede declarar desfavorables las tiradas para este tipo de acciones o imponer el pago de 1 PV para realizar la acción (que deberás gastar antes de hacer la tirada).
+
+Convencido
+Adoptas la creencia, idea o plan que te ha transmitido tu influenciador y ahora forma parte de ti. Ten en cuenta que, si el estado ha sido causado por la influencia, el influenciador debe creer sinceramente que lo que te dice es cierto cuando te convenza (la maniobra engañar, de Charlatanería, es la que se utiliza para mentir). Si el estado se vuelve crónico, querrás difundir la idea y hacer proselitismo. En momentos de calma, intentarás convencer a tus amigos y aliados.
+
+Culpable
+Estás convencido de que has cometido un grave pecado y debes expiarlo. A menos que hagas un esfuerzo sincero por reparar el daño cometido (negociándolo con el DJ), tus intentos de influencia serán desfavorables.
+
+Divinamente inspirado
+Tienes la convicción espiritual de que tus acciones están alineadas con tu destino. Recibes un bonificador de +2 a la meta de tus tiradas de ataque e intentos de influencia, así como +2 a tu Resistencia (a elegir entre Corporal, Mental o Espiritual).
+
+Estimulado
+Tu influenciador (o su espectáculo) te ha emocionado y sus palabras o acciones han calado hondo. En este estado, intentarás emular el ideal que ha comunicado: un profundo amor por tu feudo, odio a los Hazat, un deseo de ayudar a los demás, etc. No te sentirás bien hasta que hayas hecho algo para expresar o promulgar este ideal (acosar a extranjeros, vituperar a los Hazat, hacerte voluntario en una cocina para los más pobres).
+
+Humillado
+Te sientes profundamente avergonzado, eres el hazmerreír de los demás. Tus intentos de influencia contra quienes han sido testigos de tu humillación son desfavorables. Si eres amigo de tu influenciador, permanecerás neutral mientras tengas este estado hasta que te pida perdón. Si eras neutral, ahora te mostrarás hostil y podrías llegar a desafiarlo en duelo. Si el estado se vuelve crónico, es muy posible que guardes un resentimiento permanente contra tu influenciador o sientas una acuciante necesidad de complacerle para recuperar un poco de su estima.
+
+Intimidado
+Tu influenciador ha conseguido amilanarte. Sufres un penalizador de –2 a la meta de tus ataques físicos contra él, y tus intentos de coacción son desfavorables. Si se muestra mejor que tú en combate o en algún asunto social, quizás te retires y le cedas la victoria (no se trata de una regla estricta, es un sentimiento que puedes negociar con tu DJ).
+
+Predispuesto
+Te sientes inclinado a hacer lo que te ha pedido tu influenciador. No hace falta que te arriesgues (eso depende de ti), pero pondrás de tu parte para llevarlo a cabo. Si la tarea requiere demasiado esfuerzo, podrías pedirle a tu influenciador que te dé algún incentivo (como dinero, información o un favor futuro).
+
+Presionado
+Te invade la culpa; eres un pecador en manos de un dios airado. Te sientes nervioso en presencia de tu influenciador. Sufres un penalizador de –2 a la meta de tus tiradas de ataques de influencia contra él. Responderás con sinceridad a las preguntas que te haga, pero por lo general solo con «sí» o «no». No revelarás secretos importantes de tu facción (como movimientos de tropas, la ubicación de bases secretas o la identidad de espías). Las preguntas cuyas respuestas puedan poner en peligro a tus aliados provocarán una tirada refleja de quitárselo de encima.

@@ -1,0 +1,32 @@
+Ansioso
+Estás muy alterado por algún motivo. Sufres un penalizador de –2 a tus intentos de influencia, así como a cualquier tarea a largo plazo para la que tengas que hacer una tirada en este estado (por ejemplo, reparar un dispositivo o meditar).
+
+Asustado
+Te sientes amenazado y estás con los nervios a flor de piel. Sufres un penalizador de –2 a cualquier acción excepto las basadas en la percepción, esquivar y eludir, ya que vigilas constantemente tu entorno en busca de amenazas. Si un enemigo te está ganando, probablemente huyas.
+
+Aterrorizado
+Temes por tu vida. Debes huir de lo que te da miedo (la persona o cosa que te haya provocado el estado) o, si te ves forzado a enfrentarte a ello, te acurrucarás y serás incapaz de llevar a cabo ninguna acción que no sea defensiva.
+
+Berserk
+Tu furia no conoce límites. Atacarás físicamente para mutilar o incluso matar a la persona que te haya causado este estado, sin piedad. Si te lo ha causado un aliado (o si se ha debido a una compulsión oculta), atacarás a quienquiera que te indique o al enemigo que sepas que le enfurece más. Si dicha persona no está presente ni puedes alcanzarla mientras estás Berserk, atacarás a alguien de su facción. En caso de que no haya nadie disponible, atacarás a la persona neutral u hostil que esté más cerca. Una vez que acabe el estado, quedas exhausto; durante la próxima escena, deberás gastar 1 PV para iniciar cualquier acción o tus tiradas serán desfavorables.
+
+Confuso
+No estás seguro de lo que creer. Cuando recibes el estado, pierdes tu próxima acción mientras intentas decidir lo que es verdad y lo que no. A continuación, te invaden las dudas sobre el tema que haya provocado la confusión y no puedes dejar de pensar en ello; sufres un penalizador de –2 a la meta de todas las acciones que no sean físicas.
+
+Divertido
+Desbordas de alegría, como si acabases de escuchar el chiste más gracioso o la sinfonía más inspiradora que has oído nunca. Tus intentos de persuasión son favorables gracias a tu actitud contagiosa y nada amenazante, pero tus intentos de coacción son desfavorables.
+
+Enfadado
+Estás irascible. Podrías responder a tu provocador (quien haya causado este estado) con un duelo, con influencia de coacción (presionar, dar una orden, intimidar, etc.) o incluso atacarlo físicamente (hasta la primera sangre). Cualquier maniobra de influencia que intentes (como trabar amistad, de Encanto) será desfavorable. El lado bueno es que cualquier intento de persuasión contra ti también es desfavorable.
+
+Engañado
+Te han engañado y no te has dado cuenta. Crees que la persona que te ha impuesto el estado está diciendo la verdad, siempre que sean cosas plausibles, no algo tan poco creíble como que “el príncipe de tu casa es un hironem disfrazado de humano”. Dado que tiendes a creerte lo que dice la persona que te engaña, sus tiradas de persuasión contra ti son favorables mientras permanezcas en este estado.
+
+Iluminado
+Estás experimentando un plano superior de la realidad. Tus tiradas de arrepentirse, reconciliar y expiar el Ansia psíquica y la Hubris teúrgica son favorables.
+
+Obediente
+Te han dado una orden y debes obedecerla, aunque no te guste. Si la duración del estado acaba antes de que puedas terminar la orden, no tendrás que seguir obedeciéndola. Si la orden perjudica directamente los objetivos de tu facción, puedes hacer una tirada refleja de quitártelo de encima cada turno. No puedes recibir una orden para traicionar a tu facción directamente.
+
+Penalizado
+Antes de hacer cualquier tirada, lanza una moneda. Si sacas cara, la tirada es desfavorable. También puedes lanzar 1d20; 1-10 = normal y 11-20 = desfavorable.

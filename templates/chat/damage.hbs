@@ -1,4 +1,20 @@
 <div class="blood-img" style="background-image: url('{{getBloodBackground}}');">
   <h1>{{weaponDamage}}</h1>
   
+  {{#if damageData}}
+  <div class="damage-details">
+    {{#if damageFormula}}
+    <p>{{localize "FADING_SUNS.damageChat.damageFormula" formula=damageFormula}}</p>
+    {{/if}}
+    {{#if damageResult}}
+    <p>{{localize "FADING_SUNS.damageChat.damageResult" result=damageResult}}</p>
+    {{/if}}
+    {{#if resistance}}
+    <p>{{localize "FADING_SUNS.damageChat.resistance" resistance=resistance}}</p>
+    {{/if}}
+    {{#if finalDamage}}
+    <p>{{localize "FADING_SUNS.damageChat.finalDamage" damage=finalDamage}}</p>
+    {{/if}}
+  </div>
+  {{/if}}
 </div>

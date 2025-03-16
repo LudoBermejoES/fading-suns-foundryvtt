@@ -28,6 +28,38 @@
       <div class='move-name'>{{successMessage}}</div>
       <div class='move-name'>{{resistanceMessage}}</div>
       
+      {{#if effectModifiers}}
+      <div class="effect-modifiers">
+        <h3>{{localize "FADING_SUNS.messages.EFFECT_MODIFIERS"}}</h3>
+        <ul>
+          {{#if effectModifiers.modifier}}
+          <li>{{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.modifier}}</li>
+          {{/if}}
+          {{#if effectModifiers.rollAdvantage}}
+          <li>{{localize "FADING_SUNS.messages.ADVANTAGE"}}</li>
+          {{/if}}
+          {{#if effectModifiers.rollDisadvantage}}
+          <li>{{localize "FADING_SUNS.messages.DISADVANTAGE"}}</li>
+          {{/if}}
+          {{#if effectModifiers.extraVPCost}}
+          <li>{{localize "FADING_SUNS.messages.EXTRA_VP_COST"}}: {{effectModifiers.extraVPCost}}</li>
+          {{/if}}
+          {{#if effectModifiers.perceptionModifier}}
+          <li>{{localize "FADING_SUNS.CharacteristicLong.per"}} {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.perceptionModifier}}</li>
+          {{/if}}
+          {{#if effectModifiers.physicalModifier}}
+          <li>{{localize "FADING_SUNS.CharacteristicParent.body"}} {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.physicalModifier}}</li>
+          {{/if}}
+          {{#if effectModifiers.mentalModifier}}
+          <li>{{localize "FADING_SUNS.CharacteristicParent.mind"}} {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.mentalModifier}}</li>
+          {{/if}}
+          {{#if effectModifiers.socialModifier}}
+          <li>{{localize "FADING_SUNS.CharacteristicParent.spirit"}} {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.socialModifier}}</li>
+          {{/if}}
+        </ul>
+      </div>
+      {{/if}}
+      
       {{#if canSpendVPToSucceed}}
       <div class="spend-vp-container">
         <p>{{localize "FADING_SUNS.messages.CAN_SPEND_VP_TO_SUCCEED" vpNeeded=vpNeededToSucceed}}</p>
