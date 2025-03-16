@@ -472,6 +472,32 @@ export default class RollDice extends FormApplication {
     return roll1.result < roll2.result ? roll1 : roll2;
   }
 
+  /**
+   * Get the blood background image based on the dice roll
+   * @param {Number} dice - The dice roll result
+   * @param {Object} roll - The roll object
+   * @returns {String} The URL of the background image
+   */
+  getBloodBackground(dice, roll) {
+    // Default blood background
+    let bloodBackground = "systems/fading-suns/icons/blood.jpg";
+    
+    // Use different backgrounds based on the dice roll
+    if (dice >= 1 && dice <= 5) {
+      bloodBackground = "systems/fading-suns/icons/blood.jpg";
+    } else if (dice >= 6 && dice <= 10) {
+      bloodBackground = "systems/fading-suns/icons/blood.jpg";
+    } else if (dice >= 11 && dice <= 15) {
+      bloodBackground = "systems/fading-suns/icons/blood2.jpg";
+    } else if (dice >= 16 && dice <= 19) {
+      bloodBackground = "systems/fading-suns/icons/blood3.jpg";
+    } else if (dice === 20) {
+      bloodBackground = "systems/fading-suns/icons/blood4.jpg";
+    }
+    
+    return bloodBackground;
+  }
+
   async _calculateRoll(type, rollData) {
     // Prepare roll data with effect modifiers
     const preparedRollData = {
