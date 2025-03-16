@@ -108,7 +108,7 @@ export function calculateTargetResistance(target, attackData, attacker) {
   
   // Get armor resistances
   const armorResistances = {};
-  const armorItems = target.items.filter(i => i.type === "armor" && i.system.equipped);
+  const armorItems = target.items.filter(i => i.type === "Armor" && i.system.equipped);
   
   for (const armor of armorItems) {
     for (const [key, value] of Object.entries(armor.system.resistances || {})) {
