@@ -1,0 +1,26 @@
+{{!-- Predefined Effects Selection Dialog --}}
+<form class="predefined-effects-dialog">
+  <div class="form-group">
+    <label>{{localize "FADING_SUNS.Effect.SelectType"}}</label>
+    <div class="effect-types">
+      <button type="button" class="effect-type-btn" data-type="físico">{{localize "FADING_SUNS.Effect.Physical"}}</button>
+      <button type="button" class="effect-type-btn" data-type="mental">{{localize "FADING_SUNS.Effect.Mental"}}</button>
+      <button type="button" class="effect-type-btn" data-type="social">{{localize "FADING_SUNS.Effect.Social"}}</button>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label>{{localize "FADING_SUNS.Effect.SelectEffect"}}</label>
+    <div class="effects-list">
+      {{#each effects as |effect|}}
+        <div class="effect-item" data-effect-title="{{effect.title}}">
+          <div class="effect-header">
+            <i class="fas fa-{{effect.icon}}"></i>
+            <span class="effect-title">{{effect.title}}</span>
+          </div>
+          <div class="effect-description">{{effect.description}}</div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</form> 

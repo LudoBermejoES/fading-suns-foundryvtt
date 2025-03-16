@@ -2,6 +2,7 @@ import { createEffectCategories } from "../helpers/effects.mjs";
 import { CHARACTERISTICS, SKILLS, ITEM_TYPES, TEMPLATES, TABS, MANEUVER_TYPES, POWER_TYPES, PARTS } from "../helpers/constants.mjs";
 import { createDragDropHandlers, getEffect } from "../helpers/drag-drop.mjs";
 import { prepareOrderedSkills, prepareCharacteristics, prepareOrderedTypesOfManeuver, prepareOrderedTypesOfPower, prepareOrderedSchoolOfPower } from "../helpers/prepare-data.mjs";
+import { PredefinedEffectsDialog } from "../dialogs/predefined-effects-dialog.mjs";
 
 const { api, sheets } = foundry.applications;
 
@@ -540,4 +541,35 @@ export class FadingSunsItemSheet extends api.HandlebarsApplicationMixin(
   // This is marked as private because there's no real need
   // for subclasses or external hooks to mess with it directly
   #dragDrop;
+
+  /** @override */
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    // Everything below here is only needed if the sheet is editable
+    if (!this.isEditable) return;
+
+    // Active Effect management
+    html.find(".effect-control").click(ev => {
+      const button = ev.currentTarget;
+      const li = ev.currentTarget.closest("li");
+      const effect = li.dataset.effectId ? this.item.effects.get(li.dataset.effectId) : null;
+      switch (button.dataset.action) {
+        case "createDoc":
+          // Replace the default effect creation with our dialog
+          if (button.dataset.documentClass === "ActiveEffect") {
+            const dialog = new PredefinedEffectsDialog(this.item);
+            dialog.render(true);
+            return;
+          }
+          return ItemSheet._createEffect(event, button);
+        case "toggleEffect":
+          return effect.update({disabled: !effect.disabled});
+        case "viewDoc":
+          return effect.sheet.render(true);
+        case "deleteDoc":
+          return effect.delete();
+      }
+    });
+  }
 }

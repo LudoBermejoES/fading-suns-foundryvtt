@@ -384,7 +384,13 @@
       "Toggle": "Toggle Effect",
       "Temporary": "Temporary Effects",
       "Passive": "Passive Effects",
-      "Inactive": "Inactive Effects"
+      "Inactive": "Inactive Effects",
+      "SelectPredefinedEffect": "Select Predefined Effect",
+      "SelectType": "Select Effect Type",
+      "Physical": "Physical",
+      "Mental": "Mental",
+      "Social": "Social",
+      "SelectEffect": "Select Effect"
     },
     "AttackProperties": {
       "blaster": "Blaster",

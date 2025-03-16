@@ -154,3 +154,37 @@ export function countTotalEffects(categories) {
 export function prepareActiveEffectCategories(effects) {
   return createEffectCategories(effects);
 }
+
+/**
+ * Create an ActiveEffect from a predefined effect
+ * @param {Object} predefinedEffect - The predefined effect from activeEffects.js
+ * @param {Object} parent - The parent document (Actor or Item)
+ * @returns {Promise<ActiveEffect>} The created ActiveEffect
+ */
+export async function createActiveEffectFromPredefined(predefinedEffect, parent) {
+  if (!predefinedEffect || !parent) return null;
+  
+  // Get the ActiveEffect document class
+  const aeCls = getDocumentClass("ActiveEffect");
+  
+  // Prepare the effect data
+  const effectData = {
+    name: predefinedEffect.title,
+    img: `icons/svg/aura.svg`, // Default icon
+    origin: parent.uuid,
+    duration: {
+      rounds: 1
+    },
+    flags: {
+      "fading-suns": {
+        predefinedEffect: predefinedEffect.title,
+        description: predefinedEffect.description,
+        faIcon: predefinedEffect.icon,
+        type: predefinedEffect.type
+      }
+    }
+  };
+  
+  // Create the effect
+  return aeCls.create(effectData, { parent });
+}

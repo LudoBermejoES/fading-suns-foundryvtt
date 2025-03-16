@@ -1,0 +1,64 @@
+/* Predefined Effects Dialog Styles */
+.predefined-effects-dialog .effect-types {
+  display: flex;
+  display: -ms-flexbox;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.predefined-effects-dialog .effect-type-btn {
+  flex: 1;
+  -ms-flex: 1;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.predefined-effects-dialog .effect-type-btn:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.predefined-effects-dialog .effect-type-btn.active {
+  background: #4b4a44;
+  color: white;
+}
+
+.predefined-effects-dialog .effects-list {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.predefined-effects-dialog .effect-item {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.predefined-effects-dialog .effect-item:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.predefined-effects-dialog .effect-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.predefined-effects-dialog .effect-header i {
+  margin-right: 8px;
+}
+
+.predefined-effects-dialog .effect-description {
+  font-size: 0.9em;
+  color: #666;
+} 
