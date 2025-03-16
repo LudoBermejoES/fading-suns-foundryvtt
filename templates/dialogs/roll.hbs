@@ -79,6 +79,92 @@
         </section>
     </section>
 
+    {{#if effectModifiers}}
+    <section class="main grid-span-1">
+      <section class="section-group">
+        <div class="items-header-group">{{localize 'FADING_SUNS.messages.EFFECT_MODIFIERS'}}</div>
+        <div class="effect-modifiers-list">
+          {{#if effectModifiers.modifier}}
+          <div class="effect-modifier">
+            <i class="fas fa-dice-d20"></i>
+            {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.modifier}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.rollAdvantage}}
+          <div class="effect-modifier positive">
+            <i class="fas fa-arrow-up"></i>
+            {{localize "FADING_SUNS.messages.ADVANTAGE"}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.rollDisadvantage}}
+          <div class="effect-modifier negative">
+            <i class="fas fa-arrow-down"></i>
+            {{localize "FADING_SUNS.messages.DISADVANTAGE"}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.extraVPCost}}
+          <div class="effect-modifier negative">
+            <i class="fas fa-gem"></i>
+            {{localize "FADING_SUNS.messages.EXTRA_VP_COST"}}: {{effectModifiers.extraVPCost}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.perceptionModifier}}
+          <div class="effect-modifier {{#if (gt effectModifiers.perceptionModifier 0)}}positive{{else}}negative{{/if}}">
+            <i class="fas fa-eye"></i>
+            {{localize "FADING_SUNS.CharacteristicLong.per"}} {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.perceptionModifier}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.physicalModifier}}
+          <div class="effect-modifier {{#if (gt effectModifiers.physicalModifier 0)}}positive{{else}}negative{{/if}}">
+            <i class="fas fa-fist-raised"></i>
+            {{localize "FADING_SUNS.CharacteristicParent.body"}} {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.physicalModifier}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.mentalModifier}}
+          <div class="effect-modifier {{#if (gt effectModifiers.mentalModifier 0)}}positive{{else}}negative{{/if}}">
+            <i class="fas fa-brain"></i>
+            {{localize "FADING_SUNS.CharacteristicParent.mind"}} {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.mentalModifier}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.socialModifier}}
+          <div class="effect-modifier {{#if (gt effectModifiers.socialModifier 0)}}positive{{else}}negative{{/if}}">
+            <i class="fas fa-users"></i>
+            {{localize "FADING_SUNS.CharacteristicParent.spirit"}} {{localize "FADING_SUNS.messages.EXTRA_MODIFIERS"}}: {{effectModifiers.socialModifier}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.cannotAct}}
+          <div class="effect-modifier negative">
+            <i class="fas fa-ban"></i>
+            {{localize "FADING_SUNS.Roll.CannotAct"}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.autoFail}}
+          <div class="effect-modifier negative">
+            <i class="fas fa-times-circle"></i>
+            {{localize "FADING_SUNS.Roll.AutoFail"}}
+          </div>
+          {{/if}}
+          
+          {{#if effectModifiers.randomTarget}}
+          <div class="effect-modifier negative">
+            <i class="fas fa-random"></i>
+            {{localize "FADING_SUNS.Roll.RandomTarget"}}
+          </div>
+          {{/if}}
+        </div>
+      </section>
+    </section>
+    {{/if}}
+
     <section class="main grid-span-1">
         <section class="section-group">
         <div class="items-header-group">{{localize 'FADING_SUNS.messages.ResistanceChoose'}} </div>

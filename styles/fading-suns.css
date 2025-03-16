@@ -1,2 +1,5 @@
 /* Add import for predefined effects dialog */
-@import url("predefined-effects.css"); 
+@import url("predefined-effects.css");
+
+/* Add import for roll dialog styles */
+@import url("roll-dialog.css"); 

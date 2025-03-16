@@ -1,0 +1,46 @@
+/* Roll Dialog Effect Modifiers */
+.effect-modifiers-list {
+  display: flex;
+  display: -ms-flexbox;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid #7a7971;
+  border-radius: 3px;
+  margin-top: 5px;
+}
+
+.effect-modifier {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.effect-modifier i {
+  width: 16px;
+  text-align: center;
+}
+
+.effect-modifier.positive {
+  color: #2a9d3f;
+  border-left: 3px solid #2a9d3f;
+}
+
+.effect-modifier.negative {
+  color: #ab3026;
+  border-left: 3px solid #ab3026;
+}
+
+.effect-modifier.positive i {
+  color: #2a9d3f;
+}
+
+.effect-modifier.negative i {
+  color: #ab3026;
+} 
