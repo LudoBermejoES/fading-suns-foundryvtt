@@ -5,8 +5,20 @@
              <div style="font-size: 24px;">{{maneuver.name}} </div>
         {{/if}}
 
-
-        <div>{{skillTranslated}} ({{skillValue}}) + {{ characteristicSelected }} {{ characteristicValueSelected }} {{#if victoryPointsSelected }} + {{ victoryPointsSelected }} {{localize 'FADING_SUNS.messages.VP'}} {{/if}} {{#if wyrdPointUsed }} + 3 ({{localize 'FADING_SUNS.messages.WYRD_POINT_USED'}}) {{/if}} {{#if extraModifiers }} + {{ extraModifiers }} ({{localize  'FADING_SUNS.messages.EXTRA_MODIFIERS_SHORT'}}) {{/if}}</div>
+        <div>
+            {{skillTranslated}} ({{skillValue}}) + 
+            {{ characteristicSelected }} {{ characteristicValueSelected }}
+            {{#if victoryPointsSelected }} + {{ victoryPointsSelected }} {{localize 'FADING_SUNS.messages.VP'}} {{/if}}
+            {{#if wyrdPointUsed }} + 3 ({{localize 'FADING_SUNS.messages.WYRD_POINT_USED'}}) {{/if}}
+            {{#if extraModifiers }} + {{ extraModifiers }} ({{localize 'FADING_SUNS.messages.EXTRA_MODIFIERS_SHORT'}}) {{/if}}
+            {{#if effectModifiers}}
+                {{#if effectModifiers.modifier}} + {{effectModifiers.modifier}} ({{localize 'FADING_SUNS.messages.EFFECT_MODIFIERS_SHORT'}}){{/if}}
+                {{#if effectModifiers.physicalModifier}}{{#if isPhysicalRoll}} + {{effectModifiers.physicalModifier}} ({{localize 'FADING_SUNS.messages.PHYSICAL_MOD_SHORT'}}){{/if}}{{/if}}
+                {{#if effectModifiers.mentalModifier}}{{#if isMentalRoll}} + {{effectModifiers.mentalModifier}} ({{localize 'FADING_SUNS.messages.MENTAL_MOD_SHORT'}}){{/if}}{{/if}}
+                {{#if effectModifiers.socialModifier}}{{#if isSocialRoll}} + {{effectModifiers.socialModifier}} ({{localize 'FADING_SUNS.messages.SOCIAL_MOD_SHORT'}}){{/if}}{{/if}}
+                {{#if effectModifiers.perceptionModifier}}{{#if isPerceptionRoll}} + {{effectModifiers.perceptionModifier}} ({{localize 'FADING_SUNS.messages.PERCEPTION_MOD_SHORT'}}){{/if}}{{/if}}
+            {{/if}}
+        </div>
         <div style="font-size: 24px;">{{ totalRoll }}  </div>
     </div>
     {{#unless maneuver.name}}
@@ -84,6 +96,19 @@
       <section class="section-group">
         <div class="items-header-group">{{localize 'FADING_SUNS.messages.EFFECT_MODIFIERS'}}</div>
         <div class="effect-modifiers-list">
+          {{#each activeEffects as |effect|}}
+          <div class="effect-modifier {{#if effect.isPositive}}positive{{else}}negative{{/if}}">
+            <input type="checkbox" 
+                   class="effect-toggle" 
+                   data-effect-id="{{effect.id}}" 
+                   {{#unless effect.disabled}}checked{{/unless}}
+            >
+            <i class="{{effect.icon}}"></i>
+            <span class="effect-name">{{effect.label}}</span>
+            <span class="effect-value">{{#if effect.value}}({{effect.value}}){{/if}}</span>
+          </div>
+          {{/each}}
+
           {{#if effectModifiers.modifier}}
           <div class="effect-modifier">
             <i class="fas fa-dice-d20"></i>

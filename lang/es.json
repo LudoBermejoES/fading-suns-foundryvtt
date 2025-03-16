@@ -66,7 +66,12 @@
       "TotalCoverage": "Cobertura Total (+6)",
       "CAN_SPEND_VP_TO_SUCCEED": "Puedes gastar {vpNeeded} Puntos de Victoria de tu banco para tener éxito en esta tirada.",
       "SPEND_VP_BUTTON": "Gastar {vpNeeded} PV para Tener Éxito",
-      "VP_SPENT_TO_SUCCEED": "Se gastaron {vpSpent} Puntos de Victoria del banco para tener éxito en esta tirada."
+      "VP_SPENT_TO_SUCCEED": "Se gastaron {vpSpent} Puntos de Victoria del banco para tener éxito en esta tirada.",
+      "EFFECT_MODIFIERS_SHORT": "Efecto",
+      "PHYSICAL_MOD_SHORT": "Físico",
+      "MENTAL_MOD_SHORT": "Mental",
+      "SOCIAL_MOD_SHORT": "Social",
+      "PERCEPTION_MOD_SHORT": "Percepción"
     },
 
     "Maneuver": {

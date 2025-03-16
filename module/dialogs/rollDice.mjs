@@ -1,6 +1,6 @@
 import { mergeObject } from '../helpers/utils.mjs';
 import { parseAttackProperties, calculateEffectiveResistance, getResistanceLevel } from '../helpers/combat.mjs';
-import { getEffectModifiers, applyEffectModifiersToRoll } from '../helpers/rollEffects.mjs';
+import { getEffectModifiers, applyEffectModifiersToRoll, formatActiveEffectsForDisplay } from '../helpers/rollEffects.mjs';
 import { 
   calculateRoll, 
   determineRollType, 
@@ -28,6 +28,7 @@ export default class RollDice extends FormApplication {
     this.target = game?.user?.targets?.first?.() || null;
     this.attackProperties = [];
     this.coverage = "none"; // Default to no coverage
+    this.disabledEffectIds = []; // Track effects that have been disabled via checkboxes
     
     // If this is a weapon, parse attack properties from Features field
     if (this.isWeapon && this.dataset.itemId) {
@@ -38,13 +39,7 @@ export default class RollDice extends FormApplication {
     }
     
     // Get effect modifiers
-    this.effectModifiers = getEffectModifiers(this.actor, {
-      characteristic: this.characteristic,
-      skill: this.dataset.value,
-      maneuver: this.maneuver,
-      isWeapon: this.isWeapon,
-      attackProperties: this.attackProperties
-    });
+    this._updateEffectModifiers();
   }
 
   characteristic = "str";
@@ -66,6 +61,31 @@ export default class RollDice extends FormApplication {
   attackProperties = [];
   
   coverage = "none"; // none, partial, total
+  
+  disabledEffectIds = []; // Track effects that have been disabled via checkboxes
+
+  /**
+   * Update effect modifiers based on current state
+   * @private
+   */
+  _updateEffectModifiers() {
+    const rollData = {
+      characteristic: this.characteristic,
+      skill: this.dataset.value,
+      maneuver: this.maneuver,
+      isWeapon: this.isWeapon,
+      attackProperties: this.attackProperties
+    };
+    
+    this.effectModifiers = getEffectModifiers(this.actor, rollData, this.disabledEffectIds);
+    this.activeEffects = formatActiveEffectsForDisplay(this.actor).map(effect => {
+      // Mark effects as disabled if they are in the disabledEffectIds array
+      return {
+        ...effect,
+        disabled: this.disabledEffectIds.includes(effect.id)
+      };
+    });
+  }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
@@ -185,8 +205,14 @@ export default class RollDice extends FormApplication {
     // Get extra VP cost from effects
     const extraVPCost = calculateExtraVPCost(rollData, this.actor);
 
+    // Add data to determine roll type for conditional display of modifiers
+    const isPhysicalRoll = ['str', 'dex', 'end'].includes(this.characteristic);
+    const isMentalRoll = ['int', 'wits', 'tec'].includes(this.characteristic);
+    const isSocialRoll = ['pre', 'ego', 'pas'].includes(this.characteristic);
+    const isPerceptionRoll = ['per'].includes(this.characteristic);
+
     return {
-      extraModifiers: this.extraModifiers,
+      actor: this.actor,
       resistancesTranslated,
       characteristicsTranslated,
       skillName: this.dataset.label,
@@ -211,8 +237,13 @@ export default class RollDice extends FormApplication {
       coverage: this.coverage,
       numericResistance: this.numericResistance,
       effectModifiers: this.effectModifiers,
+      activeEffects: this.activeEffects, // Add formatted active effects for display
       extraVPCost,
-      canSpendVP: canSpendVP(this.actor)
+      canSpendVP: canSpendVP(this.actor),
+      isPhysicalRoll,
+      isMentalRoll,
+      isSocialRoll,
+      isPerceptionRoll
     };
   }
 
@@ -237,6 +268,11 @@ export default class RollDice extends FormApplication {
     html
       .find('input[name="extraModifiers"]')
       .change(this._onChangeModifiers.bind(this));
+      
+    // Add listener for effect toggle checkboxes
+    html
+      .find('.effect-toggle')
+      .change(this._onToggleEffect.bind(this));
   }
 
   async _updateObject(event, formData) {
@@ -291,6 +327,25 @@ export default class RollDice extends FormApplication {
 
   _onChangeModifiers(event) {
     this.extraModifiers = event.currentTarget.value;
+    this.render();
+  }
+
+  _onToggleEffect(event) {
+    const effectId = event.currentTarget.dataset.effectId;
+    const isChecked = event.currentTarget.checked;
+    
+    if (!isChecked) {
+      // Add to disabled effects if not checked
+      if (!this.disabledEffectIds.includes(effectId)) {
+        this.disabledEffectIds.push(effectId);
+      }
+    } else {
+      // Remove from disabled effects if checked
+      this.disabledEffectIds = this.disabledEffectIds.filter(id => id !== effectId);
+    }
+    
+    // Update effect modifiers and re-render
+    this._updateEffectModifiers();
     this.render();
   }
 

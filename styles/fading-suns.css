@@ -2,4 +2,9 @@
 @import url("predefined-effects.css");
 
 /* Add import for roll dialog styles */
-@import url("roll-dialog.css"); 
+@import url("roll-dialog.css");
+
+@import url("./item-sheet.css");
+@import url("./actor-sheet.css");
+@import url("./roll-dialog.css");
+@import url("./chat-message.css"); 

@@ -1,0 +1,84 @@
+/* Chat message styles for effect modifiers */
+.effect-modifiers {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.effect-modifiers h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+  color: #444;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+}
+
+.effect-modifiers-list {
+  display: flex;
+  display: -ms-flexbox;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  gap: 6px;
+}
+
+.effect-modifier {
+  display: flex;
+  display: -ms-flexbox;
+  align-items: center;
+  -ms-flex-align: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.effect-modifier i {
+  width: 16px;
+  text-align: center;
+}
+
+.effect-modifier.positive {
+  color: #2a9d3f;
+  border-left: 3px solid #2a9d3f;
+}
+
+.effect-modifier.negative {
+  color: #ab3026;
+  border-left: 3px solid #ab3026;
+}
+
+.effect-modifier.positive i {
+  color: #2a9d3f;
+}
+
+.effect-modifier.negative i {
+  color: #ab3026;
+}
+
+/* Styles for VP spending container */
+.spend-vp-container {
+  margin-top: 10px;
+  padding: 8px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #FFD700;
+  border-radius: 4px;
+}
+
+.spend-vp-button {
+  background: #f0c14b;
+  border: 1px solid #a88734;
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin-top: 4px;
+  color: #111;
+  cursor: pointer;
+}
+
+.spend-vp-button:hover {
+  background: #ddb347;
+} 

@@ -43,4 +43,37 @@
 
 .effect-modifier.negative i {
   color: #ab3026;
+}
+
+/* New styles for effect toggles */
+.effect-modifier input[type="checkbox"] {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.effect-modifier .effect-name {
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.effect-modifier .effect-value {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.effect-modifier.disabled {
+  opacity: 0.5;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Header roll modifications */
+.items-header-roll {
+  margin-bottom: 10px;
+}
+
+.items-header-roll .modifier-breakdown {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 4px;
 } 

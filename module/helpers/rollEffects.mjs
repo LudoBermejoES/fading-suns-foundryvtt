@@ -195,9 +195,10 @@ const EFFECT_MODIFIER_MAP = {
  * Get effect modifiers for a roll based on active effects on an actor
  * @param {Actor} actor - The actor to check for active effects
  * @param {Object} rollData - Data about the roll being performed
+ * @param {Array} disabledEffectIds - Array of effect IDs that should be ignored
  * @returns {Object} An object containing modifiers to apply to the roll
  */
-export function getEffectModifiers(actor, rollData) {
+export function getEffectModifiers(actor, rollData, disabledEffectIds = []) {
   if (!actor) return {};
   
   // Initialize modifiers object
@@ -218,8 +219,10 @@ export function getEffectModifiers(actor, rollData) {
     cannotAct: false
   };
   
-  // Get active effects on the actor
-  const activeEffects = actor.effects.filter(e => !e.disabled);
+  // Get active effects on the actor, excluding manually disabled ones
+  const activeEffects = actor.effects.filter(e => 
+    !e.disabled && !disabledEffectIds.includes(e.id)
+  );
   
   // Process each active effect
   for (const effect of activeEffects) {
@@ -541,4 +544,82 @@ export function applyEffectModifiersToResistance(baseResistance, attackPropertie
   }
   
   return modifiedResistance;
+}
+
+/**
+ * Format active effects for display in the roll dialog
+ * @param {Actor} actor - The actor to get effects from
+ * @param {Object} rollData - Data about the roll being performed
+ * @returns {Array} Formatted active effects for the template
+ */
+export function formatActiveEffectsForDisplay(actor) {
+  if (!actor) return [];
+  
+  // Get all non-disabled effects on the actor
+  const effects = actor.effects.filter(e => !e.disabled);
+  
+  // Format effects for display
+  return effects.map(effect => {
+    const effectTitle = effect.name.toUpperCase();
+    const effectModifiers = EFFECT_MODIFIER_MAP[effectTitle];
+    
+    // Skip effects that don't have modifiers defined
+    if (!effectModifiers) return null;
+    
+    // Determine if this is a positive or negative effect
+    let isPositive = false;
+    let value = null;
+    let icon = "fas fa-bolt"; // Default icon
+    
+    // Determine icon and value based on modifiers
+    if (effectModifiers[EFFECT_MODIFIERS.ROLL_ADVANTAGE]) {
+      isPositive = true;
+      icon = "fas fa-arrow-up";
+    } else if (effectModifiers[EFFECT_MODIFIERS.ROLL_DISADVANTAGE]) {
+      isPositive = false;
+      icon = "fas fa-arrow-down";
+    } else if (effectModifiers[EFFECT_MODIFIERS.MODIFIER]) {
+      value = effectModifiers[EFFECT_MODIFIERS.MODIFIER];
+      isPositive = value > 0;
+      icon = "fas fa-dice-d20";
+    } else if (effectModifiers[EFFECT_MODIFIERS.PERCEPTION_MODIFIER]) {
+      value = effectModifiers[EFFECT_MODIFIERS.PERCEPTION_MODIFIER];
+      isPositive = value > 0;
+      icon = "fas fa-eye";
+    } else if (effectModifiers[EFFECT_MODIFIERS.PHYSICAL_MODIFIER]) {
+      value = effectModifiers[EFFECT_MODIFIERS.PHYSICAL_MODIFIER];
+      isPositive = value > 0;
+      icon = "fas fa-fist-raised";
+    } else if (effectModifiers[EFFECT_MODIFIERS.MENTAL_MODIFIER]) {
+      value = effectModifiers[EFFECT_MODIFIERS.MENTAL_MODIFIER];
+      isPositive = value > 0;
+      icon = "fas fa-brain";
+    } else if (effectModifiers[EFFECT_MODIFIERS.SOCIAL_MODIFIER]) {
+      value = effectModifiers[EFFECT_MODIFIERS.SOCIAL_MODIFIER];
+      isPositive = value > 0;
+      icon = "fas fa-users";
+    } else if (effectModifiers[EFFECT_MODIFIERS.AUTO_FAIL]) {
+      isPositive = false;
+      icon = "fas fa-times-circle";
+    } else if (effectModifiers[EFFECT_MODIFIERS.CANNOT_ACT]) {
+      isPositive = false;
+      icon = "fas fa-ban";
+    } else if (effectModifiers[EFFECT_MODIFIERS.RANDOM_TARGET]) {
+      isPositive = false;
+      icon = "fas fa-random";
+    } else if (effectModifiers[EFFECT_MODIFIERS.EXTRA_VP_COST]) {
+      value = effectModifiers[EFFECT_MODIFIERS.EXTRA_VP_COST];
+      isPositive = false;
+      icon = "fas fa-gem";
+    }
+    
+    return {
+      id: effect.id,
+      label: effect.name,
+      icon: icon,
+      value: value,
+      isPositive: isPositive,
+      disabled: false
+    };
+  }).filter(e => e !== null);
 } 

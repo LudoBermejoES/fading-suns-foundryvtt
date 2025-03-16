@@ -67,7 +67,12 @@
       "CurrentDifficulty": "Current Difficulty",
       "CAN_SPEND_VP_TO_SUCCEED": "You can spend {vpNeeded} Victory Points from your bank to succeed on this roll.",
       "SPEND_VP_BUTTON": "Spend {vpNeeded} VP to Succeed",
-      "VP_SPENT_TO_SUCCEED": "{vpSpent} Victory Points were spent from the bank to succeed on this roll."
+      "VP_SPENT_TO_SUCCEED": "{vpSpent} Victory Points were spent from the bank to succeed on this roll.",
+      "EFFECT_MODIFIERS_SHORT": "Effect",
+      "PHYSICAL_MOD_SHORT": "Physical",
+      "MENTAL_MOD_SHORT": "Mental",
+      "SOCIAL_MOD_SHORT": "Social",
+      "PERCEPTION_MOD_SHORT": "Perception"
     },
 
     "Maneuver": {
