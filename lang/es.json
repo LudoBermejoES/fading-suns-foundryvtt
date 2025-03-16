@@ -1,6 +1,12 @@
 {
   "FADING_SUNS": {
     "LETS_ROL": "Tirada",
+    "defense": {
+    "EVADIR": "Evadir",
+    "BLOQUEAR": "Bloquear",
+    "ESQUIVAR": "Esquivar",
+    "ENVALENTONARSE": "Envalentonarse"
+  },
     "CharacteristicParent": {
       "body": "Cuerpo",
       "mind": "Mente",
@@ -386,10 +392,5 @@
     "ExtraVPCost": "Debido a efectos, debes gastar {cost} Puntos de Victoria adicionales"
   },
 
-  "defense": {
-    "EVADIR": "Evadir",
-    "BLOQUEAR": "Bloquear",
-    "ESQUIVAR": "Esquivar",
-    "ENVALENTONARSE": "Envalentonarse"
-  }
+  
 }

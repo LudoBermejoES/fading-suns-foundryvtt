@@ -1,5 +1,12 @@
 {
   "FADING_SUNS": {
+    
+  "defense": {
+    "EVADIR": "Evade",
+    "BLOQUEAR": "Block",
+    "ESQUIVAR": "Dodge",
+    "ENVALENTONARSE": "Rally"
+  },
     "LETS_ROL": "Let's rol",
     "CharacteristicParent": {
       "body": "Body",
@@ -16,7 +23,7 @@
     },
     
     "damageChat": {
-      "weaponDamage": "Your weapon is causing {{damage}} points to the enemy",
+      "weaponDamage": "Your weapon is causing {damage} points to the enemy",
       "addDamage": "You can increase the damage to your weapon by using your cache or victory points. Per 2 points you can add 1 damage",
       "useCachePoints": "Use cache points",
       "useVictoryPoints": "Use victory points",
@@ -447,11 +454,5 @@
       "gear": "Gear",
       "feature": "Feature"
     }
-  },
-  "defense": {
-    "EVADIR": "Evade",
-    "BLOQUEAR": "Block",
-    "ESQUIVAR": "Dodge",
-    "ENVALENTONARSE": "Rally"
   }
 }
