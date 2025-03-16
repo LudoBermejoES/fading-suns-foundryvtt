@@ -56,7 +56,7 @@ function registerCombatHooks() {
 }
 
 /**
- * Register hooks related to chat messages
+ * Register hooks for chat message interactions
  */
 function registerChatMessageHooks() {
   // Add a listener for the spend VP button in chat messages
@@ -88,14 +88,94 @@ function registerChatMessageHooks() {
       const messageContent = html.find(".result-roll .tooltiptext");
       messageContent.text(game.i18n.format("FADING_SUNS.messages.SUCCESS"));
       
-      // Add a note about spending VP
-      const noteHtml = `<div class="spend-vp-note">${game.i18n.format("FADING_SUNS.messages.VP_SPENT_TO_SUCCEED", { vpSpent: vpNeeded })}</div>`;
-      html.find(".spend-vp-container").replaceWith(noteHtml);
+      // Send a notification message to the chat
+      ChatMessage.create({
+        content: game.i18n.format("FADING_SUNS.messages.VP_SPENT_TO_SUCCEED", {vpSpent: vpNeeded}),
+        speaker: ChatMessage.getSpeaker({actor: actor}),
+      });
       
-      // Update the message in the database
-      await message.update({ content: html.html() });
+      // Remove the button
+      button.parentElement.remove();
+    });
+    
+    // Handle defense button clicks
+    html.find(".defense-button").click(async (event) => {
+      event.preventDefault();
       
-      ui.notifications.info(`${actor.name} spent ${vpNeeded} Victory Points to succeed.`);
+      // Get the data from the button
+      const button = event.currentTarget;
+      const defenseType = button.dataset.defenseType;
+      const attackerId = button.dataset.attackerId;
+      const targetId = button.dataset.targetId;
+      const messageId = button.dataset.messageId;
+      const rollTotal = parseInt(button.dataset.rollTotal);
+      
+      // Only show the defense option to the target's owner
+      const target = game.actors.get(targetId);
+      if (!target || !target.isOwner) {
+        ui.notifications.warn("You don't have permission to defend with this character.");
+        return;
+      }
+      
+      // Get the attacker
+      const attacker = game.actors.get(attackerId);
+      if (!attacker) return;
+      
+      // Set up the defense roll based on defense type
+      let defenseSkill, defenseCharacteristic, defenseLabel;
+      
+      switch (defenseType) {
+        case "Evadir": // For ranged attacks (DISPARAR)
+          defenseSkill = "Esquivar";
+          defenseCharacteristic = "dex";
+          defenseLabel = game.i18n.localize("FADING_SUNS.defense.EVADIR");
+          break;
+        case "Bloquear": // For melee attacks (CUERPO A CUERPO)
+          defenseSkill = "Bloquear";
+          defenseCharacteristic = "str";
+          defenseLabel = game.i18n.localize("FADING_SUNS.defense.BLOQUEAR");
+          break;
+        case "Esquivar": // For melee attacks (PELEAR)
+          defenseSkill = "Esquivar";
+          defenseCharacteristic = "dex";
+          defenseLabel = game.i18n.localize("FADING_SUNS.defense.ESQUIVAR");
+          break;
+        case "Envalentonarse": // For mental/social attacks
+          defenseSkill = "Disciplina";
+          defenseCharacteristic = "wits";
+          defenseLabel = game.i18n.localize("FADING_SUNS.defense.ENVALENTONARSE");
+          break;
+        default:
+          return;
+      }
+      
+      // Import the rollDice class
+      const RollDice = (await import("../dialogs/rollDice.mjs")).default;
+      
+      // Set up dataset for the defense roll
+      const dataset = {
+        label: defenseSkill,
+        value: target.system.skills[defenseSkill] || 0,
+        characteristic: defenseCharacteristic,
+        translated: defenseLabel,
+        isDefense: true,
+        attackTotal: rollTotal,
+        attackerId: attackerId,
+        messageId: messageId
+      };
+      
+      // Create and render the RollDice dialog for defense
+      const rollDialog = new RollDice(target, dataset);
+      rollDialog.render(true);
+      
+      // Disable all defense buttons in this message since the character is now defending
+      html.find(".defense-button").prop("disabled", true).addClass("disabled");
+      
+      // Add a note to the message
+      const defenseNote = document.createElement("div");
+      defenseNote.classList.add("defense-note");
+      defenseNote.innerHTML = `<i class="fas fa-shield-alt"></i> ${target.name} ${game.i18n.format("FADING_SUNS.messages.IS_DEFENDING")}`;
+      html.find(".defense-options").append(defenseNote);
     });
   });
 } 

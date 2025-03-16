@@ -112,6 +112,34 @@
       </div>
       {{/if}}
       
+      {{!-- Defense options for the target --}}
+      {{#if isAttack}}
+      <div class="defense-options">
+        <h3>{{localize "FADING_SUNS.messages.DEFENSE_OPTIONS"}}</h3>
+        
+        {{#if isRangedAttack}}
+        <button class="defense-button rollable" data-action="defend" data-defense-type="Evadir" data-message-id="{{messageId}}" data-attacker-id="{{actorId}}" data-target-id="{{targetId}}" data-roll-total="{{total}}">
+          <i class="fas fa-running"></i> {{localize "FADING_SUNS.defense.EVADIR"}}
+        </button>
+        {{/if}}
+        
+        {{#if isMeleeAttack}}
+        <button class="defense-button rollable" data-action="defend" data-defense-type="Bloquear" data-message-id="{{messageId}}" data-attacker-id="{{actorId}}" data-target-id="{{targetId}}" data-roll-total="{{total}}">
+          <i class="fas fa-shield-alt"></i> {{localize "FADING_SUNS.defense.BLOQUEAR"}}
+        </button>
+        <button class="defense-button rollable" data-action="defend" data-defense-type="Esquivar" data-message-id="{{messageId}}" data-attacker-id="{{actorId}}" data-target-id="{{targetId}}" data-roll-total="{{total}}">
+          <i class="fas fa-person-running"></i> {{localize "FADING_SUNS.defense.ESQUIVAR"}}
+        </button>
+        {{/if}}
+        
+        {{#if isSocialMentalAttack}}
+        <button class="defense-button rollable" data-action="defend" data-defense-type="Envalentonarse" data-message-id="{{messageId}}" data-attacker-id="{{actorId}}" data-target-id="{{targetId}}" data-roll-total="{{total}}">
+          <i class="fas fa-brain"></i> {{localize "FADING_SUNS.defense.ENVALENTONARSE"}}
+        </button>
+        {{/if}}
+      </div>
+      {{/if}}
+      
       {{#if canSpendVPToSucceed}}
       <div class="spend-vp-container">
         <p>{{localize "FADING_SUNS.messages.CAN_SPEND_VP_TO_SUCCEED" vpNeeded=vpNeededToSucceed}}</p>

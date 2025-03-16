@@ -71,7 +71,14 @@
       "PHYSICAL_MOD_SHORT": "Físico",
       "MENTAL_MOD_SHORT": "Mental",
       "SOCIAL_MOD_SHORT": "Social",
-      "PERCEPTION_MOD_SHORT": "Percepción"
+      "PERCEPTION_MOD_SHORT": "Percepción",
+      "DEFENSE_OPTIONS": "Opciones de Defensa",
+      "IS_DEFENDING": "está defendiéndose...",
+      "DEFENSE_SUCCESS": "¡Defensa Exitosa!",
+      "DEFENSE_FAILURE": "¡Defensa Fallida!",
+      "DEFENSE_ROLL": "{type}: {total} vs {attackTotal} - {result}",
+      "DEFENDED_SUCCESSFULLY": "¡se defendió con éxito!",
+      "FAILED_TO_DEFEND": "¡falló en defenderse!"
     },
 
     "Maneuver": {
@@ -377,5 +384,12 @@
   
   "Info": {
     "ExtraVPCost": "Debido a efectos, debes gastar {cost} Puntos de Victoria adicionales"
+  },
+
+  "defense": {
+    "EVADIR": "Evadir",
+    "BLOQUEAR": "Bloquear",
+    "ESQUIVAR": "Esquivar",
+    "ENVALENTONARSE": "Envalentonarse"
   }
 }

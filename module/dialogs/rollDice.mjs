@@ -30,6 +30,12 @@ export default class RollDice extends FormApplication {
     this.coverage = "none"; // Default to no coverage
     this.disabledEffectIds = []; // Track effects that have been disabled via checkboxes
     
+    // Defense-specific properties
+    this.isDefense = !!this.dataset.isDefense;
+    this.attackTotal = this.dataset.attackTotal ? parseInt(this.dataset.attackTotal) : 0;
+    this.attackerId = this.dataset.attackerId;
+    this.messageId = this.dataset.messageId;
+    
     // If this is a weapon, parse attack properties from Features field
     if (this.isWeapon && this.dataset.itemId) {
       const item = this.actor.items.get(this.dataset.itemId);
@@ -665,24 +671,77 @@ export default class RollDice extends FormApplication {
       await this.actor.update({ system: this.actor.system });
     }
 
+    // Determine if this is an attack and what type
+    let isAttack = false;
+    let isRangedAttack = false;
+    let isMeleeAttack = false;
+    let isSocialMentalAttack = false;
+    
+    // Check if this is an attack based on skill or item type
+    if (this.isWeapon) {
+      isAttack = true;
+      
+      // Determine attack type based on weapon type or skill
+      if (this.dataset.itemId) {
+        const item = this.actor.items.get(this.dataset.itemId);
+        if (item) {
+          if (item.type === "FirearmWeapon") {
+            isRangedAttack = true;
+          } else if (item.type === "MeleeWeapon") {
+            isMeleeAttack = true;
+          }
+        }
+      } else if (this.dataset.label) {
+        // Determine attack type based on skill
+        const skillName = this.dataset.label.toLowerCase();
+        if (skillName.includes("disparar")) {
+          isRangedAttack = true;
+        } else if (skillName.includes("cuerpo a cuerpo") || skillName.includes("pelear")) {
+          isMeleeAttack = true;
+        }
+      }
+    } else if (this.characteristic) {
+      // Check for mental or social attacks
+      const mentalChars = ['int', 'wits', 'tec'];
+      const socialChars = ['pre', 'ego', 'pas', 'fth'];
+      
+      if (mentalChars.includes(this.characteristic) || socialChars.includes(this.characteristic)) {
+        // If it's a mental or social skill and targeting another character
+        if (this.target) {
+          isAttack = true;
+          isSocialMentalAttack = true;
+        }
+      }
+    }
+
+    // Add attack information to template data
     const templateData = {
+      dice,
+      getBloodBackground: this.getBloodBackground(dice, myRol),
+      message,
       result: message || this._getMessage(
         success,
         critical,
         totalFailure,
         dice - resistanceValueSelected,
       ),
-      message: chatMessage,
       successMessage,
       resistanceMessage,
-      dice,
-      total,
-      maxVPToMoveToBank,
+      total: totalRoll,
+      actorId: this.actor.id,
+      messageId: randomID(),
+      targetId: this.target?.id,
       maneuver: this.maneuver,
-      actorId: this.actor._id,
-      canSpendVPToSucceed,
-      vpNeededToSucceed,
-      effectModifiers: this.effectModifiers
+      effectModifiers: this.effectModifiers,
+      isAttack,
+      isRangedAttack,
+      isMeleeAttack,
+      isSocialMentalAttack,
+      isDefense: this.isDefense,
+      attackTotal: this.attackTotal,
+      defenseSuccess: this.isDefense && success,
+      attackerId: this.attackerId,
+      originalMessageId: this.messageId
     };
 
     const content = await renderTemplate(
@@ -726,6 +785,57 @@ export default class RollDice extends FormApplication {
         this._showDamageMessage({ bank, vp, damage: this.damage });
       }
     }
+
+    // For defense rolls, we need to compare against the attack roll
+    if (this.isDefense && this.attackTotal) {
+      const defenseResult = totalRoll >= this.attackTotal;
+      
+      // Update the success/failure message for defense rolls
+      if (defenseResult) {
+        message = game.i18n.format("FADING_SUNS.messages.DEFENSE_SUCCESS");
+        result = game.i18n.format("FADING_SUNS.messages.SUCCESS");
+        success = true;
+      } else {
+        message = game.i18n.format("FADING_SUNS.messages.DEFENSE_FAILURE");
+        result = game.i18n.format("FADING_SUNS.messages.FAILURE");
+        success = false;
+      }
+      
+      // Add a specific message for the defense type
+      const defenseType = this.dataset.translated;
+      successMessage = game.i18n.format("FADING_SUNS.messages.DEFENSE_ROLL", { 
+        type: defenseType,
+        total: totalRoll,
+        attackTotal: this.attackTotal,
+        result: defenseResult ? game.i18n.localize("FADING_SUNS.messages.SUCCESS") : game.i18n.localize("FADING_SUNS.messages.FAILURE")
+      });
+    }
+
+    // For defense rolls, also update the original attack message to show the defense result
+    if (this.isDefense && this.messageId) {
+      // Find the original message
+      const originalMessage = game.messages.get(this.messageId);
+      if (originalMessage) {
+        // Add a defense result note to the original message
+        const defenseResultHtml = `
+          <div class="defense-result ${success ? 'success' : 'failure'}">
+            <i class="fas fa-${success ? 'check' : 'times'}"></i>
+            ${this.actor.name} ${success ? game.i18n.localize("FADING_SUNS.messages.DEFENDED_SUCCESSFULLY") : game.i18n.localize("FADING_SUNS.messages.FAILED_TO_DEFEND")}
+            (${this.dataset.translated}: ${totalRoll} vs ${this.attackTotal})
+          </div>
+        `;
+        
+        // Get the message content
+        let content = originalMessage.content;
+        
+        // Add the defense result note before the closing div of defense-options
+        content = content.replace('</div>\n      {{/if}}', `${defenseResultHtml}</div>\n      {{/if}}`);
+        
+        // Update the message
+        await originalMessage.update({ content });
+      }
+    }
+
     this.close();
   }
 

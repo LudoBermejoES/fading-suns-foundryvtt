@@ -72,7 +72,14 @@
       "PHYSICAL_MOD_SHORT": "Physical",
       "MENTAL_MOD_SHORT": "Mental",
       "SOCIAL_MOD_SHORT": "Social",
-      "PERCEPTION_MOD_SHORT": "Perception"
+      "PERCEPTION_MOD_SHORT": "Perception",
+      "DEFENSE_OPTIONS": "Defense Options",
+      "IS_DEFENDING": "is defending...",
+      "DEFENSE_SUCCESS": "Defense Success!",
+      "DEFENSE_FAILURE": "Defense Failed!",
+      "DEFENSE_ROLL": "{type}: {total} vs {attackTotal} - {result}",
+      "DEFENDED_SUCCESSFULLY": "defended successfully!",
+      "FAILED_TO_DEFEND": "failed to defend!"
     },
 
     "Maneuver": {
@@ -440,5 +447,11 @@
       "gear": "Gear",
       "feature": "Feature"
     }
+  },
+  "defense": {
+    "EVADIR": "Evade",
+    "BLOQUEAR": "Block",
+    "ESQUIVAR": "Dodge",
+    "ENVALENTONARSE": "Rally"
   }
 }
