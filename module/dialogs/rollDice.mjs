@@ -926,7 +926,11 @@ export default class RollDice extends FormApplication {
   }
 
   async _showDamageMessage({ bank, vp, damage, damageData }) {
-    const weaponDamage = game.i18n.format("FADING_SUNS.damageChat.weaponDamage").replace('{{damage}}', damage);
+    // Make sure damage is defined, default to 0 if not
+    const damageValue = damage || 0;
+    
+    // Create a properly formatted message with the localized string
+    const weaponDamage = game.i18n.format("FADING_SUNS.damageChat.weaponDamage", {damage: damageValue});
     
     // Prepare template data
     const templateData = {
