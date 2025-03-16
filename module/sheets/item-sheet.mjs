@@ -81,6 +81,7 @@ export class FadingSunsItemSheet extends api.HandlebarsApplicationMixin(
       createDoc: this._createEffect,
       deleteDoc: this._deleteEffect,
       toggleEffect: this._toggleEffect,
+      openPredefinedEffectsDialog: this._openPredefinedEffectsDialog,
     },
     form: {
       submitOnChange: true,
@@ -531,6 +532,19 @@ export class FadingSunsItemSheet extends api.HandlebarsApplicationMixin(
   }
 
   /**
+   * Opens the predefined effects dialog
+   * @param {PointerEvent} event   The originating click event
+   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
+   * @returns {Promise}
+   * @static
+   */
+  static async _openPredefinedEffectsDialog(event, target) {
+    event.preventDefault();
+    const dialog = new PredefinedEffectsDialog(this.item);
+    dialog.render(true);
+  }
+
+  /**
    * Returns an array of DragDrop instances
    * @type {DragDrop[]}
    */
@@ -549,27 +563,6 @@ export class FadingSunsItemSheet extends api.HandlebarsApplicationMixin(
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
 
-    // Active Effect management
-    html.find(".effect-control").click(ev => {
-      const button = ev.currentTarget;
-      const li = ev.currentTarget.closest("li");
-      const effect = li.dataset.effectId ? this.item.effects.get(li.dataset.effectId) : null;
-      switch (button.dataset.action) {
-        case "createDoc":
-          // Replace the default effect creation with our dialog
-          if (button.dataset.documentClass === "ActiveEffect") {
-            const dialog = new PredefinedEffectsDialog(this.item);
-            dialog.render(true);
-            return;
-          }
-          return ItemSheet._createEffect(event, button);
-        case "toggleEffect":
-          return effect.update({disabled: !effect.disabled});
-        case "viewDoc":
-          return effect.sheet.render(true);
-        case "deleteDoc":
-          return effect.delete();
-      }
-    });
+    // We're removing the effect control handling as it's now handled by actions
   }
 }

@@ -21,8 +21,7 @@
         <div class='effect-controls flexrow'>
           <a
             class='effect-control'
-            data-action='createDoc'
-            data-document-class='ActiveEffect'
+            data-action='openPredefinedEffectsDialog'
             {{#if (eq section.type "inactive")}}
               data-disabled="true"
             {{else if (eq section.type "temporary")}}
@@ -32,7 +31,7 @@
             title='{{localize "DOCUMENT.Create" type='Effect'}}'
           >
             <i class='fas fa-plus'></i>
-            {{localize 'DOCUMENT.New' type='Effect'}}
+            {{localize 'FADING_SUNS.Effect.SelectEffect'}}
           </a>
         </div>
       </li>

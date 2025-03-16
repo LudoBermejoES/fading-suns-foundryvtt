@@ -39,6 +39,7 @@ export class FadingSunsActorSheet extends api.HandlebarsApplicationMixin(
       useRevival: this._useRevival,
       useSurge: this._useSurge,
       viewCharacteristic: this._viewCharacteristic,
+      openPredefinedEffectsDialog: this._openPredefinedEffectsDialog,
     },
     // Custom property that's merged into `this.options`
     dragDrop: [{ dragSelector: "[data-drag]", dropSelector: null }],
@@ -1027,6 +1028,19 @@ export class FadingSunsActorSheet extends api.HandlebarsApplicationMixin(
     await this.actor.update({ "system.res.body.value": item.system.BodyResistance });
   }
 
+  /**
+   * Opens the predefined effects dialog
+   * @param {PointerEvent} event   The originating click event
+   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
+   * @returns {Promise}
+   * @static
+   */
+  static async _openPredefinedEffectsDialog(event, target) {
+    event.preventDefault();
+    const dialog = new PredefinedEffectsDialog(this.actor);
+    dialog.render(true);
+  }
+
   /** @override */
   activateListeners(html) {
     super.activateListeners(html);
@@ -1052,27 +1066,6 @@ export class FadingSunsActorSheet extends api.HandlebarsApplicationMixin(
       li.slideUp(200, () => this.render(false));
     });
 
-    // Active Effect management
-    html.find(".effect-control").click(ev => {
-      const button = ev.currentTarget;
-      const li = ev.currentTarget.closest("li");
-      const effect = li.dataset.effectId ? this.actor.effects.get(li.dataset.effectId) : null;
-      switch (button.dataset.action) {
-        case "createDoc":
-          // Replace the default effect creation with our dialog
-          if (button.dataset.documentClass === "ActiveEffect") {
-            const dialog = new PredefinedEffectsDialog(this.actor);
-            dialog.render(true);
-            return;
-          }
-          return this._createDoc(event, button);
-        case "toggleEffect":
-          return effect.update({disabled: !effect.disabled});
-        case "viewDoc":
-          return effect.sheet.render(true);
-        case "deleteDoc":
-          return effect.delete();
-      }
-    });
+    // We're removing the effect control handling from here as it's now handled by actions
   }
 }
