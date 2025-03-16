@@ -199,14 +199,35 @@ export default class RollDice extends FormApplication {
     // Apply effect modifiers
     const modifiedRollData = applyEffectModifiersToRoll(rollData, this.effectModifiers);
     
-    // Calculate total roll
+    // Get the skill value properly
+    let skillValue = 0;
+    if (typeof this.dataset.value === 'number' || !isNaN(Number(this.dataset.value))) {
+      // If dataset.value is already a number, use it directly
+      skillValue = Number(this.dataset.value);
+    } else {
+      // Otherwise try to get it from the actor's skills
+      skillValue = Number(this.actor.system.skills[this.dataset.value]?.value || 0);
+    }
+    
+    // Calculate total roll - use direct access for characteristic value
     const totalRoll =
-      Number(this.dataset.value) +
-      Number(characteristicValueSelected) +
+      skillValue +
+      Number(characteristics[this.characteristic]) +
       Number(this.victoryPointsSelected) +
       (this.wyrdPointUsed ? 3 : 0) +
       Number(this.extraModifiers) +
       (modifiedRollData.modifier || 0);
+
+    console.log("Total Roll Calculation:", {
+      skillValue,
+      characteristic: this.characteristic,
+      characteristicValue: Number(characteristics[this.characteristic]),
+      victoryPoints: Number(this.victoryPointsSelected),
+      wyrdPoints: this.wyrdPointUsed ? 3 : 0,
+      extraModifiers: Number(this.extraModifiers),
+      effectModifier: modifiedRollData.modifier || 0,
+      totalRoll
+    });
 
     // Get extra VP cost from effects
     const extraVPCost = calculateExtraVPCost(rollData, this.actor);
@@ -378,8 +399,8 @@ export default class RollDice extends FormApplication {
       skillValue = Number(this.actor.system.skills[this.dataset.value]?.value || 0);
     }
     
-    // Get the characteristic value
-    let characteristicValue = Number(this.actor.system.characteristics[this.characteristic]?.value || 0);
+    // Get the characteristic value - in the Fading Suns system, characteristics are direct values
+    const characteristicValue = Number(this.actor.system.characteristics[this.characteristic] || 0);
     
     // Calculate the total
     const total = 
@@ -393,6 +414,7 @@ export default class RollDice extends FormApplication {
     console.log("Roll calculation:", {
       skillValue,
       characteristicValue,
+      characteristic: this.characteristic,
       victoryPoints: modifiedRollData.victoryPoints || 0,
       wyrdPoints: modifiedRollData.wyrdPoints || 0,
       extraModifiers: modifiedRollData.extraModifiers || 0,
@@ -722,7 +744,7 @@ export default class RollDice extends FormApplication {
 
     // For defense rolls, we need to compare against the attack roll
     if (this.isDefense && this.attackTotal) {
-      // Calculate the correct total for defense comparison
+      // Get the skill value
       let skillValue = 0;
       if (typeof this.dataset.value === 'number' || !isNaN(Number(this.dataset.value))) {
         skillValue = Number(this.dataset.value); // Direct value (defense rolls)
@@ -730,7 +752,8 @@ export default class RollDice extends FormApplication {
         skillValue = Number(this.actor.system.skills[this.dataset.value]?.value || 0); // Look up skill
       }
       
-      const characteristicValue = Number(this.actor.system.characteristics[this.characteristic]?.value || 0);
+      // Characteristic is a direct value in the Fading Suns system
+      const characteristicValue = Number(this.actor.system.characteristics[this.characteristic] || 0);
       const modifierValue = (this.effectModifiers?.modifier || 0);
       const vpValue = Number(this.victoryPointsSelected || 0);
       const wyrdValue = this.wyrdPointUsed ? 3 : 0;
@@ -740,7 +763,8 @@ export default class RollDice extends FormApplication {
       
       console.log("Defense calculation:", { 
         skillValue, 
-        characteristicValue, 
+        characteristicValue,
+        characteristic: this.characteristic,
         modifierValue, 
         vpValue, 
         wyrdValue, 
