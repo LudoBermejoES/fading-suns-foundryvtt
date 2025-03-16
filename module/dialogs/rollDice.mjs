@@ -368,14 +368,37 @@ export default class RollDice extends FormApplication {
     // Apply effect modifiers to the roll data
     const modifiedRollData = applyEffectModifiersToRoll(rollData, this.effectModifiers);
     
+    // Get the skill value (either directly from dataset value or from actor's skills)
+    let skillValue = 0;
+    if (typeof this.dataset.value === 'number' || !isNaN(Number(this.dataset.value))) {
+      // If dataset.value is already a number, use it directly (defense rolls case)
+      skillValue = Number(this.dataset.value);
+    } else {
+      // Otherwise try to get it from the actor's skills (normal rolls case)
+      skillValue = Number(this.actor.system.skills[this.dataset.value]?.value || 0);
+    }
+    
+    // Get the characteristic value
+    let characteristicValue = Number(this.actor.system.characteristics[this.characteristic]?.value || 0);
+    
     // Calculate the total
-    const total =
-      Number(this.actor.system.skills[this.dataset.value]?.value || 0) +
-      Number(this.actor.system.characteristics[this.characteristic]?.value || 0) +
+    const total = 
+      skillValue +
+      characteristicValue +
       (modifiedRollData.victoryPoints || 0) +
       (modifiedRollData.wyrdPoints || 0) +
       (modifiedRollData.extraModifiers || 0) +
       (modifiedRollData.modifier || 0);
+
+    console.log("Roll calculation:", {
+      skillValue,
+      characteristicValue,
+      victoryPoints: modifiedRollData.victoryPoints || 0,
+      wyrdPoints: modifiedRollData.wyrdPoints || 0,
+      extraModifiers: modifiedRollData.extraModifiers || 0,
+      effectModifier: modifiedRollData.modifier || 0,
+      total
+    });
 
     // Process the roll result
     const result = processRollResult({ total }, dice);
@@ -671,6 +694,83 @@ export default class RollDice extends FormApplication {
       await this.actor.update({ system: this.actor.system });
     }
 
+    // For defense rolls, we need to compare against the attack roll
+    if (this.isDefense && this.attackTotal) {
+      // Calculate the correct total for defense comparison
+      let skillValue = 0;
+      if (typeof this.dataset.value === 'number' || !isNaN(Number(this.dataset.value))) {
+        skillValue = Number(this.dataset.value); // Direct value (defense rolls)
+      } else {
+        skillValue = Number(this.actor.system.skills[this.dataset.value]?.value || 0); // Look up skill
+      }
+      
+      const characteristicValue = Number(this.actor.system.characteristics[this.characteristic]?.value || 0);
+      const modifierValue = (this.effectModifiers?.modifier || 0);
+      const vpValue = Number(this.victoryPointsSelected || 0);
+      const wyrdValue = this.wyrdPointUsed ? 3 : 0;
+      const extraModValue = Number(this.extraModifiers || 0);
+      
+      const calculatedTotal = skillValue + characteristicValue + modifierValue + vpValue + wyrdValue + extraModValue;
+      
+      console.log("Defense calculation:", { 
+        skillValue, 
+        characteristicValue, 
+        modifierValue, 
+        vpValue, 
+        wyrdValue, 
+        extraModValue, 
+        calculatedTotal,
+        attackTotal: this.attackTotal 
+      });
+      
+      const defenseResult = calculatedTotal >= this.attackTotal;
+      
+      // Update the success/failure message for defense rolls
+      if (defenseResult) {
+        message = game.i18n.format("FADING_SUNS.messages.DEFENSE_SUCCESS");
+        result = game.i18n.format("FADING_SUNS.messages.SUCCESS");
+        success = true;
+      } else {
+        message = game.i18n.format("FADING_SUNS.messages.DEFENSE_FAILURE");
+        result = game.i18n.format("FADING_SUNS.messages.FAILURE");
+        success = false;
+      }
+      
+      // Add a specific message for the defense type
+      const defenseType = this.dataset.translated;
+      successMessage = game.i18n.format("FADING_SUNS.messages.DEFENSE_ROLL", { 
+        type: defenseType,
+        total: calculatedTotal,
+        attackTotal: this.attackTotal,
+        result: defenseResult ? game.i18n.localize("FADING_SUNS.messages.SUCCESS") : game.i18n.localize("FADING_SUNS.messages.FAILURE")
+      });
+      
+      // Use the calculated total for the defense result
+      if (this.messageId) {
+        // Find the original message
+        const originalMessage = game.messages.get(this.messageId);
+        if (originalMessage) {
+          // Add a defense result note to the original message
+          const defenseResultHtml = `
+            <div class="defense-result ${defenseResult ? 'success' : 'failure'}">
+              <i class="fas fa-${defenseResult ? 'check' : 'times'}"></i>
+              ${this.actor.name} ${defenseResult ? game.i18n.localize("FADING_SUNS.messages.DEFENDED_SUCCESSFULLY") : game.i18n.localize("FADING_SUNS.messages.FAILED_TO_DEFEND")}
+              (${this.dataset.translated}: ${calculatedTotal} vs ${this.attackTotal})
+            </div>
+          `;
+          
+          // Get the message content
+          let content = originalMessage.content;
+          
+          // Add the defense result note before the closing div of defense-options
+          content = content.replace('</div>\n      {{/if}}', `${defenseResultHtml}</div>\n      {{/if}}`);
+          
+          // Update the message
+          await originalMessage.update({ content });
+        }
+      }
+    }
+
     // Determine if this is an attack and what type
     let isAttack = false;
     let isRangedAttack = false;
@@ -714,6 +814,16 @@ export default class RollDice extends FormApplication {
       }
     }
 
+    // For defense rolls, make sure we use the correctly calculated total
+    let displayTotal = total;
+    let defenseSuccess = false;
+    
+    if (this.isDefense && this.attackTotal) {
+      // Use the correctly calculated total from the defense calculation code above
+      displayTotal = calculatedTotal;
+      defenseSuccess = defenseResult; 
+    }
+
     // Add attack information to template data
     const templateData = {
       dice,
@@ -727,7 +837,7 @@ export default class RollDice extends FormApplication {
       ),
       successMessage,
       resistanceMessage,
-      total: totalRoll,
+      total: displayTotal, // Use the corrected total for display
       actorId: this.actor.id,
       messageId: randomID(),
       targetId: this.target?.id,
@@ -739,7 +849,7 @@ export default class RollDice extends FormApplication {
       isSocialMentalAttack,
       isDefense: this.isDefense,
       attackTotal: this.attackTotal,
-      defenseSuccess: this.isDefense && success,
+      defenseSuccess: defenseSuccess, // Use the correct success value
       attackerId: this.attackerId,
       originalMessageId: this.messageId
     };
@@ -783,56 +893,6 @@ export default class RollDice extends FormApplication {
         }
       } else {
         this._showDamageMessage({ bank, vp, damage: this.damage });
-      }
-    }
-
-    // For defense rolls, we need to compare against the attack roll
-    if (this.isDefense && this.attackTotal) {
-      const defenseResult = totalRoll >= this.attackTotal;
-      
-      // Update the success/failure message for defense rolls
-      if (defenseResult) {
-        message = game.i18n.format("FADING_SUNS.messages.DEFENSE_SUCCESS");
-        result = game.i18n.format("FADING_SUNS.messages.SUCCESS");
-        success = true;
-      } else {
-        message = game.i18n.format("FADING_SUNS.messages.DEFENSE_FAILURE");
-        result = game.i18n.format("FADING_SUNS.messages.FAILURE");
-        success = false;
-      }
-      
-      // Add a specific message for the defense type
-      const defenseType = this.dataset.translated;
-      successMessage = game.i18n.format("FADING_SUNS.messages.DEFENSE_ROLL", { 
-        type: defenseType,
-        total: totalRoll,
-        attackTotal: this.attackTotal,
-        result: defenseResult ? game.i18n.localize("FADING_SUNS.messages.SUCCESS") : game.i18n.localize("FADING_SUNS.messages.FAILURE")
-      });
-    }
-
-    // For defense rolls, also update the original attack message to show the defense result
-    if (this.isDefense && this.messageId) {
-      // Find the original message
-      const originalMessage = game.messages.get(this.messageId);
-      if (originalMessage) {
-        // Add a defense result note to the original message
-        const defenseResultHtml = `
-          <div class="defense-result ${success ? 'success' : 'failure'}">
-            <i class="fas fa-${success ? 'check' : 'times'}"></i>
-            ${this.actor.name} ${success ? game.i18n.localize("FADING_SUNS.messages.DEFENDED_SUCCESSFULLY") : game.i18n.localize("FADING_SUNS.messages.FAILED_TO_DEFEND")}
-            (${this.dataset.translated}: ${totalRoll} vs ${this.attackTotal})
-          </div>
-        `;
-        
-        // Get the message content
-        let content = originalMessage.content;
-        
-        // Add the defense result note before the closing div of defense-options
-        content = content.replace('</div>\n      {{/if}}', `${defenseResultHtml}</div>\n      {{/if}}`);
-        
-        // Update the message
-        await originalMessage.update({ content });
       }
     }
 
