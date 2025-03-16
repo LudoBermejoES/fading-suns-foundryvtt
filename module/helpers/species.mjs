@@ -29,13 +29,13 @@ export const SPECIES_DATA = {
  */
 export function calculateVitality(actor) {
   const data = actor.system;
-  const speciesName = data.species?.value;
+  const speciesName = data.specie;
   const species = SPECIES_DATA[speciesName] || { size: 5 }; // Default to human if species not found
   
   // Get the necessary attribute values
   const constitution = data.characteristics?.end || 0;
   const will = data.characteristics?.wits || 0;
-  const faith = data.characteristics?.pas || 0;
+  const faith = data.characteristics?.fth || 0;
   const level = data.level?.value || 0;
   
   // Calculate vitality
@@ -69,10 +69,10 @@ export function getSpeciesSpeed(speciesName) {
  * @return {Boolean} True if any updates were made
  */
 export function updateActorSpeciesAttributes(actor) {
-  if (!actor || actor.type !== "character") return false;
+  if (!actor || actor.type !== "Character") return false;
   
   const data = actor.system;
-  const speciesName = data.species?.value;
+  const speciesName = data.specie;
   if (!speciesName) return false;
   
   let needsUpdate = false;

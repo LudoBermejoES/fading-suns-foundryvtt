@@ -396,7 +396,7 @@ export class FadingSunsActorSheet extends api.HandlebarsApplicationMixin(
     super._onRender?.(context, options);
     
     // Update species-based attributes when the sheet is opened
-    if (options.renderContext === "open") {
+    if (options.isFirstRender) {
       updateActorSpeciesAttributes(this.actor);
     }
     

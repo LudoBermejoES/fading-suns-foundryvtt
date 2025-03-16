@@ -32,10 +32,10 @@ export class FadingSunsActor extends Actor {
   prepareDerivedData() {
     super.prepareDerivedData?.();
     
-    if (this.type !== "character") return;
+    if (this.type !== "Character") return;
     
     const system = this.system;
-    const speciesName = system.species?.value;
+    const speciesName = system.specie;
     
     // Set species-based attributes if species is defined
     if (speciesName) {
