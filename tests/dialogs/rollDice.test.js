@@ -4,6 +4,7 @@
 
 import RollDice from '../../module/dialogs/rollDice.mjs';
 import * as CombatHelpers from '../../module/helpers/combat.mjs';
+import { calculateTargetResistance } from '../../module/helpers/rollCalculation.mjs';
 
 // Mock the game object
 global.game = {
@@ -54,7 +55,8 @@ jest.mock('../../module/helpers/combat.mjs', () => ({
 
 describe('RollDice', () => {
   let mockActor;
-  let rollDialog;
+  let mockDataset;
+  let rollDiceInstance;
 
   beforeEach(() => {
     // Reset mocks
@@ -62,55 +64,95 @@ describe('RollDice', () => {
     
     // Setup mock actor
     mockActor = {
-      items: {
-        get: jest.fn(),
-        filter: jest.fn().mockReturnValue([])
-      },
+      id: 'testActor1',
+      name: 'Test Actor',
       system: {
         characteristics: {
-          str: 3,
-          dex: 2,
-          end: 1,
-          wits: 4,
-          per: 2,
-          tech: 3,
-          faith: 1,
-          will: 2,
-          ext: 0
+          str: { value: 3 },
+          dex: { value: 4 },
+          end: { value: 3 },
+          int: { value: 5 },
+          wits: { value: 4 },
+          per: { value: 3 },
+          tec: { value: 2 },
+          pre: { value: 4 },
+          pas: { value: 3 },
+          fth: { value: 2 },
+          ego: { value: 3 }
+        },
+        skills: {
+          Fight: { value: 3 },
+          Shoot: { value: 2 },
+          Athletics: { value: 4 }
+        },
+        resistances: {
+          corporal: { value: 5 },
+          mental: { value: 4 },
+          social: { value: 3 }
         },
         bank: {
-          victoryPoints: 3,
-          wyrdPoints: 2
-        }
-      }
+          victoryPoints: 10,
+          wyrdPoints: 5,
+          maxBankPoints: 20
+        },
+        cache: 0
+      },
+      items: {
+        filter: jest.fn(() => []),
+        get: jest.fn(),
+      },
+      effects: {
+        filter: jest.fn(() => [])
+      },
+      update: jest.fn().mockResolvedValue(true),
+      allApplicableEffects: jest.fn(() => []),
     };
     
-    // Create basic dataset
-    const dataset = {
-      characteristic: 'str',
-      skill: 'Fight',
-      modifier: 0,
-      value: 3,
+    // Mock dataset for roll
+    mockDataset = {
       label: 'Fight',
-      translated: 'Fighting'
+      value: 'Fight',
+      translated: 'Pelear',
+      characteristic: 'str'
     };
     
     // Create roll dialog
-    rollDialog = new RollDice(mockActor, dataset);
+    rollDiceInstance = new RollDice(mockActor, mockDataset);
     
     // Mock FormApplication methods
-    rollDialog.render = jest.fn();
-    rollDialog.close = jest.fn();
+    rollDiceInstance.render = jest.fn();
+    rollDiceInstance.close = jest.fn();
+    
+    // Mock the _calculateRoll method to return predictable values
+    rollDiceInstance._calculateRoll = jest.fn().mockResolvedValue({
+      myRol: { total: 8 },
+      total: 10,
+      success: true,
+      critical: false,
+      totalFailure: false,
+      failure: false,
+      dice: 15,
+      message: ''
+    });
+    
+    // Mock getBloodBackground method
+    rollDiceInstance.getBloodBackground = jest.fn(() => 'blood-1');
+    
+    // Mock _getMessage method
+    rollDiceInstance._getMessage = jest.fn(() => 'Success!');
+    
+    // Mock _showDamageMessage method
+    rollDiceInstance._showDamageMessage = jest.fn();
   });
 
   describe('constructor', () => {
     it('should initialize with default values', () => {
-      expect(rollDialog.actor).toBe(mockActor);
-      expect(rollDialog.characteristic).toBe('str');
-      expect(rollDialog.resistance).toBe('Unknown');
-      expect(rollDialog.victoryPointsSelected).toBe(0);
-      expect(rollDialog.wyrdPointUsed).toBe(false);
-      expect(rollDialog.extraModifiers).toBe(0);
+      expect(rollDiceInstance.actor).toBe(mockActor);
+      expect(rollDiceInstance.characteristic).toBe('str');
+      expect(rollDiceInstance.resistance).toBe('Unknown');
+      expect(rollDiceInstance.victoryPointsSelected).toBe(0);
+      expect(rollDiceInstance.wyrdPointUsed).toBe(false);
+      expect(rollDiceInstance.extraModifiers).toBe(0);
     });
     
     it('should initialize with weapon and parse attack properties', () => {
@@ -157,7 +199,7 @@ describe('RollDice', () => {
       const originalActivateListeners = FormApplication.prototype.activateListeners;
       FormApplication.prototype.activateListeners = jest.fn();
       
-      rollDialog.activateListeners(html);
+      rollDiceInstance.activateListeners(html);
       
       // Restore the original method
       FormApplication.prototype.activateListeners = originalActivateListeners;
@@ -176,13 +218,13 @@ describe('RollDice', () => {
   describe('getCalculatedData', () => {
     it('should return calculated data with correct values', () => {
       // Set some values for testing
-      rollDialog.characteristic = 'dex';
-      rollDialog.resistance = 'Hard';
-      rollDialog.victoryPointsSelected = 2;
-      rollDialog.wyrdPointUsed = true;
-      rollDialog.extraModifiers = 1;
+      rollDiceInstance.characteristic = 'dex';
+      rollDiceInstance.resistance = 'Hard';
+      rollDiceInstance.victoryPointsSelected = 2;
+      rollDiceInstance.wyrdPointUsed = true;
+      rollDiceInstance.extraModifiers = 1;
       
-      const data = rollDialog.getCalculatedData();
+      const data = rollDiceInstance.getCalculatedData();
       
       // Check calculated values
       expect(data.characteristicValueSelected).toBe(2); // dex value from mock actor
@@ -254,31 +296,11 @@ describe('RollDice', () => {
         }
       };
       
-      // Add update method to mockActor
-      mockActor.update = jest.fn().mockResolvedValue(true);
-      
-      // Set up roll dialog with specific values
-      rollDialog.characteristic = 'str';
-      rollDialog.resistance = 'Hard';
-      rollDialog.victoryPointsSelected = 1;
-      rollDialog.wyrdPointUsed = false;
-      
-      // Mock the _calculateRoll method to avoid actual dice rolling
-      rollDialog._calculateRoll = jest.fn().mockResolvedValue({
-        myRol: "3d6",
-        total: 10,
-        success: true,
-        critical: false,
-        totalFailure: false,
-        failure: false,
-        dice: 10
-      });
-      
       // Call the method
-      await rollDialog._onClickRollDice(event);
+      await rollDiceInstance._onClickRollDice(event);
       
       // Check that ChatMessage.create was called
-      expect(ChatMessage.create).toHaveBeenCalled();
+      expect(global.ChatMessage.create).toHaveBeenCalled();
       
       // Check that actor.update was called
       expect(mockActor.update).toHaveBeenCalled();
@@ -515,20 +537,6 @@ describe('RollDice', () => {
         }
       };
       
-      // Add update method to mockActor
-      mockActor.update = jest.fn().mockResolvedValue(true);
-      
-      // Mock the _calculateRoll method to avoid actual dice rolling
-      weaponRollDialog._calculateRoll = jest.fn().mockResolvedValue({
-        myRol: "3d6",
-        total: 10,
-        success: true,
-        critical: false,
-        totalFailure: false,
-        failure: false,
-        dice: 10
-      });
-      
       // Call the method
       await weaponRollDialog._onClickRollDice(event);
       
@@ -539,7 +547,7 @@ describe('RollDice', () => {
       const templateData = global.renderTemplate.mock.calls[0][1];
       
       // Verify that the chat message includes information about the roll
-      expect(ChatMessage.create).toHaveBeenCalled();
+      expect(global.ChatMessage.create).toHaveBeenCalled();
     });
 
     it('should integrate coverage with attack properties and armor', () => {
@@ -659,6 +667,134 @@ describe('RollDice', () => {
       expect(data.isWeapon).toBe(false);
       // numericResistance should not be set for non-weapon rolls
       expect(data.numericResistance).toBeUndefined();
+    });
+  });
+
+  describe('Victory Points Calculation', () => {
+    it('should calculate vpNeededToSucceed when roll fails but not critically', async () => {
+      // Setup a failed roll but not a critical failure
+      rollDiceInstance._calculateRoll = jest.fn().mockResolvedValue({
+        myRol: { total: 8 },
+        total: 7, // Low total
+        success: false,
+        critical: false,
+        totalFailure: false,
+        failure: true, // It's a failure
+        dice: 10, // Dice value
+        message: ''
+      });
+      
+      // Call the roll method
+      await rollDiceInstance._onClickRollDice({
+        target: { dataset: { type: 'normal' } }
+      });
+      
+      // The VP needed should be dice - total = 10 - 7 = 3
+      expect(global.ChatMessage.create).toHaveBeenCalled();
+      const templateData = global.renderTemplate.mock.calls[0][1];
+      expect(templateData.vpNeededToSucceed).toBe(3);
+      expect(templateData.canSpendVPToSucceed).toBe(true);
+    });
+    
+    it('should not offer VP spending on critical failure', async () => {
+      // Setup a critical failure
+      rollDiceInstance._calculateRoll = jest.fn().mockResolvedValue({
+        myRol: { total: 1 },
+        total: 1,
+        success: false,
+        critical: false,
+        totalFailure: true, // Critical failure
+        failure: true,
+        dice: 10,
+        message: ''
+      });
+      
+      // Call the roll method
+      await rollDiceInstance._onClickRollDice({
+        target: { dataset: { type: 'normal' } }
+      });
+      
+      // Should not offer VP spending
+      const templateData = global.renderTemplate.mock.calls[0][1];
+      expect(templateData.canSpendVPToSucceed).toBe(false);
+    });
+    
+    it('should not offer VP spending if actor does not have enough VP', async () => {
+      // Setup a failed roll
+      rollDiceInstance._calculateRoll = jest.fn().mockResolvedValue({
+        myRol: { total: 8 },
+        total: 5,
+        success: false,
+        critical: false, 
+        totalFailure: false,
+        failure: true,
+        dice: 20, // Dice roll much higher than total
+        message: ''
+      });
+      
+      // Actor only has 10 VP but needs 15
+      mockActor.system.bank.victoryPoints = 10;
+      
+      // Call the roll method
+      await rollDiceInstance._onClickRollDice({
+        target: { dataset: { type: 'normal' } }
+      });
+      
+      // VP needed would be 15 (dice - total = 20 - 5)
+      const templateData = global.renderTemplate.mock.calls[0][1];
+      expect(templateData.vpNeededToSucceed).toBe(15);
+      expect(templateData.canSpendVPToSucceed).toBe(false); // Not enough VP
+    });
+    
+    it('should pass correct data to template for successful roll', async () => {
+      // Setup a successful roll
+      rollDiceInstance._calculateRoll = jest.fn().mockResolvedValue({
+        myRol: { total: 12 },
+        total: 12,
+        success: true,
+        critical: false,
+        totalFailure: false,
+        failure: false,
+        dice: 8,
+        message: ''
+      });
+      
+      // Call the roll method
+      await rollDiceInstance._onClickRollDice({
+        target: { dataset: { type: 'normal' } }
+      });
+      
+      // Should not offer VP spending for success
+      const templateData = global.renderTemplate.mock.calls[0][1];
+      expect(templateData.canSpendVPToSucceed).toBe(false);
+      expect(templateData.success).toBe(undefined); // Not directly passed to template
+    });
+  });
+  
+  describe('Target Resistance Calculation', () => {
+    it('should calculate target resistance correctly', () => {
+      const target = {
+        system: {
+          resistances: {
+            corporal: { value: 5 }
+          }
+        },
+        items: {
+          filter: jest.fn(() => [])
+        }
+      };
+      
+      const attackData = {
+        attackProperties: ['piercing']
+      };
+      
+      const resistance = calculateTargetResistance(target, attackData, mockActor);
+      expect(resistance).toBeDefined();
+    });
+    
+    it('should handle missing target', () => {
+      const resistance = calculateTargetResistance(null, {}, mockActor);
+      expect(resistance).toBe(0);
     });
   });
 }); 
