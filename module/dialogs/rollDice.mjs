@@ -901,7 +901,9 @@ export default class RollDice extends FormApplication {
       attackTotal: this.attackTotal,
       defenseSuccess: defenseSuccess, // Use the correct success value
       attackerId: this.attackerId,
-      originalMessageId: this.messageId
+      originalMessageId: this.messageId,
+      canSpendVPToSucceed, // Add the possibility to spend VP to succeed
+      vpNeededToSucceed // Add the number of VP needed to succeed
     };
 
     const content = await renderTemplate(
