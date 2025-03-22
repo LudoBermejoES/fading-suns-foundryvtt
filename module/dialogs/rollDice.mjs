@@ -520,20 +520,15 @@ export default class RollDice extends FormApplication {
     return bloodBackground;
   }
 
-  async _calculateRoll(type, rollData) {
-    // Prepare roll data with effect modifiers
-    const preparedRollData = {
-      ...rollData,
-      characteristic: this.characteristic,
-      skill: this.dataset.value,
-      maneuver: this.maneuver,
-      isWeapon: this.isWeapon,
-      attackProperties: this.attackProperties,
-      rollType: type
-    };
-    
+  /**
+   * Checks if a roll should automatically fail due to effect modifiers
+   * @private
+   * @param {Object} effectModifiers - The effect modifiers to check
+   * @returns {Object|null} A failure result object if should fail, null otherwise
+   */
+  _checkAutoFailConditions(effectModifiers) {
     // Check if the actor cannot act due to effects
-    if (this.effectModifiers.cannotAct) {
+    if (effectModifiers.cannotAct) {
       return {
         myRol: null,
         total: 0,
@@ -547,7 +542,7 @@ export default class RollDice extends FormApplication {
     }
     
     // Check for auto-fail
-    if (this.effectModifiers.autoFail) {
+    if (effectModifiers.autoFail) {
       return {
         myRol: null,
         total: 0,
@@ -560,31 +555,97 @@ export default class RollDice extends FormApplication {
       };
     }
     
-    // Check for random target
-    if (this.effectModifiers.randomTarget) {
-      // TODO: Implement random target selection
-      ui.notifications.warn(game.i18n.localize("FADING_SUNS.Roll.RandomTarget"));
-    }
-    
+    return null;
+  }
+
+  /**
+   * Prepares roll data with all necessary parameters
+   * @private
+   * @param {Object} rollData - The base roll data
+   * @returns {Object} The prepared roll data
+   */
+  _prepareRollData(rollData) {
+    return {
+      ...rollData,
+      characteristic: this.characteristic,
+      skill: this.dataset.value,
+      maneuver: this.maneuver,
+      isWeapon: this.isWeapon,
+      attackProperties: this.attackProperties,
+      rollType: rollData.rollType
+    };
+  }
+
+  /**
+   * Determines the final roll type based on effects and requested type
+   * @private
+   * @param {Object} preparedRollData - The prepared roll data
+   * @param {string} requestedType - The type of roll requested by the user
+   * @returns {string} The final roll type to use
+   */
+  _determineFinalRollType(preparedRollData, requestedType) {
     // Determine roll type based on effect modifiers
     const effectRollType = determineRollType(preparedRollData, this.actor);
     
     // Use the effect-determined roll type if it's different from the requested type
-    const finalRollType = effectRollType !== "normal" ? effectRollType : type;
-    
-    if (finalRollType === "normal") {
-      return this._doSingleRoll(preparedRollData);
+    return effectRollType !== "normal" ? effectRollType : requestedType;
+  }
+
+  /**
+   * Handles special effects like random target
+   * @private
+   * @param {Object} effectModifiers - The effect modifiers to check
+   */
+  _handleSpecialEffects(effectModifiers) {
+    // Check for random target
+    if (effectModifiers.randomTarget) {
+      // TODO: Implement random target selection
+      ui.notifications.warn(game.i18n.localize("FADING_SUNS.Roll.RandomTarget"));
     }
+  }
 
-    const { roll1, roll2 } = await this._doDoubleRoll(preparedRollData);
-
+  /**
+   * Processes the result of an advantage/disadvantage roll
+   * @private
+   * @param {Object} roll1 - The first roll result
+   * @param {Object} roll2 - The second roll result
+   * @param {string} rollType - The type of roll (advantage/disadvantage)
+   * @returns {Object} The final roll result to use
+   */
+  _processAdvantageRoll(roll1, roll2, rollType) {
     const best = this._getBest(roll1, roll2);
 
-    if (finalRollType === "advantage") {
+    if (rollType === "advantage") {
       return best;
     }
 
     return best === roll1 ? roll2 : roll1;
+  }
+
+  async _calculateRoll(type, rollData) {
+    // Prepare roll data with all necessary parameters
+    const preparedRollData = this._prepareRollData(rollData);
+    
+    // Check auto-fail conditions
+    const autoFailResult = this._checkAutoFailConditions(this.effectModifiers);
+    if (autoFailResult) return autoFailResult;
+    
+    // Handle special effects (like random target)
+    this._handleSpecialEffects(this.effectModifiers);
+    
+    // Determine final roll type
+    const finalRollType = this._determineFinalRollType(preparedRollData, type);
+    
+    // Perform the appropriate roll based on the final roll type
+    if (finalRollType === "normal") {
+      return this._doSingleRoll(preparedRollData);
+    }
+
+    // For advantage/disadvantage, perform a double roll
+    const { roll1, roll2 } = await this._doDoubleRoll(preparedRollData);
+    
+    // Process the advantage/disadvantage roll
+    return this._processAdvantageRoll(roll1, roll2, finalRollType);
   }
 
   async _onClickRollDice(event, target) {
