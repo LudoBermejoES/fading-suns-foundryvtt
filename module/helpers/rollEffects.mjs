@@ -5,6 +5,17 @@
 import effectsList from '../activeeffects/activeEffects.js';
 
 /**
+ * Helper function to safely check if a string includes a substring
+ * @param {any} value - The value to check
+ * @param {string} substring - The substring to look for
+ * @returns {boolean} Whether the value includes the substring
+ */
+function safeIncludes(value, substring) {
+  // Check if value is a string before using includes
+  return typeof value === 'string' && value.includes(substring);
+}
+
+/**
  * Effect modifier types
  * @enum {string}
  */
@@ -325,12 +336,6 @@ export function getEffectModifiers(actor, rollData, disabledEffectIds = []) {
  * @returns {boolean} Whether the roll matches the type
  */
 function rollMatchesType(rollData, type) {
-  // Helper function to safely check if a string includes a substring
-  const safeIncludes = (value, substring) => {
-    // Check if value is a string before using includes
-    return typeof value === 'string' && value.includes(substring);
-  };
-
   // Helper function to safely check if a maneuver includes a substring
   const maneuverIncludes = (substring) => {
     return rollData.maneuver && 
@@ -493,7 +498,7 @@ function rollIsPhysical(rollData) {
   
   const physicalCharacteristics = ["str", "dex", "end"];
   
-  return physicalSkills.some(skill => rollData.skill?.includes(skill)) ||
+  return physicalSkills.some(skill => safeIncludes(rollData.skill, skill)) ||
          physicalCharacteristics.includes(rollData.characteristic) ||
          rollData.isWeapon;
 }
@@ -510,7 +515,7 @@ function rollIsMental(rollData) {
   
   const mentalCharacteristics = ["int", "wit", "per"];
   
-  return mentalSkills.some(skill => rollData.skill?.includes(skill)) ||
+  return mentalSkills.some(skill => safeIncludes(rollData.skill, skill)) ||
          mentalCharacteristics.includes(rollData.characteristic);
 }
 
@@ -526,7 +531,7 @@ function rollIsSocial(rollData) {
   
   const socialCharacteristics = ["pre", "pas", "ext"];
   
-  return socialSkills.some(skill => rollData.skill?.includes(skill)) ||
+  return socialSkills.some(skill => safeIncludes(rollData.skill, skill)) ||
          socialCharacteristics.includes(rollData.characteristic);
 }
 
