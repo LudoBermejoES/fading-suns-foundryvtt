@@ -325,44 +325,59 @@ export function getEffectModifiers(actor, rollData, disabledEffectIds = []) {
  * @returns {boolean} Whether the roll matches the type
  */
 function rollMatchesType(rollData, type) {
+  // Helper function to safely check if a string includes a substring
+  const safeIncludes = (value, substring) => {
+    // Check if value is a string before using includes
+    return typeof value === 'string' && value.includes(substring);
+  };
+
+  // Helper function to safely check if a maneuver includes a substring
+  const maneuverIncludes = (substring) => {
+    return rollData.maneuver && 
+           typeof rollData.maneuver === 'object' && 
+           rollData.maneuver.name && 
+           typeof rollData.maneuver.name === 'string' && 
+           rollData.maneuver.name.includes(substring);
+  };
+
   switch (type) {
     case "movement":
       // Check if the roll involves movement
-      return rollData.skill?.includes("athletics") || 
-             rollData.skill?.includes("acrobatics") ||
-             rollData.maneuver?.includes("dodge");
+      return safeIncludes(rollData.skill, "athletics") || 
+             safeIncludes(rollData.skill, "acrobatics") ||
+             maneuverIncludes("dodge");
     
     case "hearing":
       // Check if the roll involves hearing
-      return rollData.skill?.includes("perception") && 
+      return safeIncludes(rollData.skill, "perception") && 
              rollData.characteristic === "per";
     
     case "influence":
       // Check if the roll involves social influence
-      return rollData.skill?.includes("charm") || 
-             rollData.skill?.includes("leadership") || 
-             rollData.skill?.includes("knavery");
+      return safeIncludes(rollData.skill, "charm") || 
+             safeIncludes(rollData.skill, "leadership") || 
+             safeIncludes(rollData.skill, "knavery");
     
     case "persuasion":
       // Check if the roll involves persuasion
-      return rollData.skill?.includes("charm") && 
-             rollData.maneuver?.includes("persuade");
+      return safeIncludes(rollData.skill, "charm") && 
+             maneuverIncludes("persuade");
     
     case "coercion":
       // Check if the roll involves coercion
-      return rollData.skill?.includes("leadership") && 
-             rollData.maneuver?.includes("coerce");
+      return safeIncludes(rollData.skill, "leadership") && 
+             maneuverIncludes("coerce");
     
     case "offensive":
       // Check if the roll is an offensive action
       return rollData.isWeapon || 
-             rollData.skill?.includes("fight") || 
-             rollData.skill?.includes("shoot");
+             safeIncludes(rollData.skill, "fight") || 
+             safeIncludes(rollData.skill, "shoot");
     
     case "defensive":
       // Check if the roll is a defensive action
-      return rollData.maneuver?.includes("dodge") || 
-             rollData.maneuver?.includes("parry");
+      return maneuverIncludes("dodge") || 
+             maneuverIncludes("parry");
     
     case "wyrd":
       // Check if the roll involves Wyrd
@@ -370,10 +385,10 @@ function rollMatchesType(rollData, type) {
     
     case "social":
       // Check if the roll involves social skills
-      return rollData.skill?.includes("charm") || 
-             rollData.skill?.includes("leadership") || 
-             rollData.skill?.includes("knavery") || 
-             rollData.skill?.includes("etiquette");
+      return safeIncludes(rollData.skill, "charm") || 
+             safeIncludes(rollData.skill, "leadership") || 
+             safeIncludes(rollData.skill, "knavery") || 
+             safeIncludes(rollData.skill, "etiquette");
     
     case "other":
       // Any roll that doesn't match the above types
