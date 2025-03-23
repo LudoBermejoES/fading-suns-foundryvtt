@@ -188,4 +188,87 @@ async function onDropFolder(event, data) {
 export function getEffect(target) {
   const li = target.closest(".effect");
   return this.item.effects.get(li?.dataset?.effectId);
+}
+
+/**
+ * Register drag-drop handlers for all sheets
+ */
+export function registerSheets() {
+  // Register drag-drop handlers for actor sheets
+  Hooks.on("renderActorSheet", (app, html, data) => {
+    const dragDropOptions = {
+      dragSelector: ".item-list .item",
+      dropSelector: ".sheet-body",
+      permissions: { dragStart: true, drop: true },
+      callbacks: {
+        dragStart: (event) => {
+          const dataset = event.currentTarget.dataset;
+          const item = app.actor.items.get(dataset.itemId);
+          event.dataTransfer.setData(
+            "text/plain",
+            JSON.stringify({
+              type: "Item",
+              uuid: item.uuid,
+              data: item
+            })
+          );
+        },
+        drop: async (event) => {
+          const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+          if (data.type === "Item") {
+            // Handle item drops
+            let item = null;
+            if (data.uuid) {
+              item = await fromUuid(data.uuid);
+            } else if (data.data) {
+              item = data.data;
+            }
+            if (item) {
+              return app.actor.createEmbeddedDocuments("Item", [item]);
+            }
+          } else if (data.type === "ActiveEffect") {
+            // Handle effect drops
+            const effect = getEffect(event.target);
+            if (effect) {
+              return app.actor.createEmbeddedDocuments("ActiveEffect", [effect]);
+            }
+          }
+        }
+      }
+    };
+    createDragDropHandlers(app, dragDropOptions);
+  });
+
+  // Register drag-drop handlers for item sheets
+  Hooks.on("renderItemSheet", (app, html, data) => {
+    const dragDropOptions = {
+      dragSelector: ".effect-list .effect",
+      dropSelector: ".sheet-body",
+      permissions: { dragStart: true, drop: true },
+      callbacks: {
+        dragStart: (event) => {
+          const dataset = event.currentTarget.dataset;
+          const effect = app.item.effects.get(dataset.effectId);
+          event.dataTransfer.setData(
+            "text/plain",
+            JSON.stringify({
+              type: "ActiveEffect",
+              uuid: effect.uuid,
+              data: effect
+            })
+          );
+        },
+        drop: async (event) => {
+          const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+          if (data.type === "ActiveEffect") {
+            const effect = getEffect(event.target);
+            if (effect) {
+              return app.item.createEmbeddedDocuments("ActiveEffect", [effect]);
+            }
+          }
+        }
+      }
+    };
+    createDragDropHandlers(app, dragDropOptions);
+  });
 } 
