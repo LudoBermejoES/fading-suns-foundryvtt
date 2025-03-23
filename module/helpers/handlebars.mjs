@@ -117,7 +117,6 @@ export const preloadHandlebarsTemplates = async function() {
     
     // Dialog templates
     "systems/fading-suns/templates/dialogs/roll.hbs",
-    "systems/fading-suns/templates/dialogs/damage.hbs",
     "systems/fading-suns/templates/dialogs/maneuver.hbs",
     "systems/fading-suns/templates/dialogs/predefined-effects.hbs",
     
