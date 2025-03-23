@@ -1,0 +1,98 @@
+# **Amenazas**
+
+Las siguientes amenazas se dividen en dos tipos principales:
+
+1. **Amenazas físicas**: Representan un peligro directo para la integridad física de cualquiera que se encuentre en el lugar o momento incorrecto.  
+2. **Amenazas sociales**: No te golpearán, pero podrían meterte en problemas de otras maneras.
+
+---
+
+## **Amenazas Físicas**
+
+### **Bandidos**  
+**Descripción**: Criminales profesionales con tatuajes, escarificaciones rituales o marcas legales. Engañan a sus víctimas hasta que es demasiado tarde.  
+**Vitalidad**: 10  
+
+#### **Campo**
+- **Acciones**:
+  - Cuchillada (Impacto 9 | 3 daños)  
+  - Disparar arco (Impacto 9 | 4 daños)  
+  - Engañar (Impacto 10 | El objetivo queda Engañado)  
+- **Resistencia**: Corporal 1 | Mental 0 | Espiritual 0  
+- **Equipo**: Cuchillos, arcos  
+
+#### **Ciudad**
+- **Acciones**:
+  - Cuchillada (Impacto 9 | 3 daños)  
+  - Disparar pistola (Impacto 9 | 5 daños)  
+  - Engañar (Impacto 10 | El objetivo queda Engañado)  
+  - Golpear con porra de choque (Impacto 9 | 6 daños + Descarga)  
+- **Resistencia**: Corporal 1 | Mental 0 | Espiritual 0  
+- **Equipo**: Armadura de cuero, cuchillos, porras de choque (el capitán además tiene una pistola)  
+
+#### **Estación Espacial**
+- **Acciones**:
+  - Disparar escopeta (Impacto 9 | 8/4/1 daños + Culata)  
+  - Engañar (Impacto 10 | El objetivo queda Engañado)  
+  - Golpear con porra de choque (Impacto 9 | 6 daños + Descarga)  
+- **Resistencia**: Corporal 2 | Mental 0 | Espiritual 0  
+- **Equipo**: Traje espacial, porra de choque, escopetas (pueden dañar el casco)  
+
+---
+
+### **Inquisidores**  
+**Descripción**: Vestidos con sotanas o capas con símbolos de llamas. Cruces de salto en la cara, pintadas con ceniza.  
+**Vitalidad**: 10  
+
+#### **Vasallo Vicario**
+- **Acciones**:
+  - Lanzar bomba incendiaria (Impacto 9 | 3(1) daños + Fuego)  
+  - Puñetazo (Impacto 9 | 2 daños)  
+- **Resistencia**: Corporal 1 | Mental 0 | Espiritual 0  
+- **Equipo**: Equipo incendiario, bastón con punta de alquitrán, botes de arcilla con alcohol o aceite  
+
+#### **Inquisidor Oficial**
+- **Acciones**:
+  - Disparar lanzallamas (Impacto 9 | 5(3) daños + Fuego)  
+  - Intimidar (Impacto 10 | El objetivo queda Intimidado)  
+  - Latigazo (Impacto 9 | 3 daños)  
+- **Resistencia**: Corporal 1 | Mental 0 | Espiritual 0  
+- **Equipo**: Látigo, lanzallamas, sotana ignífuga  
+
+---
+
+## **Amenazas Sociales**
+
+### **Cotillas de la Corte**  
+**Descripción**: Visten de forma llamativa y destacan en la multitud. Suelen ocultar su afiliación para obtener información.  
+**Vitalidad**: 10  
+
+- **Acciones**:
+  - Engañar (Impacto 10 | El objetivo queda Engañado)  
+  - Pedir (Impacto 9 | El objetivo queda Predispuesto)  
+- **Resistencia**: Corporal 0 | Mental 0 | Espiritual 1  
+- **Equipo**: Tinta y pluma, posible dispositivo de grabación, calderilla (2 fénix)  
+
+---
+
+### **Sacerdotes Entrometidos**  
+**Descripción**: Aparecen a la hora de comer y exigen hospitalidad o asistencia a sus sermones. Siempre consiguen información antes de marcharse.  
+**Vitalidad**: 10  
+
+- **Acciones**:
+  - Pedir (Impacto 9 | El objetivo queda Predispuesto)  
+  - Presionar (Impacto 10 | El objetivo queda Presionado)  
+- **Resistencia**: Corporal 0 | Mental 0 | Espiritual 0  
+- **Equipo**: Botella de vino, hidromiel o cerveza, cruz de salto, hierbas medicinales  
+
+---
+
+### **Vendedores**  
+**Descripción**: Llamativos y expertos en estafar a los ingenuos.  
+**Vitalidad**: 10  
+
+- **Acciones**:
+  - Engañar (Impacto 10 | El objetivo queda Engañado)  
+  - Pedir (Impacto 9 | El objetivo queda Predispuesto)  
+- **Resistencia**: Corporal 0 | Mental 0 | Espiritual 0  
+- **Equipo**: Mercancías diversas, chatarra de la Primera República con aspecto impresionante  
