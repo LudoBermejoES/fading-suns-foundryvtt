@@ -50,8 +50,13 @@ export const registerHandlebarsHelpers = () => {
    * @returns {string} Concatenated string
    */
   Handlebars.registerHelper("concat", function() {
-    const args = Array.prototype.slice.call(arguments, 0, -1);
-    return args.join('');
+    let outStr = '';
+    for (let arg in arguments) {
+      if (typeof arguments[arg] !== 'object') {
+        outStr += arguments[arg];
+      }
+    }
+    return outStr;
   });
 
   /**
@@ -78,4 +83,22 @@ export const registerHandlebarsHelpers = () => {
     }
     return result;
   });
+};
+
+/**
+ * Preload Handlebars templates.
+ * @return {Promise} Promise that resolves when templates are preloaded
+ */
+export const preloadHandlebarsTemplates = async function() {
+  return loadTemplates([
+    // Add paths to "modules/fading-suns/templates"
+    "systems/fading-suns/templates/actor/actor-sheet.hbs",
+    "systems/fading-suns/templates/actor/parts/actor-features.hbs",
+    "systems/fading-suns/templates/actor/parts/actor-items.hbs",
+    "systems/fading-suns/templates/actor/parts/actor-effects.hbs",
+    "systems/fading-suns/templates/item/item-sheet.hbs",
+    "systems/fading-suns/templates/chat/roll-result.hbs",
+    "systems/fading-suns/templates/dialogs/roll.hbs",
+    "systems/fading-suns/templates/dialogs/damage.hbs"
+  ]);
 }; 
