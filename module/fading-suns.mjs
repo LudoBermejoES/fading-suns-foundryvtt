@@ -1,4 +1,4 @@
-// Import document classes.
+// Import Document classes.
 import { FadingSunsActor } from "./documents/actor.mjs";
 import { FadingSunsItem } from "./documents/item.mjs";
 // Import sheet classes.
@@ -12,6 +12,12 @@ import { registerHandlebarsHelpers } from "./helpers/handlebars.mjs";
 import { registerHooks } from "./helpers/hooks.mjs";
 // Import macros
 import { rollItemMacro } from "./helpers/macros.mjs";
+import { getAllActiveEffects, getActiveEffectsWithPredicate, deactivateEffect } from "./activeeffects/activeEffects.js";
+import { getEffectModifiers, getEffectModifiersForActor, getEffectModifierFromObject } from "./helpers/rollEffects.mjs"
+import { calculateTargetResistance } from "./helpers/rollCalculation.mjs"
+import { preloadHandlebarsTemplates } from "./helpers/handlebars.mjs";
+import { registerSystemSettings } from "./helpers/settings.mjs";
+import * as dragDrop from "./helpers/drag-drop.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -34,7 +40,7 @@ globalThis.fadingSuns = {
 };
 
 Hooks.once("init", function () {
-  // Add custom cons6nts for configuration.
+  // Add custom constants for configuration.
   CONFIG.FADING_SUNS = FADING_SUNS;
 
   /**
@@ -91,6 +97,63 @@ Hooks.once("init", function () {
 
   });
 
+  // Register custom system settings
+  registerSystemSettings();
+
+  console.log(`Fading Suns | Initializing`);
+
+  // Register system settings
+  game.fadingsuns = {
+    FadingSunsActor,
+    documentTypes: {
+      Actor: {
+        character: {}
+      }
+    },
+    getAllActiveEffects,
+    getActiveEffectsWithPredicate,
+    deactivateEffect,
+    getEffectModifiers,
+    getEffectModifiersForActor,
+    getEffectModifierFromObject,
+    calculateTargetResistance,
+    rollItemMacro: rollItemMacro,
+    createNpcMacro: macros.createNpcMacro,
+    createAllNpcMacros: macros.createAllNpcMacros
+  };
+
+  // Register sheet application classes
+  dragDrop.registerSheets();
+
+  // Preload Handlebars templates.
+  return preloadHandlebarsTemplates();
+});
+
+/* -------------------------------------------- */
+/*  Ready Hook                                  */
+/* -------------------------------------------- */
+
+Hooks.once("ready", function () {
+  // Wait to register hook events until game is ready
+  registerHooks();
+
+  // Register macro helpers
+  CONFIG.Dice.terms["h"] = class HeroicDie extends Die {
+    constructor(termData) {
+      super({ faces: 6, number: 1, modifiers: [], ...termData });
+    }
+  };
+});
+
+/* -------------------------------------------- */
+/*  Hotbar Macros                               */
+/* -------------------------------------------- */
+
+Hooks.on("hotbarDrop", (bar, data, slot) => {
+  if (data.type === "Item") {
+    macros.createDocMacro(data, slot);
+    return false;
+  }
 });
 
 /* -------------------------------------------- */
