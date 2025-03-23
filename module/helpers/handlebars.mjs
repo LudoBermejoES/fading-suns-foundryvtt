@@ -91,14 +91,41 @@ export const registerHandlebarsHelpers = () => {
  */
 export const preloadHandlebarsTemplates = async function() {
   return loadTemplates([
-    // Add paths to "modules/fading-suns/templates"
-    "systems/fading-suns/templates/actor/actor-sheet.hbs",
-    "systems/fading-suns/templates/actor/parts/actor-features.hbs",
-    "systems/fading-suns/templates/actor/parts/actor-items.hbs",
-    "systems/fading-suns/templates/actor/parts/actor-effects.hbs",
-    "systems/fading-suns/templates/item/item-sheet.hbs",
-    "systems/fading-suns/templates/chat/roll-result.hbs",
+    // Actor templates
+    "systems/fading-suns/templates/actor/header.hbs",
+    "systems/fading-suns/templates/actor/features.hbs",
+    "systems/fading-suns/templates/actor/biography.hbs",
+    "systems/fading-suns/templates/actor/perks.hbs",
+    "systems/fading-suns/templates/actor/powers.hbs",
+    "systems/fading-suns/templates/actor/combat.hbs",
+    "systems/fading-suns/templates/actor/gear.hbs",
+    "systems/fading-suns/templates/actor/effects.hbs",
+    
+    // Item templates
+    "systems/fading-suns/templates/item/header.hbs",
+    "systems/fading-suns/templates/item/description.hbs",
+    "systems/fading-suns/templates/item/effects.hbs",
+    "systems/fading-suns/templates/item/maneuver.hbs",
+    "systems/fading-suns/templates/item/power.hbs",
+    "systems/fading-suns/templates/item/attribute-parts/gear.hbs",
+    "systems/fading-suns/templates/item/attribute-parts/armor.hbs",
+    "systems/fading-suns/templates/item/attribute-parts/feature.hbs",
+    "systems/fading-suns/templates/item/attribute-parts/generic.hbs",
+    "systems/fading-suns/templates/item/attribute-parts/firearmWeapon.hbs",
+    "systems/fading-suns/templates/item/attribute-parts/status.hbs",
+    "systems/fading-suns/templates/item/attribute-parts/meleeWeapon.hbs",
+    
+    // Dialog templates
     "systems/fading-suns/templates/dialogs/roll.hbs",
-    "systems/fading-suns/templates/dialogs/damage.hbs"
+    "systems/fading-suns/templates/dialogs/damage.hbs",
+    "systems/fading-suns/templates/dialogs/maneuver.hbs",
+    "systems/fading-suns/templates/dialogs/predefined-effects.hbs",
+    
+    // Chat templates
+    "systems/fading-suns/templates/chat/roll.hbs",
+    "systems/fading-suns/templates/chat/damage.hbs",
+    
+    // Generic templates
+    "templates/generic/tab-navigation.hbs"
   ]);
 }; 
