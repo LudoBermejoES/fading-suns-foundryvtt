@@ -94,7 +94,7 @@ export default class Maneuver extends FormApplication {
       this.close();
     });
 
-    html.find('label[name="roll-feature"').click((event) => {
+    html.find('button[name="roll-feature"').click((event) => {
       this._rollManeuver(event.currentTarget.dataset);
       this.close();
     });
