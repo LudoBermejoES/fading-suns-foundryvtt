@@ -11,13 +11,15 @@ import { registerHandlebarsHelpers } from "./helpers/handlebars.mjs";
 // Import hooks
 import { registerHooks } from "./helpers/hooks.mjs";
 // Import macros
-import { rollItemMacro } from "./helpers/macros.mjs";
+import * as macros from "./helpers/macros.mjs";
 import { getAllActiveEffects, getActiveEffectsWithPredicate, deactivateEffect } from "./activeeffects/activeEffects.js";
 import { getEffectModifiers, getEffectModifiersForActor, getEffectModifierFromObject } from "./helpers/rollEffects.mjs"
 import { calculateTargetResistance } from "./helpers/rollCalculation.mjs"
 import { preloadHandlebarsTemplates } from "./helpers/handlebars.mjs";
 import { registerSystemSettings } from "./helpers/settings.mjs";
 import * as dragDrop from "./helpers/drag-drop.mjs";
+
+console.log("Fading Suns module started loading");
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -35,9 +37,11 @@ globalThis.fadingSuns = {
     FadingSunsItemSheet,
   },
   utils: {
-    rollItemMacro,
+    rollItemMacro: macros.rollItemMacro,
   },
 };
+
+
 
 Hooks.once("init", function () {
   // Add custom constants for configuration.
@@ -79,8 +83,6 @@ Hooks.once("init", function () {
   // Register hooks
   registerHooks();
 
-  $();
-
   $(document).on('click', '*[data-action="moveToBank"]', function (evt, target) {
     const {
       vp,
@@ -117,7 +119,7 @@ Hooks.once("init", function () {
     getEffectModifiersForActor,
     getEffectModifierFromObject,
     calculateTargetResistance,
-    rollItemMacro: rollItemMacro,
+    rollItemMacro: macros.rollItemMacro,
     createNpcMacro: macros.createNpcMacro,
     createAllNpcMacros: macros.createAllNpcMacros
   };
@@ -136,7 +138,7 @@ Hooks.once("init", function () {
 Hooks.once("ready", function () {
   // Wait to register hook events until game is ready
   registerHooks();
-
+  
   // Register macro helpers
   CONFIG.Dice.terms["h"] = class HeroicDie extends Die {
     constructor(termData) {
