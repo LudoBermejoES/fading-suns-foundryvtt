@@ -15,7 +15,7 @@ import * as macros from "./helpers/macros.mjs";
 // Import effects
 import { EFFECT_TYPES } from "./activeeffects/activeEffects.js";
 import * as effectHelpers from "./helpers/effects.mjs";
-import { getEffectModifiers, getEffectModifiersForActor, getEffectModifierFromObject } from "./helpers/rollEffects.mjs"
+import { getEffectModifiers, applyEffectModifiersToRoll, applyEffectModifiersToResistance, formatActiveEffectsForDisplay } from "./helpers/rollEffects.mjs"
 import { calculateTargetResistance } from "./helpers/rollCalculation.mjs"
 import { preloadHandlebarsTemplates } from "./helpers/handlebars.mjs";
 import { registerSystemSettings } from "./helpers/settings.mjs";
@@ -122,8 +122,9 @@ Hooks.once("init", function () {
       return false;
     },
     getEffectModifiers,
-    getEffectModifiersForActor,
-    getEffectModifierFromObject,
+    applyEffectModifiersToRoll,
+    applyEffectModifiersToResistance,
+    formatActiveEffectsForDisplay,
     calculateTargetResistance,
     rollItemMacro: macros.rollItemMacro,
     createNpcMacro: macros.createNpcMacro,
