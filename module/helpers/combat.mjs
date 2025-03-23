@@ -70,7 +70,7 @@ export function parseAttackProperties(featuresText) {
   if (!featuresText) return [];
   
   const properties = [];
-  const lowercaseFeatures = featuresText.toLowerCase();
+  const lowercaseFeatures = featuresText.map(feature => feature.toLowerCase());
   
   // Check for each possible property in the features text
   Object.keys(ATTACK_PROPERTY_MAP).forEach(propertyName => {
@@ -79,7 +79,7 @@ export function parseAttackProperties(featuresText) {
       if (!properties.includes(propertyType)) {
         properties.push(propertyType);
       }
-    }
+    } 
   });
   
   return properties;
