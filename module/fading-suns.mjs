@@ -12,7 +12,9 @@ import { registerHandlebarsHelpers } from "./helpers/handlebars.mjs";
 import { registerHooks } from "./helpers/hooks.mjs";
 // Import macros
 import * as macros from "./helpers/macros.mjs";
-import { getAllActiveEffects, getActiveEffectsWithPredicate, deactivateEffect } from "./activeeffects/activeEffects.js";
+// Import effects
+import { EFFECT_TYPES } from "./activeeffects/activeEffects.js";
+import * as effectHelpers from "./helpers/effects.mjs";
 import { getEffectModifiers, getEffectModifiersForActor, getEffectModifierFromObject } from "./helpers/rollEffects.mjs"
 import { calculateTargetResistance } from "./helpers/rollCalculation.mjs"
 import { preloadHandlebarsTemplates } from "./helpers/handlebars.mjs";
@@ -112,9 +114,13 @@ Hooks.once("init", function () {
         character: {}
       }
     },
-    getAllActiveEffects,
-    getActiveEffectsWithPredicate,
-    deactivateEffect,
+    getAllActiveEffects: effectHelpers.prepareActiveEffectCategories,
+    getActiveEffectsWithPredicate: effectHelpers.getEffectsByType,
+    deactivateEffect: async (effectId, actor) => {
+      const effect = actor.effects.get(effectId);
+      if (effect) return effect.delete();
+      return false;
+    },
     getEffectModifiers,
     getEffectModifiersForActor,
     getEffectModifierFromObject,
