@@ -1,6 +1,8 @@
 {
   "FADING_SUNS": {
     
+  "VP": "Victory points",
+  "Cache": "Cache points",
   "defense": {
     "EVADIR": "Evade",
     "BLOQUEAR": "Block",
@@ -31,8 +33,10 @@
       "damageResult": "Damage Result: {result}",
       "resistance": "Target Resistance: {resistance}",
       "finalDamage": "Final Damage: {damage}",
-      "increaseWithVP": "Increase Damage with VP",
-      "vpSpentForDamage": "{vp} VP spent to increase damage by {boost}"
+      "increaseWithPoints": "Increase Damage with Points",
+      "vpSpentForDamage": "{vp} VP spent to increase damage by {boost}",
+      "cacheSpentForDamage": "{cache} Cache spent to increase damage by {boost}",
+      "pointsSpentForDamage": "{cache} Cache + {vp} VP spent to increase damage by {boost}"
     },
 
     "messages": {
@@ -440,12 +444,13 @@
     
     "Errors": {
       "CannotSpendVP": "You cannot spend Victory Points due to effects",
-      "NotEnoughVP": "You don't have enough Victory Points. Cost: {cost}"
+      "NotEnoughVP": "You don't have enough Victory Points. Cost: {cost}",
+      "NotEnoughPoints": "You don't have enough points to perform this action"
     },
     
     "Info": {
       "ExtraVPCost": "Note: This action costs an extra {cost} VP due to effects",
-      "DamageIncreased": "Damage increased to {damage} by spending {vp} VP"
+      "DamageIncreased": "Damage increased to {damage}"
     }
   },
   "TYPES": {

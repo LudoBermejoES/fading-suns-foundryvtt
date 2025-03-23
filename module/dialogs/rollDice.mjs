@@ -1026,23 +1026,31 @@ export default class RollDice extends FormApplication {
       vp
     };
     
-    // Add victory point increase options if the actor has VP in the bank
+    // Add victory point and cache increase options if the actor has points
     const actorId = this.actor.id;
     const actorVP = this.actor.system.bank.victoryPoints;
+    const actorCache = this.actor.system.cache || 0;
+    const totalPoints = actorVP + actorCache;
     
-    if (actorVP >= 2) {
+    if (totalPoints >= 2) {
       templateData.canIncreaseWithVP = true;
       templateData.actorId = actorId;
       
-      // Calculate how many VP increases the actor can afford
-      const maxIncrease = Math.floor(actorVP / 2);
+      // Calculate how many damage points the actor can increase based on total points
+      const maxIncrease = Math.floor(totalPoints / 2);
       const vpIncreaseOptions = [];
       
       // Add options for each possible increase (1 to maxIncrease)
       for (let i = 1; i <= maxIncrease; i++) {
+        const pointsNeeded = i * 2;
+        let cacheUsed = Math.min(actorCache, pointsNeeded);
+        let vpUsed = pointsNeeded - cacheUsed;
+        
         vpIncreaseOptions.push({
-          vpCost: i * 2,
-          damageBoost: i
+          vpCost: vpUsed,
+          cacheCost: cacheUsed,
+          damageBoost: i,
+          totalCost: pointsNeeded
         });
       }
       

@@ -1,5 +1,7 @@
 {
   "FADING_SUNS": {
+    "VP": "Puntos de Victoria",
+    "Cache": "Puntos de Caché",
     "LETS_ROL": "Tirada",
     "defense": {
     "EVADIR": "Evadir",
@@ -22,7 +24,7 @@
     },
 
     "damageChat": {
-      "weaponDamage": "Tu arma está causando {damage} puntos al enemigo",
+      "weaponDamage": "Daño del Arma: {damage}",
       "addDamage": "Puedes aumentar el daño de tu arma usando tu caché o puntos de victoria. Por cada 2 puntos puedes añadir 1 de daño",
       "useCachePoints": "Usar puntos de caché",
       "useVictoryPoints": "Usar puntos de victoria",
@@ -30,8 +32,10 @@
       "damageResult": "Resultado de Daño: {result}",
       "resistance": "Resistencia del Objetivo: {resistance}",
       "finalDamage": "Daño Final: {damage}",
-      "increaseWithVP": "Aumentar Daño con PV",
-      "vpSpentForDamage": "{vp} PV gastados para aumentar el daño en {boost}"
+      "increaseWithPoints": "Aumentar Daño con Puntos",
+      "vpSpentForDamage": "{vp} PV gastados para aumentar el daño en {boost}",
+      "cacheSpentForDamage": "{cache} Caché gastados para aumentar el daño en {boost}",
+      "pointsSpentForDamage": "{cache} Caché + {vp} PV gastados para aumentar el daño en {boost}"
     },
 
     "messages": {
@@ -387,11 +391,12 @@
   
   "Errors": {
     "CannotSpendVP": "No puedes gastar Puntos de Victoria debido a efectos",
-    "NotEnoughVP": "No tienes suficientes Puntos de Victoria. Coste: {cost}"
+    "NotEnoughVP": "No tienes suficientes Puntos de Victoria. Coste: {cost}",
+    "NotEnoughPoints": "No tienes suficientes puntos para realizar esta acción"
   },
   
   "Info": {
     "ExtraVPCost": "Nota: Esta acción cuesta {cost} PV adicionales debido a efectos",
-    "DamageIncreased": "Daño aumentado a {damage} gastando {vp} PV"
+    "DamageIncreased": "Daño aumentado a {damage}"
   }
 }

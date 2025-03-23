@@ -186,11 +186,12 @@ function registerChatMessageHooks() {
   });
 
   // Add click handler for "spend VP to increase damage" buttons in damage messages
-  $(document).on('click', '.spend-vp-button', async function(event) {
+  $(document).on('click', '.spend-vp-button-damage', async function(event) {
     event.preventDefault();
     
     const button = event.currentTarget;
     const vpCost = parseInt(button.dataset.vpCost);
+    const cacheCost = parseInt(button.dataset.cacheCost);
     const damageBoost = parseInt(button.dataset.damageBoost);
     const actorId = button.dataset.actorId;
     
@@ -204,15 +205,30 @@ function registerChatMessageHooks() {
       return;
     }
     
-    // Check if actor has enough VP
+    // Check if actor has enough VP and cache
     const currentVP = actor.system.bank.victoryPoints;
-    if (currentVP < vpCost) {
-      ui.notifications.error(game.i18n.format("FADING_SUNS.Errors.NotEnoughVP", { cost: vpCost }));
+    const currentCache = actor.system.cache || 0;
+    
+    if (currentVP < vpCost || currentCache < cacheCost) {
+      ui.notifications.error(game.i18n.localize("FADING_SUNS.Errors.NotEnoughPoints"));
       return;
     }
     
-    // Spend the VP
-    await actor.update({ "system.bank.victoryPoints": currentVP - vpCost });
+    // Update actor to spend both cache and VP
+    const updates = {};
+    
+    // Only update cache if we're using some
+    if (cacheCost > 0) {
+      updates["system.cache"] = currentCache - cacheCost;
+    }
+    
+    // Only update VP if we're using some
+    if (vpCost > 0) {
+      updates["system.bank.victoryPoints"] = currentVP - vpCost;
+    }
+    
+    // Apply the updates
+    await actor.update(updates);
     
     // Update the chat message to show the new damage
     const chatMessage = button.closest('.message');
@@ -231,23 +247,43 @@ function registerChatMessageHooks() {
         const newDamageText = game.i18n.format("FADING_SUNS.damageChat.weaponDamage", { damage: newDamage });
         damageText.textContent = newDamageText;
         
-        // Disable all VP buttons in this message since VPs have been spent
-        const allButtons = chatMessage.querySelectorAll('.spend-vp-button');
+        // Disable all VP buttons in this message since points have been spent
+        const allButtons = chatMessage.querySelectorAll('.spend-vp-button-damage');
         allButtons.forEach(btn => {
           btn.disabled = true;
           btn.classList.add('disabled');
         });
         
-        // Add a note showing VP was spent
+        // Add a note showing points spent
         const noteDiv = document.createElement('div');
         noteDiv.classList.add('vp-spent-note');
-        noteDiv.innerHTML = `<i class="fas fa-gem"></i> ${game.i18n.format("FADING_SUNS.damageChat.vpSpentForDamage", { vp: vpCost, boost: damageBoost })}`;
+        
+        let spentMessage;
+        if (cacheCost > 0 && vpCost > 0) {
+          spentMessage = game.i18n.format("FADING_SUNS.damageChat.pointsSpentForDamage", { 
+            cache: cacheCost, 
+            vp: vpCost, 
+            boost: damageBoost 
+          });
+        } else if (cacheCost > 0) {
+          spentMessage = game.i18n.format("FADING_SUNS.damageChat.cacheSpentForDamage", { 
+            cache: cacheCost, 
+            boost: damageBoost 
+          });
+        } else {
+          spentMessage = game.i18n.format("FADING_SUNS.damageChat.vpSpentForDamage", { 
+            vp: vpCost, 
+            boost: damageBoost 
+          });
+        }
+        
+        noteDiv.innerHTML = `<i class="fas fa-gem"></i> ${spentMessage}`;
         
         // Insert after the damage heading
         damageText.insertAdjacentElement('afterend', noteDiv);
         
         // Show notification
-        ui.notifications.info(game.i18n.format("FADING_SUNS.Info.DamageIncreased", { damage: newDamage, vp: vpCost }));
+        ui.notifications.info(game.i18n.format("FADING_SUNS.Info.DamageIncreased", { damage: newDamage }));
       }
     }
   });
