@@ -1026,8 +1026,32 @@ export default class RollDice extends FormApplication {
       vp
     };
     
+    // Add victory point increase options if the actor has VP in the bank
+    const actorId = this.actor.id;
+    const actorVP = this.actor.system.bank.victoryPoints;
+    
+    if (actorVP >= 2) {
+      templateData.canIncreaseWithVP = true;
+      templateData.actorId = actorId;
+      
+      // Calculate how many VP increases the actor can afford
+      const maxIncrease = Math.floor(actorVP / 2);
+      const vpIncreaseOptions = [];
+      
+      // Add options for each possible increase (1 to maxIncrease)
+      for (let i = 1; i <= maxIncrease; i++) {
+        vpIncreaseOptions.push({
+          vpCost: i * 2,
+          damageBoost: i
+        });
+      }
+      
+      templateData.vpIncreaseOptions = vpIncreaseOptions;
+    }
+    
     // Add damage calculation data if available
     if (damageData) {
+      templateData.damageData = true;
       templateData.damageFormula = damageData.damageFormula;
       templateData.damageResult = damageData.damageResult;
       templateData.resistance = damageData.resistance;

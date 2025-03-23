@@ -22,14 +22,16 @@
     },
 
     "damageChat": {
-      "weaponDamage": "Tu arma está causando {{damage}} puntos al enemigo",
+      "weaponDamage": "Tu arma está causando {damage} puntos al enemigo",
       "addDamage": "Puedes aumentar el daño de tu arma usando tu caché o puntos de victoria. Por cada 2 puntos puedes añadir 1 de daño",
       "useCachePoints": "Usar puntos de caché",
       "useVictoryPoints": "Usar puntos de victoria",
       "damageFormula": "Fórmula de Daño: {formula}",
       "damageResult": "Resultado de Daño: {result}",
       "resistance": "Resistencia del Objetivo: {resistance}",
-      "finalDamage": "Daño Final: {damage}"
+      "finalDamage": "Daño Final: {damage}",
+      "increaseWithVP": "Aumentar Daño con PV",
+      "vpSpentForDamage": "{vp} PV gastados para aumentar el daño en {boost}"
     },
 
     "messages": {
@@ -389,8 +391,7 @@
   },
   
   "Info": {
-    "ExtraVPCost": "Debido a efectos, debes gastar {cost} Puntos de Victoria adicionales"
+    "ExtraVPCost": "Nota: Esta acción cuesta {cost} PV adicionales debido a efectos",
+    "DamageIncreased": "Daño aumentado a {damage} gastando {vp} PV"
   }
-
-  
 }

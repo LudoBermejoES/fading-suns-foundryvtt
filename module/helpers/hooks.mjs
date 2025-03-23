@@ -111,7 +111,13 @@ function registerChatMessageHooks() {
       const rollTotal = parseInt(button.dataset.rollTotal);
       
       // Only show the defense option to the target's owner
-      const target = game.actors.get(targetId);
+
+    // Get token object from the canvas
+    const token = canvas.tokens.get(targetId);
+
+    // If you need the actor linked to the token
+    const target = token?.actor;
+
       if (!target || !target.isOwner) {
         ui.notifications.warn("You don't have permission to defend with this character.");
         return;
@@ -177,5 +183,72 @@ function registerChatMessageHooks() {
       defenseNote.innerHTML = `<i class="fas fa-shield-alt"></i> ${target.name} ${game.i18n.format("FADING_SUNS.messages.IS_DEFENDING")}`;
       html.find(".defense-options").append(defenseNote);
     });
+  });
+
+  // Add click handler for "spend VP to increase damage" buttons in damage messages
+  $(document).on('click', '.spend-vp-button', async function(event) {
+    event.preventDefault();
+    
+    const button = event.currentTarget;
+    const vpCost = parseInt(button.dataset.vpCost);
+    const damageBoost = parseInt(button.dataset.damageBoost);
+    const actorId = button.dataset.actorId;
+    
+    // Get the actor
+    const actor = game.actors.get(actorId);
+    if (!actor) return;
+    
+    // Check if the user has permission to modify this actor
+    if (!actor.isOwner) {
+      ui.notifications.warn(game.i18n.localize("FADING_SUNS.Warnings.NoPermission"));
+      return;
+    }
+    
+    // Check if actor has enough VP
+    const currentVP = actor.system.bank.victoryPoints;
+    if (currentVP < vpCost) {
+      ui.notifications.error(game.i18n.format("FADING_SUNS.Errors.NotEnoughVP", { cost: vpCost }));
+      return;
+    }
+    
+    // Spend the VP
+    await actor.update({ "system.bank.victoryPoints": currentVP - vpCost });
+    
+    // Update the chat message to show the new damage
+    const chatMessage = button.closest('.message');
+    const damageText = chatMessage.querySelector('h1');
+    
+    if (damageText) {
+      // Get the current damage value
+      const damageRegex = /(\d+)/;
+      const match = damageText.textContent.match(damageRegex);
+      
+      if (match) {
+        const currentDamage = parseInt(match[1]);
+        const newDamage = currentDamage + damageBoost;
+        
+        // Update the text
+        const newDamageText = game.i18n.format("FADING_SUNS.damageChat.weaponDamage", { damage: newDamage });
+        damageText.textContent = newDamageText;
+        
+        // Disable all VP buttons in this message since VPs have been spent
+        const allButtons = chatMessage.querySelectorAll('.spend-vp-button');
+        allButtons.forEach(btn => {
+          btn.disabled = true;
+          btn.classList.add('disabled');
+        });
+        
+        // Add a note showing VP was spent
+        const noteDiv = document.createElement('div');
+        noteDiv.classList.add('vp-spent-note');
+        noteDiv.innerHTML = `<i class="fas fa-gem"></i> ${game.i18n.format("FADING_SUNS.damageChat.vpSpentForDamage", { vp: vpCost, boost: damageBoost })}`;
+        
+        // Insert after the damage heading
+        damageText.insertAdjacentElement('afterend', noteDiv);
+        
+        // Show notification
+        ui.notifications.info(game.i18n.format("FADING_SUNS.Info.DamageIncreased", { damage: newDamage, vp: vpCost }));
+      }
+    }
   });
 } 

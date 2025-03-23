@@ -162,4 +162,67 @@
   opacity: 0.5;
   cursor: not-allowed;
   background: #6c757d;
+}
+
+/* VP Spend buttons for damage increase */
+.increase-damage-options {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.increase-damage-options h3 {
+  font-size: 14px;
+  margin: 0 0 5px 0;
+  text-align: center;
+  color: #ddd;
+}
+
+.spend-vp-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.spend-vp-button {
+  background-color: #2a5f34;
+  color: #fff;
+  border: 1px solid #143a1c;
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.spend-vp-button:hover {
+  background-color: #3c7f46;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.spend-vp-button i {
+  margin-right: 3px;
+}
+
+.spend-vp-button.disabled {
+  background-color: #555;
+  color: #aaa;
+  cursor: not-allowed;
+  border-color: #444;
+}
+
+.vp-spent-note {
+  background-color: rgba(42, 95, 52, 0.2);
+  border-left: 3px solid #2a5f34;
+  padding: 5px;
+  margin: 5px 0;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.vp-spent-note i {
+  color: #2a5f34;
+  margin-right: 5px;
 } 

@@ -23,14 +23,16 @@
     },
     
     "damageChat": {
-      "weaponDamage": "Your weapon is causing {damage} points to the enemy",
+      "weaponDamage": "Weapon Damage: {damage}",
       "addDamage": "You can increase the damage to your weapon by using your cache or victory points. Per 2 points you can add 1 damage",
       "useCachePoints": "Use cache points",
       "useVictoryPoints": "Use victory points",
       "damageFormula": "Damage Formula: {formula}",
       "damageResult": "Damage Result: {result}",
       "resistance": "Target Resistance: {resistance}",
-      "finalDamage": "Final Damage: {damage}"
+      "finalDamage": "Final Damage: {damage}",
+      "increaseWithVP": "Increase Damage with VP",
+      "vpSpentForDamage": "{vp} VP spent to increase damage by {boost}"
     },
 
     "messages": {
@@ -442,7 +444,8 @@
     },
     
     "Info": {
-      "ExtraVPCost": "Due to effects, you must spend {cost} additional Victory Points"
+      "ExtraVPCost": "Note: This action costs an extra {cost} VP due to effects",
+      "DamageIncreased": "Damage increased to {damage} by spending {vp} VP"
     }
   },
   "TYPES": {

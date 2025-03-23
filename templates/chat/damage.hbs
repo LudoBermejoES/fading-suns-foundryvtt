@@ -17,4 +17,18 @@
     {{/if}}
   </div>
   {{/if}}
+
+  {{#if canIncreaseWithVP}}
+  <div class="increase-damage-options">
+    <h3>{{localize "FADING_SUNS.damageChat.increaseWithVP"}}</h3>
+    <div class="spend-vp-buttons">
+      {{#each vpIncreaseOptions}}
+        <button class="spend-vp-button" data-vp-cost="{{vpCost}}" data-damage-boost="{{damageBoost}}" data-actor-id="{{../actorId}}">
+          <i class="fas fa-arrow-up"></i>
+          +{{damageBoost}} ({{vpCost}} {{localize "FADING_SUNS.VP"}})
+        </button>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
 </div>
