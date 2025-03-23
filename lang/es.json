@@ -356,12 +356,12 @@
   },
   "TYPES": {
     "Actor": {
-      "character": "Character",
-      "npc": "NPC"
+      "character": "Personaje",
+      "npc": "PNJ"
     },
     "Item": {
-      "gear": "Gear",
-      "feature": "Feature"
+      "gear": "Equipo",
+      "feature": "Característica"
     }
   },
   "AttackProperties": {
@@ -398,5 +398,11 @@
   "Info": {
     "ExtraVPCost": "Nota: Esta acción cuesta {cost} PV adicionales debido a efectos",
     "DamageIncreased": "Daño aumentado a {damage}"
+  },
+  "SETTINGS": {
+    "VictoryPointsLimit": "Límite de Puntos de Victoria",
+    "VictoryPointsLimitHint": "Número máximo de Puntos de Victoria que se pueden almacenar en el banco de un actor",
+    "ShowEffectDetails": "Mostrar Detalles de Efectos",
+    "ShowEffectDetailsHint": "Mostrar información detallada sobre los efectos activos en las hojas de personaje"
   }
 }

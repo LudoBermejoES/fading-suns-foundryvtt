@@ -462,5 +462,11 @@
       "gear": "Gear",
       "feature": "Feature"
     }
+  },
+  "SETTINGS": {
+    "VictoryPointsLimit": "Victory Points Limit",
+    "VictoryPointsLimitHint": "Maximum number of Victory Points that can be stored in an actor's bank",
+    "ShowEffectDetails": "Show Effect Details",
+    "ShowEffectDetailsHint": "Show detailed information about active effects on character sheets"
   }
 }
